@@ -21,3 +21,6 @@ _v020_payload/
 README_v*_PATCH.md
 _v*_payload/
 reports/local-sample-report.md
+_v100rc2_payload/
+apply_v1.0.0_rc2_external_review_activation_gate.py
+README_v1.0.0-rc2_PATCH.md

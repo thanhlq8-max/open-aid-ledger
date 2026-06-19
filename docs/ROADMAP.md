@@ -114,3 +114,10 @@ Next milestone: v1.0.0 donation-ready candidate, only after review gates pass.
 ## v1.0.0-rc1 — Donation-ready candidate review
 
 Documentation-only candidate release. Donations remain inactive until a separate reviewed activation process is completed.
+
+
+## v1.0.0-rc2 - External review activation gate
+
+- Add external-review gate before any activation proposal.
+- Add wallet-publication precheck.
+- Keep donation activation blocked pending later explicit decision.

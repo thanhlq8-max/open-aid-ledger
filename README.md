@@ -6,7 +6,7 @@ Transparency-first public ledger template for voluntary digital-asset donations 
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
-VERSION: 1.0.0-rc1-donation-ready-candidate
+VERSION: 1.0.0-rc2-external-review-activation-gate
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 CUSTODY_AUTOMATION: NO
@@ -44,6 +44,7 @@ It is designed for:
 - Provides donation-readiness dry-run checks before any donation activation.
 - Provides a static public status page and validator for GitHub Pages readiness.
 - Provides v1.0.0-rc1 donation-ready candidate review artifacts while keeping donation collection inactive.
+- Provides v1.0.0-rc2 external review and activation-gate artifacts while keeping donation collection inactive.
 
 ## What this repository does not do
 
@@ -188,6 +189,12 @@ scripts/validate_readiness.py
 ```
 
 The dry run checks readiness while keeping `DONATIONS_ACTIVE: NO` and `WALLETS_PUBLISHED: NO`.
+
+## External review activation gate
+
+The repository is now at RC2 review-gate stage. RC2 requires external review evidence and wallet-publication precheck documentation before any later activation proposal can be considered.
+
+RC2 does not activate donations and does not publish real wallet addresses.
 
 ## Donation activation policy
 

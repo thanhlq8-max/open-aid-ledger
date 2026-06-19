@@ -1,0 +1,30 @@
+{
+  "schema_version": "rc2-external-review-v1",
+  "project_id": "open-aid-ledger",
+  "release_candidate": "1.0.0-rc2",
+  "review_gate": "external_review_activation_gate",
+  "donations_active": false,
+  "wallets_published": false,
+  "activation_approved": false,
+  "external_review_required": true,
+  "review_status": "template_only",
+  "required_documents": [
+    "docs/RC2_EXTERNAL_REVIEW_ACTIVATION_GATE.md",
+    "docs/EXTERNAL_REVIEW_PANEL_GUIDE.md",
+    "docs/ACTIVATION_GATE_SIGNOFF_RECORD.md",
+    "docs/WALLET_PUBLICATION_PRECHECK.md"
+  ],
+  "blocked_until": [
+    "external_review_recorded",
+    "wallet_publication_precheck_completed",
+    "public_status_confirmed",
+    "activation_proposal_reviewed"
+  ],
+  "forbidden": [
+    "custody_automation",
+    "transfer_automation",
+    "exchange_integration",
+    "trading_use",
+    "return_promise"
+  ]
+}

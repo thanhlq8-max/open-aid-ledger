@@ -1,3 +1,13 @@
+## v1.0.0-rc2 - External review activation gate
+
+- Added RC2 external review and activation-gate documentation.
+- Added external review panel guide.
+- Added activation gate signoff record.
+- Added wallet publication precheck.
+- Added RC2 dry-run metadata example.
+- Added RC2 validator and tests.
+- Kept donation collection inactive and wallets unpublished.
+
 # Changelog
 
 ## 1.0.0-rc1-donation-ready-candidate
