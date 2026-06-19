@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security or privacy-sensitive disclosure
+    url: https://github.com/thanhlq8-max/open-aid-ledger/security/advisories
+    about: Do not post private keys, seed phrases, identity documents, or private beneficiary data in public issues.

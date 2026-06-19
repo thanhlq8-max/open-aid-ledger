@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.env
+.env.*
+wallets.json
+*.key
+*.pem
+*.seed
+*.secret
+.DS_Store
+reports/local-smoke-report.md
+reports/ci-report.md

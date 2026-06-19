@@ -1,0 +1,25 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Compile scripts
+        run: python -m compileall scripts
+      - name: Validate wallet example
+        run: python scripts/validate_wallets.py wallets.example.json --allow-placeholders
+      - name: Validate ledgers
+        run: python scripts/validate_ledger.py --donations ledger/donations.csv --disbursements ledger/disbursements.csv
+      - name: Public safety scan
+        run: python scripts/check_public_safety.py .
+      - name: Generate empty report
+        run: python scripts/generate_report.py --donations ledger/donations.csv --disbursements ledger/disbursements.csv --out reports/ci-report.md

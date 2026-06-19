@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "last_updated": "TO_BE_FILLED_BY_MAINTAINER",
+  "wallets": [
+    {
+      "wallet_id": "TO_BE_FILLED_BY_MAINTAINER",
+      "campaign_id": "TO_BE_FILLED_BY_MAINTAINER",
+      "chain": "TO_BE_FILLED_BY_MAINTAINER",
+      "asset": "TO_BE_FILLED_BY_MAINTAINER",
+      "network": "TO_BE_FILLED_BY_MAINTAINER",
+      "address": "TO_BE_FILLED_BY_MAINTAINER",
+      "controller_type": "single_maintainer_or_multisig",
+      "controller_disclosure": "TO_BE_FILLED_BY_MAINTAINER",
+      "risk_note": "Only send the listed asset on the listed network. Unsupported transfers may be unrecoverable."
+    }
+  ],
+  "prohibited": {
+    "private_keys": "never_store",
+    "seed_phrases": "never_store",
+    "exchange_api_keys": "never_store",
+    "custody_automation": "not_supported"
+  }
+}
