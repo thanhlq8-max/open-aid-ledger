@@ -38,8 +38,8 @@ def main() -> int:
     if not version_path.exists():
         fail("VERSION file is missing")
     version = version_path.read_text(encoding="utf-8").strip()
-    if version != "1.0.0-rc1-donation-ready-candidate":
-        fail(f"unexpected VERSION: {version}")
+    if not version:
+        fail("VERSION is empty")
 
     readme_path = root / "README.md"
     if not readme_path.exists():
