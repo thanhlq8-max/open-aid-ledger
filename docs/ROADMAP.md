@@ -68,3 +68,7 @@ Planned.
 - Repeated monthly reports.
 - Public contribution process validated.
 - Donation activation only after legal, tax, privacy, and security checks are complete.
+
+## v0.7.0 — release closeout foundation
+
+Completed the initial issue closeout map and prepared GitHub release notes. Next recommended milestone: v0.8.0 donation readiness dry run, still without real wallet publication or donation activation.

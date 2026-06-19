@@ -49,3 +49,7 @@ Focus:
 
 Maintainer governance, donation activation, emergency freeze, conflict-of-interest disclosure, and governance decision-record templates were added. Donations remain inactive and wallets remain unpublished.
 - v0.6.0 adds campaign lifecycle metadata validation and issue/release mapping.
+
+## v0.7.0 release closeout foundation
+
+Initial seed issues #1 through #6 are mapped to completed releases. Donation collection remains inactive and wallet publication remains blocked until a future explicit reviewed activation.

@@ -6,7 +6,7 @@ Transparency-first public ledger template for voluntary digital-asset donations 
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
-VERSION: 0.6.0-campaign-lifecycle-foundation
+VERSION: 0.7.0-release-closeout-foundation
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 CUSTODY_AUTOMATION: NO
@@ -201,6 +201,19 @@ Near-term priorities:
 5. keep donation activation inactive until all launch gates pass.
 
 The first donation-ready release should not be cut until the safety and reporting foundation is stable.
+
+
+## Release closeout
+
+The initial six public seed issues are mapped to completed releases in:
+
+```text
+docs/INITIAL_ISSUE_COMPLETION_MAP.md
+docs/ISSUE_CLOSEOUT_COMMENTS.md
+docs/RELEASE_CLOSEOUT.md
+```
+
+This closeout does not activate donations or publish real wallet addresses.
 
 ## License
 

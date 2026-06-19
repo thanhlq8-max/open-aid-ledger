@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.7.0-release-closeout-foundation
+
+- Added release closeout documentation.
+- Added initial issue completion map for issues #1 through #6.
+- Added copy-ready issue closeout comments.
+- Added GitHub Release draft for v0.7.0.
+- Added tests for release closeout documentation.
+- Donations remain inactive; wallets remain unpublished.
+
 ## v0.6.0 — Campaign lifecycle foundation
 
 - Added campaign lifecycle metadata template.
