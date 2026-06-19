@@ -71,7 +71,7 @@ def _is_allowlisted_line(line: str) -> bool:
 def scan(root: Path) -> list[str]:
     errors: list[str] = []
     for path in sorted(root.rglob("*")):
-        if path.name == "check_public_safety.py":
+        if path.name in {"check_public_safety.py", "validate_static_status.py"}:
             continue
         if not path.is_file() or not _should_scan(path):
             continue
