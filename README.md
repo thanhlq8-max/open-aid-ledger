@@ -6,7 +6,7 @@ Transparency-first public ledger template for voluntary digital-asset donations 
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
-VERSION: 0.1.3-restore-readme-cleanup
+VERSION: 0.1.4-final-helper-cleanup
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 CUSTODY_AUTOMATION: NO

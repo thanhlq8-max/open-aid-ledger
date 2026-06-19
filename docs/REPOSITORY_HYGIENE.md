@@ -1,55 +1,59 @@
 # Repository Hygiene
 
-## Purpose
-
-This document defines public-repository hygiene rules for Open Aid Ledger.
-
-The repository is intended to be a transparency template. Its public tree should not contain temporary patch instructions, local apply scripts, generated smoke-test files, secrets, private beneficiary data, or maintainer-only operational clutter.
-
-## Public tree rules
-
-Allowed:
-
-- source scripts under `scripts/`;
-- policy files;
-- documentation;
-- issue and pull request templates;
-- campaign templates;
-- placeholder wallet metadata;
-- reviewed sample reports.
-
-Forbidden:
-
-- private keys;
-- seed phrases;
-- API tokens;
-- exchange credentials;
-- unredacted beneficiary private data;
-- temporary patch apply scripts;
-- local-only smoke reports unless intentionally reviewed as samples;
-- active donation wallet files before governance approval.
-
-## Patch helper cleanup
-
-Patch helper files should be used locally and removed before commit. Examples:
+## Current status
 
 ```text
-README_PATCH.md
-README_RESTORE.md
-apply_v*_*.ps1
-```
-
-If a helper artifact is accidentally committed, create a cleanup patch that removes it and confirms the README still describes the actual project, not the patch procedure.
-
-## README rule
-
-`README.md` must describe the project and public status. It must not be used as a temporary patch instruction file.
-
-## Current hygiene status
-
-```text
-LAST_REVIEWED_VERSION: 0.1.3-restore-readme-cleanup
+VERSION: 0.1.4-final-helper-cleanup
+PUBLIC_REPOSITORY: YES
+PATCH_HELPER_ARTIFACTS_ALLOWED_IN_ROOT: NO
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
-PATCH_HELPERS_ALLOWED_IN_PUBLIC_TREE: NO
+CUSTODY_AUTOMATION: NO
 ```
+
+## Rule
+
+The repository root must not retain local patch helper files after a patch has been applied.
+
+Do not commit files such as:
+
+```text
+PATCH_README.txt
+README_PATCH.md
+README_RESTORE.md
+apply_v0.1.1_post_publish_cleanup.ps1
+apply_v0.1.2_public_repo_hygiene.ps1
+apply_v0.1.3_restore_readme_cleanup.ps1
+apply_v*.ps1
+```
+
+## Allowed root files
+
+Root files should be stable project files only, such as:
+
+```text
+README.md
+LICENSE
+CHANGELOG.md
+VERSION
+DONATION_POLICY.md
+TRANSPARENCY_POLICY.md
+BENEFICIARY_PRIVACY_POLICY.md
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
+SECURITY.md
+RELEASE_CHECKLIST.md
+wallets.example.json
+```
+
+## Patch workflow
+
+1. Apply local patch scripts outside the repository root where possible.
+2. If a patch script must be copied into the root, remove it before committing.
+3. Review GitHub Desktop changed files before committing.
+4. Do not commit local smoke reports unless they are intentionally promoted to reviewed sample reports.
+5. Do not commit private wallet material, seed phrases, private keys, or beneficiary-identifying material.
+
+## Release rule
+
+Before cutting any release, confirm that the root does not contain local helper artifacts and that `DONATIONS_ACTIVE` remains `NO` unless a reviewed activation process has explicitly approved a transition to `YES`.

@@ -1,43 +1,40 @@
 # Post-Publish Status
 
-## Current status
+## Current state
 
 ```text
 REPOSITORY: thanhlq8-max/open-aid-ledger
-PUBLIC: YES
-VERSION: 0.1.3-restore-readme-cleanup
+STATUS: PUBLIC_TEMPLATE
+VERSION: 0.1.4-final-helper-cleanup
+ISSUES_CREATED: YES
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 CUSTODY_AUTOMATION: NO
+PRIVATE_KEYS_IN_REPO: FORBIDDEN
 TRADING_USE: FORBIDDEN
 RETURN_PROMISE: FORBIDDEN
-OPEN_ISSUES_CREATED: YES
 ```
 
 ## Completed
 
-- Public repository created.
-- Initial policy and validator files published.
-- Six initial issues created for the safety and reporting backlog.
-- v0.1.1 post-publish documentation added.
-- v0.1.2 public repository hygiene attempt completed.
-- v0.1.3 restored the main README and removed helper artifacts.
+- Repository published publicly on GitHub.
+- Core policies committed.
+- Public README restored after v0.1.2 patch mistake.
+- Six initial issues created for safety and roadmap alignment.
+- Residual helper artifacts removed from the public repository root.
+
+## Still required before donation activation
+
+1. Harden wallet metadata schema.
+2. Add validator tests and run them in CI.
+3. Approve address-change procedure.
+4. Document multisig or equivalent governance.
+5. Approve public transparency report format.
+6. Review beneficiary privacy controls.
+7. Change `DONATIONS_ACTIVE` from `NO` to `YES` only in a reviewed commit.
 
 ## Next development target
 
 ```text
 v0.2.0 â€” Ledger Safety & Public Report Foundation
 ```
-
-Priority order:
-
-1. Harden wallet metadata schema.
-2. Add unit tests for wallet and ledger validators.
-3. Add maintainer governance checklist.
-4. Add sample transparency report.
-5. Design GitHub Pages static report.
-6. Design read-only blockchain explorer importer.
-
-## Launch gate
-
-Donation activation remains blocked until wallet governance, reporting, privacy, and safety checks are reviewed in public commits.
