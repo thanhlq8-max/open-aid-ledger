@@ -38,14 +38,17 @@ Status: implemented as design-only.
 - Added guardrail tests for importer design docs.
 - Kept network fetching, private keys, signing, transfers, and exchange APIs out of scope.
 
-## v0.5 — maintainer governance checklist
+## v0.5.0 — Maintainer Governance Checklist
 
-Planned.
+Status: implemented.
 
-- Add launch checklist for maintainer governance.
-- Add donation activation checklist.
-- Add emergency freeze procedure.
-- Add conflict-of-interest disclosure template.
+- Added maintainer governance checklist.
+- Added donation activation checklist.
+- Added emergency freeze procedure.
+- Added conflict-of-interest disclosure template.
+- Added governance decision record template.
+- Added tests for governance guardrails.
+- Kept donations inactive and wallets unpublished.
 
 ## v1.0 — stable public-good ledger
 

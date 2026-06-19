@@ -4,7 +4,7 @@
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
-VERSION: 0.4.0-read-only-importer-design
+VERSION: 0.5.0-maintainer-governance-checklist
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 CUSTODY_AUTOMATION: NO
@@ -43,3 +43,8 @@ Focus:
 - emergency freeze procedure;
 - conflict-of-interest disclosure;
 - monthly maintainer report checklist.
+
+
+## v0.5.0 governance update
+
+Maintainer governance, donation activation, emergency freeze, conflict-of-interest disclosure, and governance decision-record templates were added. Donations remain inactive and wallets remain unpublished.

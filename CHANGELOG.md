@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.5.0 — Maintainer Governance Checklist
+
+- Added maintainer governance checklist.
+- Added donation activation checklist.
+- Added emergency freeze procedure.
+- Added conflict-of-interest disclosure template.
+- Added governance decision record template.
+- Added governance documentation tests.
+- Kept donations inactive, wallets unpublished, custody automation disabled, trading use forbidden, and return promises forbidden.
+
+
 ## v0.4.0 — Read-only Blockchain Explorer Importer Design
 
 - Added design-only read-only blockchain explorer importer documentation.

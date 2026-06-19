@@ -6,7 +6,7 @@ Transparency-first public ledger template for voluntary digital-asset donations 
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
-VERSION: 0.4.0-read-only-importer-design
+VERSION: 0.5.0-maintainer-governance-checklist
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 CUSTODY_AUTOMATION: NO
@@ -39,6 +39,7 @@ It is designed for:
 - Keeps donation activation explicit and auditable.
 - Provides a sample transparency report and static GitHub Pages status design.
 - Documents a read-only blockchain explorer importer design for future public transaction reconciliation.
+- Provides maintainer governance, donation activation, emergency freeze, and conflict-of-interest checklists.
 
 ## What this repository does not do
 
@@ -76,6 +77,10 @@ NO_BENEFICIARY_DOXXING
 .github/                         GitHub workflows and templates
 campaigns/                       Campaign proposal templates and examples
 docs/                            Governance, legal notes, roadmap, and operating docs
+  docs/MAINTAINER_GOVERNANCE_CHECKLIST.md      Maintainer launch and operating checklist
+  docs/DONATION_ACTIVATION_CHECKLIST.md        Donation activation gate
+  docs/EMERGENCY_FREEZE_PROCEDURE.md           Incident freeze procedure
+  docs/CONFLICT_OF_INTEREST_DISCLOSURE_TEMPLATE.md Conflict disclosure template
 examples/sample-ledger/           Fictional sample ledger rows
 examples/importer/                Fictional importer-normalization sample rows
 ledger/                          CSV ledger templates
