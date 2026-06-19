@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.0-rc1-donation-ready-candidate
+
+- Added RC1 donation-ready candidate review documents.
+- Added RC1 release checklist, signoff record, and non-activation notice.
+- Added RC1 dry-run metadata example.
+- Added RC1 validator and tests.
+- Kept donation collection inactive and wallet publication disabled.
 
 ## v0.10.0 — Pre-1.0 donation-ready candidate review
 

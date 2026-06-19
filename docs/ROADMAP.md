@@ -109,3 +109,8 @@ Planned.
 
 Next milestone: v1.0.0 donation-ready candidate, only after review gates pass.
 
+
+
+## v1.0.0-rc1 — Donation-ready candidate review
+
+Documentation-only candidate release. Donations remain inactive until a separate reviewed activation process is completed.

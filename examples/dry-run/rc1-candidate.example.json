@@ -1,0 +1,16 @@
+{
+  "candidate": "v1.0.0-rc1",
+  "project_status": "public_template",
+  "donations_active": false,
+  "wallets_published": false,
+  "custody_automation": false,
+  "transfer_automation": false,
+  "review_status": "pending",
+  "required_docs": [
+    "docs/RC1_DONATION_READY_CANDIDATE.md",
+    "docs/RC1_RELEASE_CHECKLIST.md",
+    "docs/RC1_SIGNOFF_RECORD.md",
+    "docs/RC1_NON_ACTIVATION_NOTICE.md"
+  ],
+  "notes": "Dry-run metadata only. No real donation address is included."
+}
