@@ -18,7 +18,7 @@ ROOT_REQUIRED = {
         "TRADING_USE: FORBIDDEN",
         "RETURN_PROMISE: FORBIDDEN",
     ],
-    "VERSION": ["1.0.0-rc2"],
+    "VERSION": ["1.0.0-rc3"],
     "RELEASE_NOTES_v0.10.0.md": ["Donation-ready candidate review", "DONATIONS_ACTIVE: NO"],
 }
 

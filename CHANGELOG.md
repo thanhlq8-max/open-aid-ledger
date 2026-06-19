@@ -1,3 +1,13 @@
+## v1.0.0-rc3 — External Review Evidence Pack
+
+- Added RC3 external review evidence-pack documentation.
+- Added external review feedback register.
+- Added review evidence acceptance criteria.
+- Added RC3 activation decision packet and non-activation notice.
+- Added RC3 dry-run evidence-pack example.
+- Added RC3 validator and tests.
+- Kept donations inactive and wallets unpublished.
+
 ## v1.0.0-rc2 - External review activation gate
 
 - Added RC2 external review and activation-gate documentation.

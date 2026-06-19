@@ -121,3 +121,7 @@ Documentation-only candidate release. Donations remain inactive until a separate
 - Add external-review gate before any activation proposal.
 - Add wallet-publication precheck.
 - Keep donation activation blocked pending later explicit decision.
+
+## v1.0.0-rc3 — External Review Evidence Pack
+
+RC3 collects evidence for external review and future activation decisions. It does not activate donations or publish real wallet addresses.

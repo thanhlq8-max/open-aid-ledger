@@ -1,0 +1,32 @@
+{
+  "schema_version": "rc3.external_review_evidence_pack.v1",
+  "project_id": "open-aid-ledger",
+  "release_candidate": "1.0.0-rc3",
+  "status": "inactive_review",
+  "donations_active": false,
+  "wallets_published": false,
+  "activation_approved": false,
+  "review_scope": [
+    "wallet_publication_process",
+    "campaign_lifecycle",
+    "beneficiary_privacy",
+    "ledger_validation",
+    "public_status_page",
+    "emergency_freeze",
+    "conflict_of_interest"
+  ],
+  "evidence_items": [
+    {
+      "id": "EV-RC3-001",
+      "area": "wallet_publication_process",
+      "status": "sample",
+      "finding_count": 0,
+      "activation_blocker": true,
+      "note": "Sample evidence only. Not a production review."
+    }
+  ],
+  "decision": {
+    "activation_decision": "BLOCKED",
+    "reason": "RC3 is evidence-pack only."
+  }
+}

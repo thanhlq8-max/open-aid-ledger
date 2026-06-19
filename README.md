@@ -6,7 +6,7 @@ Transparency-first public ledger template for voluntary digital-asset donations 
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
-VERSION: 1.0.0-rc2-external-review-activation-gate
+VERSION: 1.0.0-rc3-external-review-evidence-pack
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 CUSTODY_AUTOMATION: NO
@@ -262,3 +262,17 @@ This closeout does not activate donations or publish real wallet addresses.
 ## License
 
 See `LICENSE`.
+
+## RC3 external review evidence pack
+
+The current release candidate adds a review evidence-pack layer.
+
+This RC3 checkpoint remains non-activating:
+
+```text
+DONATIONS_ACTIVE: NO
+WALLETS_PUBLISHED: NO
+ACTIVATION_APPROVED: NO
+```
+
+External review evidence must be collected and assessed before any separate activation proposal can be considered.

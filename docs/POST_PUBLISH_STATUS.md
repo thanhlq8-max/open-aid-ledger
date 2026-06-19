@@ -2,7 +2,7 @@
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
-VERSION: 1.0.0-rc2-external-review-activation-gate
+VERSION: 1.0.0-rc3-external-review-evidence-pack
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 CUSTODY_AUTOMATION: NO
@@ -40,3 +40,14 @@ Pre-1.0 donation-ready candidate review materials are present. Donation collecti
 ## RC2 external review activation gate
 
 RC2 adds external review and wallet-publication precheck documentation. Donation collection remains inactive and real wallets remain unpublished.
+
+## v1.0.0-rc3 status
+
+```text
+VERSION: 1.0.0-rc3-external-review-evidence-pack
+DONATIONS_ACTIVE: NO
+WALLETS_PUBLISHED: NO
+ACTIVATION_APPROVED: NO
+```
+
+The project remains in non-activating review mode.

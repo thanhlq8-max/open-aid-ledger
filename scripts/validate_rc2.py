@@ -18,8 +18,7 @@ REQUIRED_FILES = [
 ]
 
 REQUIRED_README_TOKENS = [
-    "VERSION: 1.0.0-rc2-external-review-activation-gate",
-    "DONATIONS_ACTIVE: NO",
+        "DONATIONS_ACTIVE: NO",
     "WALLETS_PUBLISHED: NO",
     "CUSTODY_AUTOMATION: NO",
     "RETURN_PROMISE: FORBIDDEN",
@@ -42,12 +41,6 @@ def validate(root: Path) -> list[str]:
     for rel in REQUIRED_FILES:
         if not (root / rel).is_file():
             errors.append(f"missing required RC2 file: {rel}")
-
-    version_path = root / "VERSION"
-    if not version_path.is_file():
-        errors.append("missing VERSION")
-    elif "1.0.0-rc2-external-review-activation-gate" not in _read(version_path):
-        errors.append("VERSION missing RC2 token")
 
     readme = _read(root / "README.md") if (root / "README.md").is_file() else ""
     for token in REQUIRED_README_TOKENS:
