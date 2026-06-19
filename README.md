@@ -6,7 +6,7 @@ Transparency-first public ledger template for voluntary digital-asset donations 
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
-VERSION: 0.3.0-sample-report-pages-foundation
+VERSION: 0.4.0-read-only-importer-design
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 CUSTODY_AUTOMATION: NO
@@ -38,6 +38,7 @@ It is designed for:
 - Provides campaign templates and governance documentation.
 - Keeps donation activation explicit and auditable.
 - Provides a sample transparency report and static GitHub Pages status design.
+- Documents a read-only blockchain explorer importer design for future public transaction reconciliation.
 
 ## What this repository does not do
 
@@ -75,9 +76,12 @@ NO_BENEFICIARY_DOXXING
 .github/                         GitHub workflows and templates
 campaigns/                       Campaign proposal templates and examples
 docs/                            Governance, legal notes, roadmap, and operating docs
+examples/sample-ledger/           Fictional sample ledger rows
+examples/importer/                Fictional importer-normalization sample rows
 ledger/                          CSV ledger templates
 reports/                         Generated or sample transparency reports
 scripts/                         Local validation and report-generation scripts
+tests/                           Regression tests for validators, reports, and docs
 wallets.example.json             Placeholder wallet metadata template
 DONATION_POLICY.md               Donation rules and restrictions
 TRANSPARENCY_POLICY.md           Public reporting rules
@@ -91,15 +95,17 @@ CONTRIBUTING.md                  Contributor guide
 Run from the repository root:
 
 ```powershell
-python -m compileall scripts
+python -m compileall scripts tests
 python scripts\validate_wallets.py wallets.example.json --allow-placeholders
-python scripts\validate_ledger.py --donations ledger\donations.csv --disbursements ledger\disbursements.csv
+python scripts\validate_ledger.py --donations ledger\donations.csv --disbursements ledger\disbursements.csv --enforce-balance
+python scripts\validate_ledger.py --donations examples\sample-ledger\donations.csv --disbursements examples\sample-ledger\disbursements.csv --enforce-balance
 python scripts\check_public_safety.py .
-python scripts\generate_report.py --donations ledger\donations.csv --disbursements ledger\disbursements.csv --out reports\local-smoke-report.md
+python -m pip install -r requirements-dev.txt
+python -m pytest -q
 python scripts\generate_report.py --donations examples\sample-ledger\donations.csv --disbursements examples\sample-ledger\disbursements.csv --out reports\local-sample-report.md --title "Open Aid Ledger Sample Transparency Report"
 ```
 
-The smoke report is for local validation only unless intentionally reviewed and committed.
+The local sample report is for validation only unless intentionally reviewed and committed.
 
 ## Sample reporting
 
@@ -120,6 +126,19 @@ docs/GITHUB_PAGES_STATIC_REPORT.md
 docs/index.md
 ```
 
+## Read-only importer design
+
+The repository now includes a design-only foundation for future public blockchain explorer importers:
+
+```text
+docs/BLOCKCHAIN_EXPLORER_IMPORTER_DESIGN.md
+docs/IMPORTER_NORMALIZED_TX_SCHEMA.md
+docs/IMPORTER_MANUAL_RECONCILIATION.md
+examples/importer/normalized_transactions.sample.csv
+```
+
+The importer scope is intentionally read-only. It must not sign transactions, move assets, handle private keys, use exchange withdrawal APIs, or write directly to donation ledgers without manual review.
+
 ## Donation activation policy
 
 Donation collection must remain inactive until all of the following are complete:
@@ -130,7 +149,8 @@ Donation collection must remain inactive until all of the following are complete
 4. multisig or equivalent governance is documented;
 5. public transparency report format is approved;
 6. beneficiary privacy controls are reviewed;
-7. the maintainer explicitly changes `DONATIONS_ACTIVE` from `NO` to `YES` in a reviewed commit.
+7. read-only importer design is reviewed if transaction import is used;
+8. the maintainer explicitly changes `DONATIONS_ACTIVE` from `NO` to `YES` in a reviewed commit.
 
 ## Legal and tax note
 
@@ -144,23 +164,6 @@ For Vietnam-specific context, see:
 docs/VN_LEGAL_AND_TAX_NOTE.md
 ```
 
-
-## v0.2.0 ledger safety foundation
-
-The ledger safety layer now includes:
-
-- wallet metadata schema v1.1;
-- stricter wallet metadata validation;
-- stricter ledger CSV validation;
-- optional balance enforcement;
-- validator regression tests;
-- public report foundation improvements.
-
-See:
-
-- `docs/WALLET_SCHEMA.md`
-- `docs/LEDGER_VALIDATION.md`
-- `RELEASE_NOTES_v0.2.0.md`
 ## Development roadmap
 
 Near-term priorities:

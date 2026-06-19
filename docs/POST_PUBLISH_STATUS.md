@@ -1,31 +1,45 @@
-# Post-Publish Status
+# Post-publish Status
 
-## Current repository status
+## Current state
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
-VERSION: 0.2.0-ledger-safety-foundation
+VERSION: 0.4.0-read-only-importer-design
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 CUSTODY_AUTOMATION: NO
-PRIVATE_KEYS_IN_REPO: FORBIDDEN
 TRADING_USE: FORBIDDEN
 RETURN_PROMISE: FORBIDDEN
 ```
 
-## Current phase
+## Completed
 
-Open Aid Ledger is still a transparency infrastructure template. It is not donation-active.
+- Public repository published.
+- Initial issues created.
+- Validation workflow passing.
+- Public README restored and helper artifacts cleaned.
+- Ledger safety foundation added.
+- Sample transparency reporting foundation added.
+- Static GitHub Pages status design added.
+- Read-only blockchain explorer importer design added.
 
-The current development phase is focused on:
+## Not active yet
 
-1. wallet metadata schema hardening;
-2. ledger validation hardening;
-3. validator regression tests;
-4. public report foundation;
-5. governance documentation.
+- No real wallet addresses are published.
+- Donation collection is not active.
+- No custody automation exists.
+- No blockchain explorer network importer is implemented.
+- No direct ledger mutation from importers is allowed.
 
-## Next milestone
+## Next recommended milestone
 
-`v0.3.0` should focus on GitHub Pages/static public reporting after the ledger safety layer remains stable.
+`v0.5.0 — Maintainer Governance Checklist`
 
+Focus:
+
+- donation activation checklist;
+- wallet publication approval workflow;
+- address-change review checklist;
+- emergency freeze procedure;
+- conflict-of-interest disclosure;
+- monthly maintainer report checklist.
