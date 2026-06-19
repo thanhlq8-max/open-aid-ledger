@@ -1,15 +1,8 @@
 # Roadmap
 
-## v0.6.0 — Campaign lifecycle foundation
-
-- Campaign status schema.
-- Campaign review checklist.
-- Campaign metadata validator.
-- Issue-to-release mapping for initial backlog closeout.
-
-Boundary: no donation activation, no wallet publication, no custody automation, no trading logic, no return promise.
-
 ## v0.1 — public release foundation
+
+Status: implemented.
 
 - Publish public repository.
 - Pass validation workflow.
@@ -59,7 +52,44 @@ Status: implemented.
 - Added tests for governance guardrails.
 - Kept donations inactive and wallets unpublished.
 
-## v1.0 — stable public-good ledger
+## v0.6.0 — Campaign Lifecycle Foundation
+
+Status: implemented.
+
+- Campaign status schema.
+- Campaign review checklist.
+- Campaign metadata validator.
+- Issue-to-release mapping for initial backlog closeout.
+- Kept donations inactive and wallets unpublished.
+
+## v0.7.0 — Release Closeout Foundation
+
+Status: implemented.
+
+- Completed initial issue closeout map.
+- Prepared GitHub release notes draft.
+- Closed initial seed issues manually after review.
+- Kept donations inactive and wallets unpublished.
+
+## v0.8.0 — Donation Readiness Dry Run
+
+Status: implemented.
+
+- Added donation readiness dry-run checks.
+- Kept donation activation inactive.
+- Prepared for a future reviewed donation-ready release without publishing wallets yet.
+
+## v0.9.0 — Static Public Status Page Finalization
+
+Status: implemented.
+
+- Finalized `docs/index.md` as the static public status page.
+- Added static status page validator.
+- Added GitHub Pages deployment checklist.
+- Added status badge guidance.
+- Kept donations inactive and wallets unpublished.
+
+## v1.0 — Stable Public-Good Ledger
 
 Planned.
 
@@ -68,13 +98,3 @@ Planned.
 - Repeated monthly reports.
 - Public contribution process validated.
 - Donation activation only after legal, tax, privacy, and security checks are complete.
-
-## v0.7.0 — release closeout foundation
-
-Completed the initial issue closeout map and prepared GitHub release notes. Next recommended milestone: v0.8.0 donation readiness dry run, still without real wallet publication or donation activation.
-
-## 0.8.0-donation-readiness-dry-run
-
-- Add donation readiness dry-run checks.
-- Keep donation activation inactive.
-- Prepare for a future reviewed donation-ready release without publishing wallets yet.

@@ -1,61 +1,32 @@
-# Post-publish Status
-
-## Current state
+# Post-publish status
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
-VERSION: 0.6.0-campaign-lifecycle-foundation
+VERSION: 0.9.0-static-public-status-page
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 CUSTODY_AUTOMATION: NO
+PRIVATE_KEYS_IN_REPO: FORBIDDEN
 TRADING_USE: FORBIDDEN
 RETURN_PROMISE: FORBIDDEN
 ```
 
-## Completed
+## Completed foundation
 
-- Public repository published.
-- Initial issues created.
-- Validation workflow passing.
-- Public README restored and helper artifacts cleaned.
-- Ledger safety foundation added.
-- Sample transparency reporting foundation added.
-- Static GitHub Pages status design added.
-- Read-only blockchain explorer importer design added.
+- Public repository template.
+- Wallet metadata schema hardening.
+- Ledger safety validation.
+- Sample transparency report.
+- Static GitHub Pages report design.
+- Read-only blockchain explorer importer design.
+- Maintainer governance checklist.
+- Campaign lifecycle foundation.
+- Initial issue closeout.
+- Donation readiness dry run.
+- Static public status page finalization.
 
-## Not active yet
+## Current gate
 
-- No real wallet addresses are published.
-- Donation collection is not active.
-- No custody automation exists.
-- No blockchain explorer network importer is implemented.
-- No direct ledger mutation from importers is allowed.
+The project is still not donation-active.
 
-## Next recommended milestone
-
-`v0.5.0 — Maintainer Governance Checklist`
-
-Focus:
-
-- donation activation checklist;
-- wallet publication approval workflow;
-- address-change review checklist;
-- emergency freeze procedure;
-- conflict-of-interest disclosure;
-- monthly maintainer report checklist.
-
-
-## v0.5.0 governance update
-
-Maintainer governance, donation activation, emergency freeze, conflict-of-interest disclosure, and governance decision-record templates were added. Donations remain inactive and wallets remain unpublished.
-- v0.6.0 adds campaign lifecycle metadata validation and issue/release mapping.
-
-## v0.7.0 release closeout foundation
-
-Initial seed issues #1 through #6 are mapped to completed releases. Donation collection remains inactive and wallet publication remains blocked until a future explicit reviewed activation.
-
-## 0.8.0-donation-readiness-dry-run
-
-Status: dry-run readiness foundation added.
-
-Donation collection remains inactive and wallets remain unpublished.
+The next release should be a pre-1.0 release candidate focused on final review, not real donation activation.

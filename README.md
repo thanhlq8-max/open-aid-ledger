@@ -6,7 +6,7 @@ Transparency-first public ledger template for voluntary digital-asset donations 
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
-VERSION: 0.8.0-donation-readiness-dry-run
+VERSION: 0.9.0-static-public-status-page
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 CUSTODY_AUTOMATION: NO
@@ -42,6 +42,7 @@ It is designed for:
 - Provides maintainer governance, donation activation, emergency freeze, and conflict-of-interest checklists.
 - Provides campaign lifecycle, status metadata, campaign review checklist, and campaign validation.
 - Provides donation-readiness dry-run checks before any donation activation.
+- Provides a static public status page and validator for GitHub Pages readiness.
 
 ## What this repository does not do
 
@@ -88,6 +89,7 @@ docs/                            Governance, legal notes, roadmap, and operating
   docs/CAMPAIGN_REVIEW_CHECKLIST.md       Campaign review checklist
   docs/CAMPAIGN_STATUS_SCHEMA.md          Campaign metadata schema
   docs/CAMPAIGN_LIFECYCLE.md              Campaign status lifecycle
+  docs/PUBLIC_STATUS_PAGE.md              Static public status page rules
   docs/DONATION_READINESS_DRY_RUN.md          Donation readiness dry-run gates
   docs/DRY_RUN_WALLET_PUBLICATION_REVIEW.md Dry-run wallet publication checklist
   docs/DONATION_LAUNCH_RISK_REGISTER.md    Launch risk register
