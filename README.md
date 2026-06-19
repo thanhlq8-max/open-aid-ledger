@@ -1,197 +1,24 @@
-# Open Aid Ledger
+# Open Aid Ledger v0.1.2 Public Repository Hygiene Patch
 
-[![Validate](https://github.com/thanhlq8-max/open-aid-ledger/actions/workflows/validate.yml/badge.svg)](https://github.com/thanhlq8-max/open-aid-ledger/actions/workflows/validate.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+This patch removes helper artifacts that were used to apply v0.1.1 but should not remain in the public repository.
 
-**Status:** public-release candidate template  
-**Mode:** transparency-first public donation ledger  
-**Donation status:** inactive until maintainers publish verified wallet addresses  
-**Current milestone:** v0.1.1 post-publish cleanup / v0.2.0 ledger-safety foundation  
-**Last updated:** 2026-06-19
+## Apply
 
-Open Aid Ledger is a public, read-only transparency repository for voluntary digital-asset donations used to support hardship cases and open-source public-good work.
+Copy `apply_v0.1.2_public_repo_hygiene.ps1` into the root of `F:\GitHub\open-aid-ledger`, then run:
 
-This project exists because a single person usually cannot create meaningful social support alone, while many small voluntary donations from a transparent community can become useful support for real hardship cases.
+```powershell
+cd F:\GitHub\open-aid-ledger
+powershell -ExecutionPolicy Bypass -File .\apply_v0.1.2_public_repo_hygiene.ps1
+```
 
-This repository is designed for:
+## Commit
 
-- children and families facing hardship;
-- homeless or vulnerable people;
-- community members in urgent difficulty;
-- open-source maintainers and tooling that provide real public utility;
-- trader communities that want to donate part of legitimate profits to social support.
-
-This repository is **not** a trading project, investment fund, exchange, broker, payment processor, custody service, charity registration substitute, or payment institution.
-
----
-
-## Current public status
+After validation passes, commit in GitHub Desktop:
 
 ```text
-DONATIONS_ACTIVE: NO
-WALLETS_PUBLISHED: NO
-CUSTODY_AUTOMATION: NO
-PRIVATE_KEYS_IN_REPO: FORBIDDEN
-TRADING_USE: FORBIDDEN
-RETURN_PROMISE: FORBIDDEN
+Clean public repository helper artifacts
 ```
 
-Donations should not be sent until the maintainers create a real `wallets.json`, publish the first transparency report, and make the policy files consistent with the active campaign.
+## Scope
 
-The repository has been published publicly and the initial safety backlog is open. The current development focus is to harden the transparency infrastructure before any real wallet address is published.
----
-
-## Active public backlog
-
-The first public backlog is intentionally focused on safety and transparency infrastructure:
-
-- [#1 Harden wallet metadata schema](https://github.com/thanhlq8-max/open-aid-ledger/issues/1)
-- [#2 Add unit tests for wallet and ledger validators](https://github.com/thanhlq8-max/open-aid-ledger/issues/2)
-- [#3 Add sample transparency report](https://github.com/thanhlq8-max/open-aid-ledger/issues/3)
-- [#4 Add GitHub Pages static report design](https://github.com/thanhlq8-max/open-aid-ledger/issues/4)
-- [#5 Design read-only blockchain explorer importer](https://github.com/thanhlq8-max/open-aid-ledger/issues/5)
-- [#6 Add maintainer governance checklist](https://github.com/thanhlq8-max/open-aid-ledger/issues/6)
-
-The project should not move to active donations until the wallet schema, ledger validation, privacy policy, governance checklist, and reporting workflow have been reviewed.
-
-
----
-
-## Core principles
-
-1. **Voluntary only** â€” all donations are optional.
-2. **No return promise** â€” donors receive no profit, yield, token, allocation, ownership, signal, or financial benefit.
-3. **No trading use** â€” donations must not be used to fund trading accounts, margin calls, revenge trading, copy trading, or managed accounts.
-4. **No private-key handling** â€” this repository never stores seed phrases, private keys, API keys, exchange credentials, or custody automation.
-5. **Transparency first** â€” incoming donations, outgoing support, campaign rules, and reports should be auditable.
-6. **Privacy by default** â€” beneficiary identity must be protected unless they explicitly consent to disclosure.
-7. **Local-law respect** â€” contributors and donors are responsible for their own legal, tax, and reporting obligations.
-
----
-
-## Vietnam note
-
-Vietnam does not treat digital assets as legal tender or legal means of payment. Public reporting indicates that owning crypto is not explicitly banned, while the regulatory framework continues to evolve. This repository therefore avoids payment-language and uses only voluntary digital-asset donation/transparency language.
-
-When donations are converted to VND or otherwise realized, maintainers and recipients should keep records and handle tax/reporting obligations according to applicable Vietnamese law. This is not legal or tax advice.
-
-See: [`docs/VN_LEGAL_AND_TAX_NOTE.md`](docs/VN_LEGAL_AND_TAX_NOTE.md)
-
----
-
-## Supported assets and wallets
-
-Wallet addresses are intentionally not filled in this template.
-
-Before accepting donations, maintainers must complete:
-
-- copy `wallets.example.json` to `wallets.json`;
-- verify wallet addresses outside GitHub before publishing;
-- update [`DONATION_POLICY.md`](DONATION_POLICY.md);
-- update [`TRANSPARENCY_POLICY.md`](TRANSPARENCY_POLICY.md);
-- update [`BENEFICIARY_PRIVACY_POLICY.md`](BENEFICIARY_PRIVACY_POLICY.md);
-- run all validation commands.
-
-Recommended minimum practice:
-
-- start with a small number of public addresses;
-- use a dedicated address per campaign where possible;
-- move to multisig before accepting large amounts;
-- publish monthly reports;
-- never accept private keys, seed phrases, or exchange credentials.
-
----
-
-## What this repo does
-
-- Publishes donation wallet metadata after maintainer activation.
-- Maintains public incoming/outgoing ledgers.
-- Generates Markdown transparency reports.
-- Documents campaign rules and disbursement decisions.
-- Protects beneficiary privacy while keeping fund flow auditable.
-- Provides validation scripts to catch common ledger and secret-handling mistakes.
-
-## What this repo does not do
-
-- No buy/sell signals.
-- No investment advice.
-- No profit sharing.
-- No managed trading.
-- No trading-account rescue.
-- No token issuance.
-- No custody automation.
-- No private-key collection.
-- No mixer, obfuscation, or laundering support.
-- No claim of being a registered charity unless a legal entity is added later.
-
----
-
-## Quick start
-
-Copy wallet template only when ready to activate donations:
-
-```bash
-cp wallets.example.json wallets.json
-python scripts/validate_wallets.py wallets.json
-```
-
-Add donation records to:
-
-```text
-ledger/donations.csv
-```
-
-Add support/disbursement records to:
-
-```text
-ledger/disbursements.csv
-```
-
-Validate public safety:
-
-```bash
-python scripts/validate_ledger.py --donations ledger/donations.csv --disbursements ledger/disbursements.csv
-python scripts/check_public_safety.py .
-```
-
-Generate a report:
-
-```bash
-python scripts/generate_report.py --donations ledger/donations.csv --disbursements ledger/disbursements.csv --out reports/monthly-report.md
-```
-
----
-
-## Campaigns
-
-Current starter campaigns:
-
-- [`campaigns/2026-community-hardship-support.md`](campaigns/2026-community-hardship-support.md)
-- [`campaigns/2026-trader-community-giving.md`](campaigns/2026-trader-community-giving.md)
-- [`campaigns/2026-open-source-public-good-support.md`](campaigns/2026-open-source-public-good-support.md)
-
-Trader-community giving is allowed only as voluntary social giving from legitimate profits. It must not fund trading losses, margin calls, revenge trading, copy trading, or managed accounts.
-
----
-
-## Public release checklist
-
-See [`docs/PUBLISHING.md`](docs/PUBLISHING.md) and [`RELEASE_CHECKLIST.md`](RELEASE_CHECKLIST.md).
-
-Minimum before public activation:
-
-```bash
-python -m compileall scripts
-python scripts/validate_wallets.py wallets.example.json
-python scripts/validate_ledger.py --donations ledger/donations.csv --disbursements ledger/disbursements.csv
-python scripts/check_public_safety.py .
-python scripts/generate_report.py --donations ledger/donations.csv --disbursements ledger/disbursements.csv --out reports/local-smoke-report.md
-```
-
----
-
-## Security
-
-Never submit private keys, seed phrases, screenshots containing wallet secrets, exchange credentials, identity documents, or private beneficiary data into GitHub issues, pull requests, commits, or comments.
-
-See [`SECURITY.md`](SECURITY.md) and [`docs/SCAM_PREVENTION.md`](docs/SCAM_PREVENTION.md).
+This patch does not activate donations, publish wallets, add custody automation, add private-key handling, add trading behavior, or change ledger logic.

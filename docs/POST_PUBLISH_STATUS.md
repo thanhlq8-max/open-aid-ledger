@@ -39,7 +39,7 @@ RETURN_PROMISE: FORBIDDEN
 ## Next milestone
 
 ```text
-v0.2.0 â€” Ledger Safety & Public Report Foundation
+v0.2.0 Ã¢â‚¬â€ Ledger Safety & Public Report Foundation
 ```
 
 Recommended order:
@@ -64,3 +64,8 @@ Recommended order:
 ## Activation prerequisites
 
 Before donations become active, maintainers should complete wallet schema hardening, wallet verification procedure, address-change review, governance checklist, privacy checklist, campaign-specific policy, first report template, tax/recordkeeping note, public safety scan, and maintainer approval note.
+## v0.1.2 public repository hygiene
+
+The repository should not keep local patch helper artifacts after a patch has been applied. `README_PATCH.md` and `apply_v0.1.1_post_publish_cleanup.ps1` were removed from the public tree.
+
+Donation status remains inactive. No wallet addresses were published.
