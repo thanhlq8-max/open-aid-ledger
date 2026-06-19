@@ -1,0 +1,16 @@
+{
+  "release": "0.10.0-pre-1.0-candidate-review",
+  "candidate_status": "PENDING_REVIEW",
+  "donations_active": false,
+  "wallets_published": false,
+  "required_reviews": [
+    "repository_status",
+    "wallet_publication",
+    "campaign_lifecycle",
+    "ledger_validation",
+    "beneficiary_privacy",
+    "public_status_page"
+  ],
+  "blocking_items": [],
+  "follow_up_items": []
+}

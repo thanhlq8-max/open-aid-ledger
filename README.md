@@ -6,7 +6,7 @@ Transparency-first public ledger template for voluntary digital-asset donations 
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
-VERSION: 0.9.0-static-public-status-page
+VERSION: 0.10.0-pre-1.0-candidate-review
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 CUSTODY_AUTOMATION: NO
@@ -211,6 +211,19 @@ For Vietnam-specific context, see:
 
 ```text
 docs/VN_LEGAL_AND_TAX_NOTE.md
+```
+
+## Pre-1.0 candidate review
+
+This repository is now in pre-1.0 candidate-review mode. The review checks whether the public template, ledger validation, campaign lifecycle, governance controls, readiness dry run, and public status page are coherent enough to prepare a future donation-ready release.
+
+This does not activate donations and does not publish real wallet addresses.
+
+See:
+
+```text
+docs/PRE_1_0_DONATION_READY_CANDIDATE_REVIEW.md
+docs/DONATION_READY_CANDIDATE_CHECKLIST.md
 ```
 
 ## Development roadmap

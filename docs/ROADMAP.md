@@ -98,3 +98,14 @@ Planned.
 - Repeated monthly reports.
 - Public contribution process validated.
 - Donation activation only after legal, tax, privacy, and security checks are complete.
+
+## v0.10.0 — Pre-1.0 donation-ready candidate review
+
+- Candidate review documents.
+- Candidate checklist.
+- External review request template.
+- Operational risk acceptance template.
+- Candidate validation script and tests.
+
+Next milestone: v1.0.0 donation-ready candidate, only after review gates pass.
+

@@ -1,5 +1,15 @@
 # Changelog
 
+
+## v0.10.0 — Pre-1.0 donation-ready candidate review
+
+- Added pre-1.0 candidate review documentation.
+- Added donation-ready candidate checklist and external review template.
+- Added candidate decision record and operational risk acceptance docs.
+- Added candidate review example JSON.
+- Added `scripts/validate_candidate.py` and tests.
+- Kept donations inactive and wallets unpublished.
+
 ## 0.9.0-static-public-status-page
 
 - Finalized `docs/index.md` as the canonical static public status page.
