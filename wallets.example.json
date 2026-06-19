@@ -1,6 +1,9 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
+  "project_id": "open-aid-ledger",
   "last_updated": "TO_BE_FILLED_BY_MAINTAINER",
+  "donations_active": false,
+  "wallets_published": false,
   "wallets": [
     {
       "wallet_id": "TO_BE_FILLED_BY_MAINTAINER",
@@ -11,7 +14,13 @@
       "address": "TO_BE_FILLED_BY_MAINTAINER",
       "controller_type": "single_maintainer_or_multisig",
       "controller_disclosure": "TO_BE_FILLED_BY_MAINTAINER",
-      "risk_note": "Only send the listed asset on the listed network. Unsupported transfers may be unrecoverable."
+      "custody_model": "read_only_public_address_metadata_only",
+      "donation_use": "hardship_support_or_open_source_public_good_support_only",
+      "status": "placeholder",
+      "purpose": "TO_BE_FILLED_BY_MAINTAINER",
+      "address_verification": "TO_BE_FILLED_BY_MAINTAINER",
+      "last_reviewed_utc": "TO_BE_FILLED_BY_MAINTAINER",
+      "risk_note": "Only send the listed asset on the listed network after the address is verified and donation collection is active. Unsupported transfers may be unrecoverable."
     }
   ],
   "prohibited": {
@@ -21,3 +30,4 @@
     "custody_automation": "not_supported"
   }
 }
+

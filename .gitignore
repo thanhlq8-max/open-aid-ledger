@@ -1,5 +1,6 @@
 __pycache__/
 *.pyc
+.pytest_cache/
 .env
 .env.*
 wallets.json
@@ -10,3 +11,10 @@ wallets.json
 .DS_Store
 reports/local-smoke-report.md
 reports/ci-report.md
+apply_v*.ps1
+PATCH_README.txt
+README_PATCH.md
+README_RESTORE.md
+apply_v*.py
+_v020_payload/
+*_payload/

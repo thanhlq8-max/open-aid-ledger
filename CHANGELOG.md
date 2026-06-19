@@ -58,3 +58,13 @@ Added:
 - publishing guide;
 - release checklist;
 - scam prevention and address-change procedures.
+
+## v0.2.0 — Ledger Safety Foundation
+
+- Hardened wallet metadata schema to v1.1.
+- Added stronger wallet metadata validation.
+- Added stronger ledger CSV validation, duplicate transaction checks, and optional balance enforcement.
+- Added validator regression tests and CI test execution.
+- Added wallet schema and ledger validation documentation.
+- Improved transparency report output with net balance by asset.
+- Kept donations inactive and wallets unpublished.

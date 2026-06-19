@@ -1,12 +1,10 @@
 # Post-Publish Status
 
-## Current state
+## Current repository status
 
 ```text
-REPOSITORY: thanhlq8-max/open-aid-ledger
-STATUS: PUBLIC_TEMPLATE
-VERSION: 0.1.4-final-helper-cleanup
-ISSUES_CREATED: YES
+PROJECT_STATUS: PUBLIC_TEMPLATE
+VERSION: 0.2.0-ledger-safety-foundation
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 CUSTODY_AUTOMATION: NO
@@ -15,26 +13,19 @@ TRADING_USE: FORBIDDEN
 RETURN_PROMISE: FORBIDDEN
 ```
 
-## Completed
+## Current phase
 
-- Repository published publicly on GitHub.
-- Core policies committed.
-- Public README restored after v0.1.2 patch mistake.
-- Six initial issues created for safety and roadmap alignment.
-- Residual helper artifacts removed from the public repository root.
+Open Aid Ledger is still a transparency infrastructure template. It is not donation-active.
 
-## Still required before donation activation
+The current development phase is focused on:
 
-1. Harden wallet metadata schema.
-2. Add validator tests and run them in CI.
-3. Approve address-change procedure.
-4. Document multisig or equivalent governance.
-5. Approve public transparency report format.
-6. Review beneficiary privacy controls.
-7. Change `DONATIONS_ACTIVE` from `NO` to `YES` only in a reviewed commit.
+1. wallet metadata schema hardening;
+2. ledger validation hardening;
+3. validator regression tests;
+4. public report foundation;
+5. governance documentation.
 
-## Next development target
+## Next milestone
 
-```text
-v0.2.0 â€” Ledger Safety & Public Report Foundation
-```
+`v0.3.0` should focus on GitHub Pages/static public reporting after the ledger safety layer remains stable.
+

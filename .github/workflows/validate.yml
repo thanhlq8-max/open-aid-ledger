@@ -13,13 +13,18 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+      - name: Install dev dependencies
+        run: python -m pip install -r requirements-dev.txt
       - name: Compile scripts
         run: python -m compileall scripts
       - name: Validate wallet example
         run: python scripts/validate_wallets.py wallets.example.json --allow-placeholders
       - name: Validate ledgers
-        run: python scripts/validate_ledger.py --donations ledger/donations.csv --disbursements ledger/disbursements.csv
+        run: python scripts/validate_ledger.py --donations ledger/donations.csv --disbursements ledger/disbursements.csv --enforce-balance
       - name: Public safety scan
         run: python scripts/check_public_safety.py .
+      - name: Run tests
+        run: python -m pytest -q
       - name: Generate empty report
         run: python scripts/generate_report.py --donations ledger/donations.csv --disbursements ledger/disbursements.csv --out reports/ci-report.md
+

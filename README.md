@@ -6,7 +6,7 @@ Transparency-first public ledger template for voluntary digital-asset donations 
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
-VERSION: 0.1.4-final-helper-cleanup
+VERSION: 0.2.0-ledger-safety-foundation
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 CUSTODY_AUTOMATION: NO
@@ -123,6 +123,23 @@ For Vietnam-specific context, see:
 docs/VN_LEGAL_AND_TAX_NOTE.md
 ```
 
+
+## v0.2.0 ledger safety foundation
+
+The ledger safety layer now includes:
+
+- wallet metadata schema v1.1;
+- stricter wallet metadata validation;
+- stricter ledger CSV validation;
+- optional balance enforcement;
+- validator regression tests;
+- public report foundation improvements.
+
+See:
+
+- `docs/WALLET_SCHEMA.md`
+- `docs/LEDGER_VALIDATION.md`
+- `RELEASE_NOTES_v0.2.0.md`
 ## Development roadmap
 
 Near-term priorities:
