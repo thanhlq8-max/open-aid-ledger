@@ -53,3 +53,9 @@ Maintainer governance, donation activation, emergency freeze, conflict-of-intere
 ## v0.7.0 release closeout foundation
 
 Initial seed issues #1 through #6 are mapped to completed releases. Donation collection remains inactive and wallet publication remains blocked until a future explicit reviewed activation.
+
+## 0.8.0-donation-readiness-dry-run
+
+Status: dry-run readiness foundation added.
+
+Donation collection remains inactive and wallets remain unpublished.

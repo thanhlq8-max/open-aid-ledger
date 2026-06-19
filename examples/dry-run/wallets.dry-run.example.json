@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.1",
+  "project_id": "open-aid-ledger",
+  "last_updated": "DRY_RUN_ONLY",
+  "donations_active": false,
+  "wallets_published": false,
+  "dry_run_only": true,
+  "wallets": [
+    {
+      "wallet_id": "DRY-RUN-WALLET-001",
+      "campaign_id": "DRY-RUN-CAMPAIGN-001",
+      "chain": "DRY_RUN_CHAIN",
+      "asset": "DRY_RUN_ASSET",
+      "network": "DRY_RUN_NETWORK",
+      "address": "TO_BE_FILLED_BY_MAINTAINER_AFTER_REVIEW",
+      "controller_type": "single_maintainer_or_multisig",
+      "controller_disclosure": "Dry-run placeholder only; no real controller is asserted.",
+      "custody_model": "read_only_public_address_metadata_only",
+      "donation_use": "hardship_support_or_open_source_public_good_support_only",
+      "status": "placeholder",
+      "purpose": "Dry-run wallet publication review only.",
+      "address_verification": "Not verified; placeholder only.",
+      "last_reviewed_utc": "DRY_RUN_ONLY",
+      "risk_note": "Dry-run placeholder. Do not send funds."
+    }
+  ],
+  "prohibited": {
+    "private_keys": "never_store",
+    "seed_phrases": "never_store",
+    "exchange_api_keys": "never_store",
+    "custody_automation": "not_supported"
+  }
+}

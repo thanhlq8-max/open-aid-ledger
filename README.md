@@ -6,7 +6,7 @@ Transparency-first public ledger template for voluntary digital-asset donations 
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
-VERSION: 0.7.0-release-closeout-foundation
+VERSION: 0.8.0-donation-readiness-dry-run
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 CUSTODY_AUTOMATION: NO
@@ -41,6 +41,7 @@ It is designed for:
 - Documents a read-only blockchain explorer importer design for future public transaction reconciliation.
 - Provides maintainer governance, donation activation, emergency freeze, and conflict-of-interest checklists.
 - Provides campaign lifecycle, status metadata, campaign review checklist, and campaign validation.
+- Provides donation-readiness dry-run checks before any donation activation.
 
 ## What this repository does not do
 
@@ -87,6 +88,10 @@ docs/                            Governance, legal notes, roadmap, and operating
   docs/CAMPAIGN_REVIEW_CHECKLIST.md       Campaign review checklist
   docs/CAMPAIGN_STATUS_SCHEMA.md          Campaign metadata schema
   docs/CAMPAIGN_LIFECYCLE.md              Campaign status lifecycle
+  docs/DONATION_READINESS_DRY_RUN.md          Donation readiness dry-run gates
+  docs/DRY_RUN_WALLET_PUBLICATION_REVIEW.md Dry-run wallet publication checklist
+  docs/DONATION_LAUNCH_RISK_REGISTER.md    Launch risk register
+  docs/DONATION_LAUNCH_RUNBOOK.md          Future launch runbook
 examples/sample-ledger/           Fictional sample ledger rows
 examples/importer/                Fictional importer-normalization sample rows
 ledger/                          CSV ledger templates
@@ -109,6 +114,7 @@ Run from the repository root:
 python -m compileall scripts tests
 python scripts\validate_wallets.py wallets.example.json --allow-placeholders
 python scripts\validate_campaigns.py campaigns\campaigns.example.json --allow-inactive-template
+python scripts\validate_readiness.py .
 python scripts\validate_ledger.py --donations ledger\donations.csv --disbursements ledger\disbursements.csv --enforce-balance
 python scripts\validate_ledger.py --donations examples\sample-ledger\donations.csv --disbursements examples\sample-ledger\disbursements.csv --enforce-balance
 python scripts\check_public_safety.py .
@@ -165,6 +171,21 @@ scripts/validate_campaigns.py
 
 Campaigns must remain inactive unless donation activation gates are explicitly reviewed and `DONATIONS_ACTIVE` is changed in a reviewed commit.
 
+## Donation readiness dry run
+
+The repository includes a dry-run-only donation readiness layer:
+
+```text
+docs/DONATION_READINESS_DRY_RUN.md
+docs/DRY_RUN_WALLET_PUBLICATION_REVIEW.md
+docs/DONATION_LAUNCH_RISK_REGISTER.md
+docs/DONATION_LAUNCH_RUNBOOK.md
+examples/dry-run/wallets.dry-run.example.json
+scripts/validate_readiness.py
+```
+
+The dry run checks readiness while keeping `DONATIONS_ACTIVE: NO` and `WALLETS_PUBLISHED: NO`.
+
 ## Donation activation policy
 
 Donation collection must remain inactive until all of the following are complete:
@@ -194,10 +215,10 @@ docs/VN_LEGAL_AND_TAX_NOTE.md
 
 Near-term priorities:
 
-1. campaign lifecycle and status validation;
-2. close or update initial issues with release mapping;
-3. prepare a reviewed static public status page;
-4. design read-only importer implementation plan;
+1. run donation-readiness dry-run checks;
+2. prepare a reviewed static public status page;
+3. design read-only importer implementation plan;
+4. prepare inactive wallet-publication review;
 5. keep donation activation inactive until all launch gates pass.
 
 The first donation-ready release should not be cut until the safety and reporting foundation is stable.

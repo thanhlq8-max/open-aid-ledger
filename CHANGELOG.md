@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.0-donation-readiness-dry-run
+
+- Added donation-readiness dry-run documentation.
+- Added dry-run wallet publication review checklist.
+- Added launch risk register and future launch runbook.
+- Added `scripts/validate_readiness.py` and regression tests.
+- Kept donations inactive and wallets unpublished.
+
 ## 0.7.0-release-closeout-foundation
 
 - Added release closeout documentation.

@@ -72,3 +72,9 @@ Planned.
 ## v0.7.0 — release closeout foundation
 
 Completed the initial issue closeout map and prepared GitHub release notes. Next recommended milestone: v0.8.0 donation readiness dry run, still without real wallet publication or donation activation.
+
+## 0.8.0-donation-readiness-dry-run
+
+- Add donation readiness dry-run checks.
+- Keep donation activation inactive.
+- Prepare for a future reviewed donation-ready release without publishing wallets yet.
