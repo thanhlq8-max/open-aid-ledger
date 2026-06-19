@@ -1,5 +1,14 @@
 # Roadmap
 
+## v0.6.0 — Campaign lifecycle foundation
+
+- Campaign status schema.
+- Campaign review checklist.
+- Campaign metadata validator.
+- Issue-to-release mapping for initial backlog closeout.
+
+Boundary: no donation activation, no wallet publication, no custody automation, no trading logic, no return promise.
+
 ## v0.1 — public release foundation
 
 - Publish public repository.

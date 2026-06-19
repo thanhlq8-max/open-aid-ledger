@@ -4,7 +4,7 @@
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
-VERSION: 0.5.0-maintainer-governance-checklist
+VERSION: 0.6.0-campaign-lifecycle-foundation
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 CUSTODY_AUTOMATION: NO
@@ -48,3 +48,4 @@ Focus:
 ## v0.5.0 governance update
 
 Maintainer governance, donation activation, emergency freeze, conflict-of-interest disclosure, and governance decision-record templates were added. Donations remain inactive and wallets remain unpublished.
+- v0.6.0 adds campaign lifecycle metadata validation and issue/release mapping.

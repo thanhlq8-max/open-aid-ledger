@@ -1,0 +1,58 @@
+{
+  "schema_version": "campaigns.v1.0",
+  "project_id": "open-aid-ledger",
+  "donations_active": false,
+  "wallets_published": false,
+  "campaigns": [
+    {
+      "campaign_id": "2026-community-hardship-support",
+      "title": "Community Hardship Support",
+      "status": "approved_inactive",
+      "purpose": "Provide documented hardship support while donation collection remains inactive.",
+      "beneficiary_privacy_level": "redacted_public_summary",
+      "donation_activation_allowed": false,
+      "wallets_required": false,
+      "ledger_required": true,
+      "decision_record_path": "docs/GOVERNANCE_DECISION_RECORD.md",
+      "report_path": "reports/sample-transparency-report.md",
+      "created_utc": "2026-06-19",
+      "last_reviewed_utc": "2026-06-19",
+      "guardrails": [
+        "NO_PRIVATE_KEYS",
+        "NO_SEED_PHRASES",
+        "NO_AUTO_TRANSFER",
+        "NO_CUSTODY_AUTOMATION",
+        "NO_TRADING_ACCOUNT_TOP_UP",
+        "NO_MARGIN_CALL_SUPPORT",
+        "NO_RETURN_PROMISE",
+        "NO_BENEFICIARY_DOXXING"
+      ],
+      "notes": "Sample-only campaign record. Does not activate donations or publish wallets."
+    },
+    {
+      "campaign_id": "2026-open-source-public-good-support",
+      "title": "Open Source Public Good Support",
+      "status": "proposed",
+      "purpose": "Document future support for open-source public-good work with transparent reporting.",
+      "beneficiary_privacy_level": "public_project_summary",
+      "donation_activation_allowed": false,
+      "wallets_required": false,
+      "ledger_required": true,
+      "decision_record_path": "docs/GOVERNANCE_DECISION_RECORD.md",
+      "report_path": "reports/sample-transparency-report.md",
+      "created_utc": "2026-06-19",
+      "last_reviewed_utc": "2026-06-19",
+      "guardrails": [
+        "NO_PRIVATE_KEYS",
+        "NO_SEED_PHRASES",
+        "NO_AUTO_TRANSFER",
+        "NO_CUSTODY_AUTOMATION",
+        "NO_TRADING_ACCOUNT_TOP_UP",
+        "NO_MARGIN_CALL_SUPPORT",
+        "NO_RETURN_PROMISE",
+        "NO_BENEFICIARY_DOXXING"
+      ],
+      "notes": "Sample-only campaign record for public-good support workflow design."
+    }
+  ]
+}

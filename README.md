@@ -6,7 +6,7 @@ Transparency-first public ledger template for voluntary digital-asset donations 
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
-VERSION: 0.5.0-maintainer-governance-checklist
+VERSION: 0.6.0-campaign-lifecycle-foundation
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 CUSTODY_AUTOMATION: NO
@@ -40,6 +40,7 @@ It is designed for:
 - Provides a sample transparency report and static GitHub Pages status design.
 - Documents a read-only blockchain explorer importer design for future public transaction reconciliation.
 - Provides maintainer governance, donation activation, emergency freeze, and conflict-of-interest checklists.
+- Provides campaign lifecycle, status metadata, campaign review checklist, and campaign validation.
 
 ## What this repository does not do
 
@@ -76,11 +77,16 @@ NO_BENEFICIARY_DOXXING
 ```text
 .github/                         GitHub workflows and templates
 campaigns/                       Campaign proposal templates and examples
+campaigns/campaigns.example.json    Campaign lifecycle metadata template
 docs/                            Governance, legal notes, roadmap, and operating docs
   docs/MAINTAINER_GOVERNANCE_CHECKLIST.md      Maintainer launch and operating checklist
   docs/DONATION_ACTIVATION_CHECKLIST.md        Donation activation gate
   docs/EMERGENCY_FREEZE_PROCEDURE.md           Incident freeze procedure
   docs/CONFLICT_OF_INTEREST_DISCLOSURE_TEMPLATE.md Conflict disclosure template
+  docs/ISSUE_RELEASE_MAPPING.md           Initial backlog to release mapping
+  docs/CAMPAIGN_REVIEW_CHECKLIST.md       Campaign review checklist
+  docs/CAMPAIGN_STATUS_SCHEMA.md          Campaign metadata schema
+  docs/CAMPAIGN_LIFECYCLE.md              Campaign status lifecycle
 examples/sample-ledger/           Fictional sample ledger rows
 examples/importer/                Fictional importer-normalization sample rows
 ledger/                          CSV ledger templates
@@ -102,6 +108,7 @@ Run from the repository root:
 ```powershell
 python -m compileall scripts tests
 python scripts\validate_wallets.py wallets.example.json --allow-placeholders
+python scripts\validate_campaigns.py campaigns\campaigns.example.json --allow-inactive-template
 python scripts\validate_ledger.py --donations ledger\donations.csv --disbursements ledger\disbursements.csv --enforce-balance
 python scripts\validate_ledger.py --donations examples\sample-ledger\donations.csv --disbursements examples\sample-ledger\disbursements.csv --enforce-balance
 python scripts\check_public_safety.py .
@@ -144,6 +151,20 @@ examples/importer/normalized_transactions.sample.csv
 
 The importer scope is intentionally read-only. It must not sign transactions, move assets, handle private keys, use exchange withdrawal APIs, or write directly to donation ledgers without manual review.
 
+## Campaign lifecycle
+
+The repository includes campaign lifecycle documentation and a campaign metadata validator:
+
+```text
+campaigns/campaigns.example.json
+docs/CAMPAIGN_LIFECYCLE.md
+docs/CAMPAIGN_STATUS_SCHEMA.md
+docs/CAMPAIGN_REVIEW_CHECKLIST.md
+scripts/validate_campaigns.py
+```
+
+Campaigns must remain inactive unless donation activation gates are explicitly reviewed and `DONATIONS_ACTIVE` is changed in a reviewed commit.
+
 ## Donation activation policy
 
 Donation collection must remain inactive until all of the following are complete:
@@ -173,12 +194,11 @@ docs/VN_LEGAL_AND_TAX_NOTE.md
 
 Near-term priorities:
 
-1. harden wallet metadata schema;
-2. add tests for validator scripts;
-3. add sample transparency report;
-4. design GitHub Pages static reporting;
-5. design read-only blockchain explorer importer;
-6. add maintainer governance checklist.
+1. campaign lifecycle and status validation;
+2. close or update initial issues with release mapping;
+3. prepare a reviewed static public status page;
+4. design read-only importer implementation plan;
+5. keep donation activation inactive until all launch gates pass.
 
 The first donation-ready release should not be cut until the safety and reporting foundation is stable.
 

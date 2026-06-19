@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.6.0 — Campaign lifecycle foundation
+
+- Added campaign lifecycle metadata template.
+- Added `scripts/validate_campaigns.py`.
+- Added campaign lifecycle, status schema, review checklist, and issue/release mapping docs.
+- Added campaign validator tests.
+- Updated CI validation to include campaign metadata.
+- Preserved donation-inactive, no-wallet-publication, no-custody, no-trading, and no-return-promise boundaries.
+
 ## v0.5.0 — Maintainer Governance Checklist
 
 - Added maintainer governance checklist.
