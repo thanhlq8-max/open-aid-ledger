@@ -6,7 +6,7 @@ Transparency-first public ledger template for voluntary digital-asset donations 
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
-VERSION: 0.2.0-ledger-safety-foundation
+VERSION: 0.3.0-sample-report-pages-foundation
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 CUSTODY_AUTOMATION: NO
@@ -37,6 +37,7 @@ It is designed for:
 - Provides validator scripts for wallet metadata, ledger shape, and public-safety checks.
 - Provides campaign templates and governance documentation.
 - Keeps donation activation explicit and auditable.
+- Provides a sample transparency report and static GitHub Pages status design.
 
 ## What this repository does not do
 
@@ -95,9 +96,29 @@ python scripts\validate_wallets.py wallets.example.json --allow-placeholders
 python scripts\validate_ledger.py --donations ledger\donations.csv --disbursements ledger\disbursements.csv
 python scripts\check_public_safety.py .
 python scripts\generate_report.py --donations ledger\donations.csv --disbursements ledger\disbursements.csv --out reports\local-smoke-report.md
+python scripts\generate_report.py --donations examples\sample-ledger\donations.csv --disbursements examples\sample-ledger\disbursements.csv --out reports\local-sample-report.md --title "Open Aid Ledger Sample Transparency Report"
 ```
 
 The smoke report is for local validation only unless intentionally reviewed and committed.
+
+## Sample reporting
+
+The repository includes a non-production sample report and sample ledger rows:
+
+```text
+reports/sample-transparency-report.md
+examples/sample-ledger/donations.csv
+examples/sample-ledger/disbursements.csv
+```
+
+These files are sample-only and do not activate donation collection.
+
+For the static public status-page design, see:
+
+```text
+docs/GITHUB_PAGES_STATIC_REPORT.md
+docs/index.md
+```
 
 ## Donation activation policy
 

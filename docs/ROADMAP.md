@@ -37,3 +37,13 @@ Potential features:
 - Multisig recommendation implemented for active campaigns.
 - Repeated monthly reports.
 - Public contribution process validated.
+
+## v0.3.0 — Sample Transparency Report + GitHub Pages Foundation
+
+Status: implemented.
+
+- Sample transparency report.
+- Sample ledger rows.
+- Static GitHub Pages reporting design.
+- Report-generation tests.
+

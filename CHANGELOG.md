@@ -1,3 +1,14 @@
+# Changelog
+
+## v0.3.0 — Sample Transparency Report + GitHub Pages Foundation
+
+- Added a sample transparency report with fictional records only.
+- Added sample ledger CSV rows under `examples/sample-ledger/`.
+- Added static GitHub Pages status-page design docs.
+- Added report-generation tests.
+- Extended CI to validate sample ledgers and generate a sample report.
+- Kept donations inactive and wallets unpublished.
+
 ## v0.1.3 Ã¢â‚¬â€ Restore README cleanup
 
 - Restored `README.md` to the main Open Aid Ledger project overview.

@@ -11,3 +11,7 @@ wallet-change-YYYY-MM-DD.md
 ```
 
 Reports must avoid raw private beneficiary data.
+
+## Sample report
+
+`sample-transparency-report.md` is fictional sample data only. It must not be treated as production ledger output or evidence of active donation collection.
