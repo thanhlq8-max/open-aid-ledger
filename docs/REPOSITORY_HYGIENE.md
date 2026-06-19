@@ -1,43 +1,55 @@
 # Repository Hygiene
 
-Open Aid Ledger is a public transparency project. The repository must remain clean, reviewable, and safe for public contributors.
+## Purpose
 
-## Public repository rules
+This document defines public-repository hygiene rules for Open Aid Ledger.
 
-Do not commit:
+The repository is intended to be a transparency template. Its public tree should not contain temporary patch instructions, local apply scripts, generated smoke-test files, secrets, private beneficiary data, or maintainer-only operational clutter.
 
-- local patch application scripts after they have been used
-- temporary patch readme files
-- local smoke-test output unless intentionally published as a sample report
-- private wallet material
-- seed phrases, mnemonics, recovery phrases, or API tokens
-- real beneficiary personal data
-- exchange account credentials
-- generated caches or build artifacts
+## Public tree rules
 
-## Allowed helper files
+Allowed:
 
-Helper files may be committed only when they are intended as stable project tooling, for example:
+- source scripts under `scripts/`;
+- policy files;
+- documentation;
+- issue and pull request templates;
+- campaign templates;
+- placeholder wallet metadata;
+- reviewed sample reports.
 
-- validator scripts under `scripts/`
-- documented GitHub workflows under `.github/workflows/`
-- official policy documents under `docs/`
-- release notes for published versions
+Forbidden:
 
-## Cleanup checklist before every push
+- private keys;
+- seed phrases;
+- API tokens;
+- exchange credentials;
+- unredacted beneficiary private data;
+- temporary patch apply scripts;
+- local-only smoke reports unless intentionally reviewed as samples;
+- active donation wallet files before governance approval.
 
-Before pushing to GitHub, check:
+## Patch helper cleanup
 
-```powershell
-git status --short
-python -m compileall scripts
-python scripts\validate_wallets.py wallets.example.json --allow-placeholders
-python scripts\validate_ledger.py --donations ledger\donations.csv --disbursements ledger\disbursements.csv
-python scripts\check_public_safety.py .
+Patch helper files should be used locally and removed before commit. Examples:
+
+```text
+README_PATCH.md
+README_RESTORE.md
+apply_v*_*.ps1
 ```
 
-Do not push if any command fails.
+If a helper artifact is accidentally committed, create a cleanup patch that removes it and confirms the README still describes the actual project, not the patch procedure.
 
-## Donation safety lock
+## README rule
 
-Repository hygiene cleanup must not change donation state. The project remains inactive for donations until wallet governance, address verification, reporting, and maintainer approval are complete.
+`README.md` must describe the project and public status. It must not be used as a temporary patch instruction file.
+
+## Current hygiene status
+
+```text
+LAST_REVIEWED_VERSION: 0.1.3-restore-readme-cleanup
+DONATIONS_ACTIVE: NO
+WALLETS_PUBLISHED: NO
+PATCH_HELPERS_ALLOWED_IN_PUBLIC_TREE: NO
+```

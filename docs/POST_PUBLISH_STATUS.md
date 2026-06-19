@@ -1,71 +1,43 @@
 # Post-Publish Status
 
-**Repository:** `thanhlq8-max/open-aid-ledger`  
-**Status:** public repository published  
-**Current version:** `0.1.1-post-publish-cleanup`  
-**Donation status:** inactive  
-**Wallet status:** no verified real wallet published  
-**Last updated:** 2026-06-19
-
-## Current lock
+## Current status
 
 ```text
+REPOSITORY: thanhlq8-max/open-aid-ledger
+PUBLIC: YES
+VERSION: 0.1.3-restore-readme-cleanup
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 CUSTODY_AUTOMATION: NO
-PRIVATE_KEYS_IN_REPO: FORBIDDEN
 TRADING_USE: FORBIDDEN
 RETURN_PROMISE: FORBIDDEN
+OPEN_ISSUES_CREATED: YES
 ```
 
 ## Completed
 
 - Public repository created.
-- Initial README, policies, validators, campaign templates, and workflow committed.
-- Six initial issues opened.
-- Public labels added for documentation, enhancement, security, governance, and good-first-issue work.
+- Initial policy and validator files published.
+- Six initial issues created for the safety and reporting backlog.
+- v0.1.1 post-publish documentation added.
+- v0.1.2 public repository hygiene attempt completed.
+- v0.1.3 restored the main README and removed helper artifacts.
 
-## Initial issue backlog
-
-| Issue | Purpose | Priority |
-|---|---|---|
-| #1 Harden wallet metadata schema | Prevent ambiguous or unsafe wallet publication | P0 |
-| #2 Add unit tests for wallet and ledger validators | Prevent silent validator regressions | P0 |
-| #3 Add sample transparency report | Make transparency output easy to review | P1 |
-| #4 Add GitHub Pages static report design | Prepare shareable public transparency site | P1 |
-| #5 Design read-only blockchain explorer importer | Plan future transaction import without custody risk | P1 |
-| #6 Add maintainer governance checklist | Define operational controls before donation activation | P0 |
-
-## Next milestone
+## Next development target
 
 ```text
-v0.2.0 Ã¢â‚¬â€ Ledger Safety & Public Report Foundation
+v0.2.0 â€” Ledger Safety & Public Report Foundation
 ```
 
-Recommended order:
+Priority order:
 
-1. Complete issue #1.
-2. Complete issue #2.
-3. Complete issue #6.
-4. Complete issue #3.
-5. Confirm GitHub Actions passes.
-6. Create/tag `v0.1.0-public-release-candidate` or `v0.1.1-post-publish-cleanup` depending on maintainer preference.
+1. Harden wallet metadata schema.
+2. Add unit tests for wallet and ledger validators.
+3. Add maintainer governance checklist.
+4. Add sample transparency report.
+5. Design GitHub Pages static report.
+6. Design read-only blockchain explorer importer.
 
-## Do not do yet
+## Launch gate
 
-- Do not publish real donation wallets.
-- Do not ask people to send funds.
-- Do not create a token.
-- Do not add transfer automation.
-- Do not add exchange API access.
-- Do not collect private beneficiary identity documents through GitHub.
-- Do not describe crypto as legal tender or legal means of payment.
-
-## Activation prerequisites
-
-Before donations become active, maintainers should complete wallet schema hardening, wallet verification procedure, address-change review, governance checklist, privacy checklist, campaign-specific policy, first report template, tax/recordkeeping note, public safety scan, and maintainer approval note.
-## v0.1.2 public repository hygiene
-
-The repository should not keep local patch helper artifacts after a patch has been applied. `README_PATCH.md` and `apply_v0.1.1_post_publish_cleanup.ps1` were removed from the public tree.
-
-Donation status remains inactive. No wallet addresses were published.
+Donation activation remains blocked until wallet governance, reporting, privacy, and safety checks are reviewed in public commits.
