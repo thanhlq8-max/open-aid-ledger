@@ -6,6 +6,7 @@
 **Status:** public-release candidate template  
 **Mode:** transparency-first public donation ledger  
 **Donation status:** inactive until maintainers publish verified wallet addresses  
+**Current milestone:** v0.1.1 post-publish cleanup / v0.2.0 ledger-safety foundation  
 **Last updated:** 2026-06-19
 
 Open Aid Ledger is a public, read-only transparency repository for voluntary digital-asset donations used to support hardship cases and open-source public-good work.
@@ -37,17 +38,34 @@ RETURN_PROMISE: FORBIDDEN
 
 Donations should not be sent until the maintainers create a real `wallets.json`, publish the first transparency report, and make the policy files consistent with the active campaign.
 
+The repository has been published publicly and the initial safety backlog is open. The current development focus is to harden the transparency infrastructure before any real wallet address is published.
+---
+
+## Active public backlog
+
+The first public backlog is intentionally focused on safety and transparency infrastructure:
+
+- [#1 Harden wallet metadata schema](https://github.com/thanhlq8-max/open-aid-ledger/issues/1)
+- [#2 Add unit tests for wallet and ledger validators](https://github.com/thanhlq8-max/open-aid-ledger/issues/2)
+- [#3 Add sample transparency report](https://github.com/thanhlq8-max/open-aid-ledger/issues/3)
+- [#4 Add GitHub Pages static report design](https://github.com/thanhlq8-max/open-aid-ledger/issues/4)
+- [#5 Design read-only blockchain explorer importer](https://github.com/thanhlq8-max/open-aid-ledger/issues/5)
+- [#6 Add maintainer governance checklist](https://github.com/thanhlq8-max/open-aid-ledger/issues/6)
+
+The project should not move to active donations until the wallet schema, ledger validation, privacy policy, governance checklist, and reporting workflow have been reviewed.
+
+
 ---
 
 ## Core principles
 
-1. **Voluntary only** — all donations are optional.
-2. **No return promise** — donors receive no profit, yield, token, allocation, ownership, signal, or financial benefit.
-3. **No trading use** — donations must not be used to fund trading accounts, margin calls, revenge trading, copy trading, or managed accounts.
-4. **No private-key handling** — this repository never stores seed phrases, private keys, API keys, exchange credentials, or custody automation.
-5. **Transparency first** — incoming donations, outgoing support, campaign rules, and reports should be auditable.
-6. **Privacy by default** — beneficiary identity must be protected unless they explicitly consent to disclosure.
-7. **Local-law respect** — contributors and donors are responsible for their own legal, tax, and reporting obligations.
+1. **Voluntary only** â€” all donations are optional.
+2. **No return promise** â€” donors receive no profit, yield, token, allocation, ownership, signal, or financial benefit.
+3. **No trading use** â€” donations must not be used to fund trading accounts, margin calls, revenge trading, copy trading, or managed accounts.
+4. **No private-key handling** â€” this repository never stores seed phrases, private keys, API keys, exchange credentials, or custody automation.
+5. **Transparency first** â€” incoming donations, outgoing support, campaign rules, and reports should be auditable.
+6. **Privacy by default** â€” beneficiary identity must be protected unless they explicitly consent to disclosure.
+7. **Local-law respect** â€” contributors and donors are responsible for their own legal, tax, and reporting obligations.
 
 ---
 
