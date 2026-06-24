@@ -41,6 +41,7 @@ It is designed for:
 - Documents a read-only blockchain explorer importer design for future public transaction reconciliation.
 - Provides maintainer governance, donation activation, emergency freeze, and conflict-of-interest checklists.
 - Provides campaign lifecycle, status metadata, campaign review checklist, and campaign validation.
+- Provides beneficiary-safe intake, partner attestation, and disbursement decision record templates.
 - Provides donation-readiness dry-run checks before any donation activation.
 - Provides a static public status page and validator for GitHub Pages readiness.
 - Provides v1.0.0-rc1 donation-ready candidate review artifacts while keeping donation collection inactive.
@@ -92,6 +93,9 @@ docs/                            Governance, legal notes, roadmap, and operating
   docs/CAMPAIGN_REVIEW_CHECKLIST.md       Campaign review checklist
   docs/CAMPAIGN_STATUS_SCHEMA.md          Campaign metadata schema
   docs/CAMPAIGN_LIFECYCLE.md              Campaign status lifecycle
+  docs/BENEFICIARY_INTAKE_REVIEW.md       Beneficiary-safe intake and review workflow
+  docs/PARTNER_ATTESTATION_TEMPLATE.md    Partner attestation template
+  docs/DISBURSEMENT_DECISION_RECORD_TEMPLATE.md Disbursement decision record template
   docs/PUBLIC_STATUS_PAGE.md              Static public status page rules
   docs/DONATION_READINESS_DRY_RUN.md          Donation readiness dry-run gates
   docs/DRY_RUN_WALLET_PUBLICATION_REVIEW.md Dry-run wallet publication checklist
@@ -181,6 +185,19 @@ scripts/validate_campaigns.py
 
 Campaigns must remain inactive unless donation activation gates are explicitly reviewed and `DONATIONS_ACTIVE` is changed in a reviewed commit.
 
+## Beneficiary-safe relief workflow
+
+The repository includes review-only workflow documents for handling real hardship-support cases without exposing vulnerable people in the public repository:
+
+```text
+docs/BENEFICIARY_INTAKE_REVIEW.md
+docs/PARTNER_ATTESTATION_TEMPLATE.md
+docs/DISBURSEMENT_DECISION_RECORD_TEMPLATE.md
+BENEFICIARY_PRIVACY_POLICY.md
+```
+
+These documents help maintainers review need, privacy, partner confirmation, and future disbursement records while keeping donation collection inactive and wallet publication blocked.
+
 ## Donation readiness dry run
 
 The repository includes a dry-run-only donation readiness layer:
@@ -231,7 +248,7 @@ docs/VN_LEGAL_AND_TAX_NOTE.md
 
 ## Pre-1.0 candidate review
 
-This repository is now in pre-1.0 candidate-review mode. The review checks whether the public template, ledger validation, campaign lifecycle, governance controls, readiness dry run, and public status page are coherent enough to prepare a future donation-ready release.
+This repository is now in pre-1.0 candidate-review mode. The review checks whether the public template, ledger validation, campaign lifecycle, governance controls, readiness dry run, public status page, and beneficiary-safe relief workflow are coherent enough to prepare a future donation-ready release.
 
 This does not activate donations and does not publish real wallet addresses.
 
@@ -247,10 +264,11 @@ docs/DONATION_READY_CANDIDATE_CHECKLIST.md
 Near-term priorities:
 
 1. collect and assess RC3 external review evidence;
-2. keep the static public status page aligned with current inactive status;
-3. resolve legal/tax review and wallet-governance blockers before any activation proposal;
-4. keep read-only importer implementation behind reviewed design and manual reconciliation gates;
-5. keep donation activation inactive until all launch gates pass.
+2. test the beneficiary-safe relief workflow with fictional review records;
+3. keep the static public status page aligned with current inactive status;
+4. resolve legal/tax review and wallet-governance blockers before any activation proposal;
+5. keep read-only importer implementation behind reviewed design and manual reconciliation gates;
+6. keep donation activation inactive until all launch gates pass.
 
 The first donation-ready release should not be cut until the safety and reporting foundation is stable.
 
