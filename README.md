@@ -102,6 +102,7 @@ docs/                            Governance, legal notes, roadmap, and operating
   docs/DONATION_LAUNCH_RISK_REGISTER.md    Launch risk register
   docs/DONATION_LAUNCH_RUNBOOK.md          Future launch runbook
 examples/sample-ledger/           Fictional sample ledger rows
+examples/relief-review/           Fictional beneficiary-safe relief review records
 examples/importer/                Fictional importer-normalization sample rows
 ledger/                          CSV ledger templates
 reports/                         Generated or sample transparency reports
@@ -197,6 +198,17 @@ BENEFICIARY_PRIVACY_POLICY.md
 ```
 
 These documents help maintainers review need, privacy, partner confirmation, and future disbursement records while keeping donation collection inactive and wallet publication blocked.
+
+The repository also includes fictional relief-review examples:
+
+```text
+examples/relief-review/README.md
+examples/relief-review/FAM-2026-001_intake_review.sample.md
+examples/relief-review/FAM-2026-001_partner_attestation.sample.md
+examples/relief-review/FAM-2026-001_disbursement_decision.sample.md
+```
+
+These samples do not use real beneficiary data and do not imply that funds have been collected or moved.
 
 ## Donation readiness dry run
 
