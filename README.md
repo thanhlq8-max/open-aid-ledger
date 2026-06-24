@@ -45,6 +45,7 @@ It is designed for:
 - Provides a static public status page and validator for GitHub Pages readiness.
 - Provides v1.0.0-rc1 donation-ready candidate review artifacts while keeping donation collection inactive.
 - Provides v1.0.0-rc2 external review and activation-gate artifacts while keeping donation collection inactive.
+- Provides v1.0.0-rc3 external review evidence-pack artifacts while keeping donation collection inactive.
 
 ## What this repository does not do
 
@@ -121,6 +122,11 @@ python scripts\validate_campaigns.py campaigns\campaigns.example.json --allow-in
 python scripts\validate_readiness.py .
 python scripts\validate_ledger.py --donations ledger\donations.csv --disbursements ledger\disbursements.csv --enforce-balance
 python scripts\validate_ledger.py --donations examples\sample-ledger\donations.csv --disbursements examples\sample-ledger\disbursements.csv --enforce-balance
+python scripts\validate_static_status.py .
+python scripts\validate_candidate.py .
+python scripts\validate_rc1.py .
+python scripts\validate_rc2.py .
+python scripts\validate_rc3.py .
 python scripts\check_public_safety.py .
 python -m pip install -r requirements-dev.txt
 python -m pytest -q
@@ -190,11 +196,13 @@ scripts/validate_readiness.py
 
 The dry run checks readiness while keeping `DONATIONS_ACTIVE: NO` and `WALLETS_PUBLISHED: NO`.
 
-## External review activation gate
+## External review and evidence gates
 
-The repository is now at RC2 review-gate stage. RC2 requires external review evidence and wallet-publication precheck documentation before any later activation proposal can be considered.
+The repository has completed RC2 external review activation-gate scaffolding and is now at RC3 external review evidence-pack stage.
 
-RC2 does not activate donations and does not publish real wallet addresses.
+RC3 requires external review evidence, unresolved finding records, activation blockers, and maintainer response documentation before any later activation proposal can be considered.
+
+RC2 and RC3 do not activate donations and do not publish real wallet addresses.
 
 ## Donation activation policy
 
@@ -238,10 +246,10 @@ docs/DONATION_READY_CANDIDATE_CHECKLIST.md
 
 Near-term priorities:
 
-1. run donation-readiness dry-run checks;
-2. prepare a reviewed static public status page;
-3. design read-only importer implementation plan;
-4. prepare inactive wallet-publication review;
+1. collect and assess RC3 external review evidence;
+2. keep the static public status page aligned with current inactive status;
+3. resolve legal/tax review and wallet-governance blockers before any activation proposal;
+4. keep read-only importer implementation behind reviewed design and manual reconciliation gates;
 5. keep donation activation inactive until all launch gates pass.
 
 The first donation-ready release should not be cut until the safety and reporting foundation is stable.
