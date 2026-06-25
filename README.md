@@ -2,7 +2,18 @@
 
 Transparency-first public ledger template for voluntary digital-asset support to hardship cases and open-source public goods.
 
-Open Aid Ledger is designed to make support easier to verify, safer to operate, and clearer for donors.
+Open Aid Ledger is designed to make support easier to access, easier to use, easier to share, safer to operate, and clearer for donors.
+
+## Project goals
+
+```text
+EASY_TO_ACCESS: YES
+EASY_TO_USE: YES
+EASY_TO_SHARE: YES
+USER_DASHBOARD: YES
+PUBLIC_TRANSPARENCY: YES
+SAFETY_FIRST: YES
+```
 
 ## Start here
 
@@ -36,6 +47,16 @@ IF DONATIONS_ACTIVE is NO:
 
 Donation collection is inactive. Live receiving details are not published.
 
+## User dashboard
+
+Open the public dashboard:
+
+```text
+docs/index.md
+```
+
+The dashboard shows current status, donor safety warning, operating readiness, blocked items, and the shortest path for donors, maintainers, and reviewers.
+
 ## What this repo is for
 
 This repo provides a public template for:
@@ -50,11 +71,11 @@ This repo provides a public template for:
 ## Simple operating path
 
 ```text
-1. Donor reads Donor Quickstart.
-2. Donor checks Public Status.
-3. Maintainer runs dry-run operation.
-4. Reviewer checks the review packet.
-5. Blockers are fixed and validated.
+1. Donor checks Public Status.
+2. Maintainer runs dry-run operation.
+3. Reviewer checks evidence and blockers.
+4. Maintainer fixes blockers.
+5. CI and public-safety checks pass.
 6. Activation is considered only in a separate reviewed proposal.
 ```
 
