@@ -1,6 +1,6 @@
 # Start Here
 
-This is the shortest operating path for Open Aid Ledger.
+This is the operating cockpit for Open Aid Ledger.
 
 Current status:
 
@@ -12,76 +12,80 @@ ACTIVATION_APPROVED: NO
 
 Do not send support while this status remains inactive.
 
-## One-page flow
-
-Use this order:
+## Use this flow
 
 ```text
-1. Donor reads Donor Quickstart.
-2. Donor checks Public Status.
-3. Maintainer runs dry-run operation.
-4. Reviewer checks the review packet.
-5. Blockers are fixed and validated.
-6. Activation is considered only in a separate reviewed proposal.
+1. Donor checks public status.
+2. Maintainer runs dry-run operation.
+3. Reviewer checks evidence and blockers.
+4. Maintainer fixes blockers.
+5. CI and public-safety checks pass.
+6. Go-live is considered only in a separate reviewed proposal.
 ```
 
-## For donors
+## Donor path
 
-Read:
-
-1. `docs/DONOR_QUICKSTART.md`
-2. `docs/DONOR_FAQ.md`
-3. `docs/index.md`
-
-Donor rule:
+Read only these first:
 
 ```text
-IF public status is inactive:
+docs/index.md
+docs/DONOR_QUICKSTART.md
+docs/DONOR_FAQ.md
+```
+
+Rule:
+
+```text
+IF DONATIONS_ACTIVE is NO OR WALLETS_PUBLISHED is NO:
     DO_NOT_SEND
 ```
 
-Only use receiving information from the official public status page or an approved repository source linked from it.
+Use receiving information only from the official public status page or an approved repository source linked from it.
 
-## For maintainers
+## Maintainer path
 
-Run this path before any future operating proposal:
+Before any future operating proposal, run:
 
-1. `docs/DRY_RUN_OPERATIONS_RUNBOOK.md`
-2. `examples/dry-run/DRY_RUN_001_OPERATION_REPORT.sample.md`
-3. `docs/REVIEW_PACKET_TEMPLATE.md`
-4. `docs/OPERATIONAL_READINESS_MATRIX.md`
+```text
+docs/DRY_RUN_OPERATIONS_RUNBOOK.md
+examples/dry-run/DRY_RUN_001_OPERATION_REPORT.sample.md
+docs/REVIEW_PACKET_TEMPLATE.md
+docs/OPERATIONAL_READINESS_MATRIX.md
+```
 
-Maintainer rule:
+Rule:
 
 ```text
 IF any blocker remains:
     GO_LIVE = NO
 ```
 
-## For reviewers
+## Reviewer path
 
-Check:
+Check only what affects go/no-go:
 
-- public status is clear;
-- donor instructions are simple;
-- receiving-channel source is unambiguous;
-- account protection is reviewed;
-- privacy rules protect supported people;
-- ledger and report process is reproducible;
-- freeze process is documented;
-- CI passes.
+```text
+public status clarity
+donor source-of-truth
+receiving-channel control
+account protection
+beneficiary privacy
+ledger and report reproducibility
+freeze process
+CI result
+```
 
-## What is intentionally not here
-
-This page does not include every policy.
-
-Use it as the front door. Use detailed docs only when the flow points to them.
-
-## Current decision
+## Current go/no-go
 
 ```text
 DONOR_ENTRYPOINT_READY: YES
 DRY_RUN_READY: YES
 REVIEW_PACKET_READY: YES
+RECEIVING_CHANNEL_PUBLICATION: BLOCKED
+DONATION_ACTIVATION: BLOCKED
 GO_LIVE: NO
 ```
+
+## Detailed docs
+
+Use detailed docs only when the flow above points to them.
