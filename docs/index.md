@@ -2,6 +2,14 @@
 
 Open Aid Ledger is a transparency-first public ledger template for voluntary digital-asset donations supporting hardship cases and open-source public goods.
 
+## Start here
+
+- [Start Here](START_HERE.md)
+- [Donor Quickstart](DONOR_QUICKSTART.md)
+- [Donor FAQ](DONOR_FAQ.md)
+
+Use `Start Here` as the front door. Use detailed docs only when the flow points to them.
+
 ## Current status
 
 ```text
