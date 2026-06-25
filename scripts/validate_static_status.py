@@ -83,7 +83,7 @@ def validate(root: Path) -> int:
         if not doc.exists():
             return _fail(f"required static dashboard doc missing: {doc.relative_to(root)}")
 
-    print("static public dashboard OK")
+    print("static public status page OK")
     return 0
 
 
