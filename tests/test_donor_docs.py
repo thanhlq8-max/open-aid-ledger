@@ -21,6 +21,10 @@ def test_start_here_keeps_operating_cockpit() -> None:
     text = read("docs/START_HERE.md")
     for phrase in [
         "This is the operating cockpit",
+        "EASY_TO_ACCESS: YES",
+        "EASY_TO_USE: YES",
+        "EASY_TO_SHARE: YES",
+        "USER_DASHBOARD: YES",
         "DONATIONS_ACTIVE: NO",
         "WALLETS_PUBLISHED: NO",
         "ACTIVATION_APPROVED: NO",
@@ -29,9 +33,27 @@ def test_start_here_keeps_operating_cockpit() -> None:
         "Reviewer path",
         "IF DONATIONS_ACTIVE is NO OR WALLETS_PUBLISHED is NO:",
         "IF any blocker remains:",
+        "DASHBOARD_READY: YES",
         "RECEIVING_CHANNEL_PUBLICATION: BLOCKED",
         "DONATION_ACTIVATION: BLOCKED",
         "GO_LIVE: NO",
+    ]:
+        assert phrase in text
+
+
+def test_dashboard_keeps_user_goals_and_shareable_snapshot() -> None:
+    text = read("docs/index.md")
+    for phrase in [
+        "Open Aid Ledger public dashboard",
+        "EASY_TO_ACCESS: YES",
+        "EASY_TO_USE: YES",
+        "EASY_TO_SHARE: YES",
+        "USER_DASHBOARD: YES",
+        "Shareable status snapshot",
+        "Official dashboard: docs/index.md",
+        "Start here: docs/START_HERE.md",
+        "Donation activation | BLOCKED",
+        "Custody automation | FORBIDDEN",
     ]:
         assert phrase in text
 
