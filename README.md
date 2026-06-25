@@ -2,6 +2,23 @@
 
 Transparency-first public ledger template for voluntary digital-asset donations supporting hardship cases and open-source public goods.
 
+## Start here
+
+Use one front door first:
+
+```text
+docs/START_HERE.md
+```
+
+Then follow only the links needed for your role: donor, maintainer, or reviewer.
+
+Current rule:
+
+```text
+IF DONATIONS_ACTIVE is NO:
+    DO_NOT_SEND
+```
+
 ## Current status
 
 ```text
