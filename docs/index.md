@@ -59,6 +59,24 @@ If the public status still says `DONATIONS_ACTIVE: NO` or `WALLETS_PUBLISHED: NO
 | Donation activation | BLOCKED | `DONATIONS_ACTIVE` remains `NO`. |
 | Custody automation | FORBIDDEN | No signing, transfer automation, withdrawal APIs, or custody flow. |
 
+## One-screen operating board
+
+| Role | Next action | Use this file | Done when |
+|---|---|---|---|
+| Donor | Check current status before sending. | `docs/DONOR_QUICKSTART.md` | Status is active and official source is clear. |
+| Maintainer | Run a dry-run operation with sample data. | `docs/DRY_RUN_OPERATIONS_RUNBOOK.md` | Dry-run report is complete. |
+| Reviewer | Check evidence and unresolved blockers. | `docs/REVIEW_PACKET_TEMPLATE.md` | Review result is recorded. |
+| Maintainer | Decide go/no-go from readiness matrix. | `docs/OPERATIONAL_READINESS_MATRIX.md` | `GO_LIVE` remains `NO` while blockers remain. |
+
+## Current blockers
+
+```text
+RECEIVING_CHANNEL_PUBLICATION: BLOCKED
+DONATION_ACTIVATION: BLOCKED
+CUSTODY_AUTOMATION: FORBIDDEN
+GO_LIVE: NO
+```
+
 ## Shareable status snapshot
 
 ```text
