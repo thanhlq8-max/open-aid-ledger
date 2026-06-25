@@ -10,10 +10,25 @@ def read(path: str) -> str:
 
 def test_donor_docs_exist() -> None:
     for path in [
+        "docs/START_HERE.md",
         "docs/DONOR_QUICKSTART.md",
         "docs/DONOR_FAQ.md",
     ]:
         assert (ROOT / path).is_file(), path
+
+
+def test_start_here_keeps_simple_front_door() -> None:
+    text = read("docs/START_HERE.md")
+    for phrase in [
+        "This is the shortest operating path",
+        "DONATIONS_ACTIVE: NO",
+        "WALLETS_PUBLISHED: NO",
+        "ACTIVATION_APPROVED: NO",
+        "Donor reads Donor Quickstart.",
+        "GO_LIVE = NO",
+        "Use it as the front door.",
+    ]:
+        assert phrase in text
 
 
 def test_donor_quickstart_preserves_inactive_status_and_safe_flow() -> None:
@@ -48,6 +63,7 @@ def test_donor_faq_preserves_public_source_and_no_return_promise() -> None:
 
 def test_public_status_links_donor_entry_points() -> None:
     text = read("docs/index.md")
-    assert "[Donor quickstart](DONOR_QUICKSTART.md)" in text
+    assert "[Start Here](START_HERE.md)" in text
+    assert "[Donor Quickstart](DONOR_QUICKSTART.md)" in text
     assert "[Donor FAQ](DONOR_FAQ.md)" in text
     assert "If the public status still says `DONATIONS_ACTIVE: NO`" in text
