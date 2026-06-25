@@ -12,10 +12,21 @@ ACTIVATION_APPROVED: NO
 
 Do not send support while this status remains inactive.
 
+## Product goal
+
+```text
+EASY_TO_ACCESS: YES
+EASY_TO_USE: YES
+EASY_TO_SHARE: YES
+USER_DASHBOARD: YES
+PUBLIC_TRANSPARENCY: YES
+SAFETY_FIRST: YES
+```
+
 ## Use this flow
 
 ```text
-1. Donor checks public status.
+1. Donor checks public dashboard.
 2. Maintainer runs dry-run operation.
 3. Reviewer checks evidence and blockers.
 4. Maintainer fixes blockers.
@@ -40,7 +51,7 @@ IF DONATIONS_ACTIVE is NO OR WALLETS_PUBLISHED is NO:
     DO_NOT_SEND
 ```
 
-Use receiving information only from the official public status page or an approved repository source linked from it.
+Use receiving information only from the official public dashboard or an approved repository source linked from it.
 
 ## Maintainer path
 
@@ -65,8 +76,9 @@ IF any blocker remains:
 Check only what affects go/no-go:
 
 ```text
-public status clarity
+public dashboard clarity
 donor source-of-truth
+shareable status snapshot
 receiving-channel control
 account protection
 beneficiary privacy
@@ -79,6 +91,7 @@ CI result
 
 ```text
 DONOR_ENTRYPOINT_READY: YES
+DASHBOARD_READY: YES
 DRY_RUN_READY: YES
 REVIEW_PACKET_READY: YES
 RECEIVING_CHANNEL_PUBLICATION: BLOCKED
