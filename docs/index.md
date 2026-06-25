@@ -1,4 +1,4 @@
-# Open Aid Ledger public status
+# Open Aid Ledger public dashboard
 
 Open Aid Ledger is a transparency-first public ledger template for voluntary digital-asset support to hardship cases and open-source public goods.
 
@@ -9,6 +9,17 @@ Open Aid Ledger is a transparency-first public ledger template for voluntary dig
 - [Donor FAQ](DONOR_FAQ.md)
 
 Use `Start Here` as the front door. Use detailed docs only when the flow points to them.
+
+## User goals
+
+```text
+EASY_TO_ACCESS: YES
+EASY_TO_USE: YES
+EASY_TO_SHARE: YES
+USER_DASHBOARD: YES
+PUBLIC_TRANSPARENCY: YES
+SAFETY_FIRST: YES
+```
 
 ## Current status
 
@@ -33,17 +44,32 @@ A future active release must publish status, asset, network, approved receiving 
 
 If the public status still says `DONATIONS_ACTIVE: NO` or `WALLETS_PUBLISHED: NO`, do not send.
 
-## Status dashboard
+## Visual dashboard
 
-| Area | Status | Meaning |
+| Area | Status | User meaning |
 |---|---:|---|
-| Donor entry point | READY | `Start Here`, Donor Quickstart, and Donor FAQ are available. |
+| Access path | READY | Start with one page: `START_HERE.md`. |
+| Donor guidance | READY | Donor Quickstart and FAQ are available. |
+| Shareability | READY | Share this dashboard or `START_HERE.md`, not screenshots or copied receiving data. |
+| Public status | READY | Current status is visible and explicit. |
 | Public ledger template | READY | Ledger templates and validators exist. |
 | Dry-run operation | READY | Maintainers can test the flow with sample data. |
 | Review packet | READY | Reviewers can record evidence and blockers. |
 | Receiving-channel publication | BLOCKED | No live receiving detail is published yet. |
 | Donation activation | BLOCKED | `DONATIONS_ACTIVE` remains `NO`. |
 | Custody automation | FORBIDDEN | No signing, transfer automation, withdrawal APIs, or custody flow. |
+
+## Shareable status snapshot
+
+```text
+Open Aid Ledger status:
+DONATIONS_ACTIVE: NO
+WALLETS_PUBLISHED: NO
+ACTIVATION_APPROVED: NO
+GO_LIVE: NO
+Official dashboard: docs/index.md
+Start here: docs/START_HERE.md
+```
 
 ## Minimal path
 
@@ -78,4 +104,4 @@ This project is not a payment processor, charity-registration claim, custody wal
 
 ## Next milestone
 
-The next milestone is dry-run evidence review and donation-readiness final review. It remains dry-run only unless a maintainer deliberately changes donation status in a separate reviewed proposal.
+The next milestone is dry-run evidence review, dashboard review, and donation-readiness final review. It remains dry-run only unless a maintainer deliberately changes donation status in a separate reviewed proposal.
