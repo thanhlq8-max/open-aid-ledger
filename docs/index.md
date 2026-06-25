@@ -42,6 +42,8 @@ If the public status still says `DONATIONS_ACTIVE: NO` or `WALLETS_PUBLISHED: NO
 
 ## Donor trust and verification
 
+- [Donor quickstart](DONOR_QUICKSTART.md)
+- [Donor FAQ](DONOR_FAQ.md)
 - [Donor trust guide](DONOR_TRUST_GUIDE.md)
 - [Receiving channel publication policy](RECEIVING_CHANNEL_PUBLICATION_POLICY.md)
 - [Receiving account protection checklist](RECEIVING_ACCOUNT_PROTECTION.md)
