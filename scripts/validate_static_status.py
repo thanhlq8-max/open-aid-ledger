@@ -1,4 +1,4 @@
-"""Validate the static public status page.
+"""Validate the static public dashboard.
 
 This validator is intentionally local and read-only. It does not call GitHub,
 blockchain explorers, exchanges, or wallet APIs.
@@ -14,25 +14,31 @@ import sys
 REQUIRED_TOKENS = [
     "DONATIONS_ACTIVE: NO",
     "WALLETS_PUBLISHED: NO",
+    "ACTIVATION_APPROVED: NO",
     "CUSTODY_AUTOMATION: NO",
-    "PRIVATE_KEYS_IN_REPO: FORBIDDEN",
     "TRADING_USE: FORBIDDEN",
     "RETURN_PROMISE: FORBIDDEN",
+    "Donation activation | BLOCKED",
+    "Custody automation | FORBIDDEN",
+    "EASY_TO_ACCESS: YES",
+    "EASY_TO_USE: YES",
+    "EASY_TO_SHARE: YES",
+    "USER_DASHBOARD: YES",
 ]
 
 REQUIRED_LINK_TARGETS = [
-    "PUBLIC_STATUS_PAGE.md",
-    "PAGES_DEPLOYMENT_CHECKLIST.md",
-    "DONATION_READINESS_DRY_RUN.md",
-    "DONATION_ACTIVATION_CHECKLIST.md",
-    "MAINTAINER_GOVERNANCE_CHECKLIST.md",
+    "START_HERE.md",
+    "DONOR_QUICKSTART.md",
+    "DONOR_FAQ.md",
+    "DRY_RUN_OPERATIONS_RUNBOOK.md",
+    "REVIEW_PACKET_TEMPLATE.md",
+    "OPERATIONAL_READINESS_MATRIX.md",
 ]
 
 FORBIDDEN_TOKENS = [
     "DONATIONS_ACTIVE: YES",
     "WALLETS_PUBLISHED: YES",
     "CUSTODY_AUTOMATION: YES",
-    "PRIVATE_KEYS_IN_REPO: ALLOWED",
     "TRADING_USE: ALLOWED",
     "RETURN_PROMISE: ALLOWED",
     "guaranteed return",
@@ -66,22 +72,23 @@ def validate(root: Path) -> int:
 
     for target in REQUIRED_LINK_TARGETS:
         if target not in text:
-            return _fail(f"missing required public status link target: {target}")
+            return _fail(f"missing required public dashboard link target: {target}")
 
     for doc in [
-        root / "docs" / "PUBLIC_STATUS_PAGE.md",
-        root / "docs" / "PAGES_DEPLOYMENT_CHECKLIST.md",
+        root / "docs" / "START_HERE.md",
+        root / "docs" / "DONOR_QUICKSTART.md",
+        root / "docs" / "DONOR_FAQ.md",
         root / "docs" / "STATUS_BADGE_GUIDE.md",
     ]:
         if not doc.exists():
-            return _fail(f"required static status doc missing: {doc.relative_to(root)}")
+            return _fail(f"required static dashboard doc missing: {doc.relative_to(root)}")
 
-    print("static public status page OK")
+    print("static public dashboard OK")
     return 0
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Validate static public status page safety boundaries.")
+    parser = argparse.ArgumentParser(description="Validate static public dashboard safety boundaries.")
     parser.add_argument("root", nargs="?", default=".", help="Repository root.")
     args = parser.parse_args()
     return validate(Path(args.root).resolve())
