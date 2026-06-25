@@ -44,7 +44,7 @@ It is designed for:
 - Provides beneficiary-safe intake, partner attestation, and disbursement decision record templates.
 - Provides donation-readiness dry-run checks before any donation activation.
 - Provides a static public status page and validator for GitHub Pages readiness.
-- Provides donor trust, public summary, and receiving-account protection guides while keeping donation collection inactive.
+- Provides donor trust, public summary, receiving-account protection, and receiving-channel publication guides while keeping donation collection inactive.
 - Provides v1.0.0-rc1 donation-ready candidate review artifacts while keeping donation collection inactive.
 - Provides v1.0.0-rc2 external review and activation-gate artifacts while keeping donation collection inactive.
 - Provides v1.0.0-rc3 external review evidence-pack artifacts while keeping donation collection inactive.
@@ -99,6 +99,7 @@ docs/                            Governance, legal notes, roadmap, and operating
   docs/DISBURSEMENT_DECISION_RECORD_TEMPLATE.md Disbursement decision record template
   docs/PUBLIC_SUMMARY_CHECKLIST.md        Public-safe case summary checklist
   docs/RECEIVING_ACCOUNT_PROTECTION.md    Future receiving-account protection checklist
+  docs/RECEIVING_CHANNEL_PUBLICATION_POLICY.md Future receiving-channel publication policy
   docs/DONOR_TRUST_GUIDE.md               Future donor trust and verification guide
   docs/PUBLIC_STATUS_PAGE.md              Static public status page rules
   docs/DONATION_READINESS_DRY_RUN.md          Donation readiness dry-run gates
@@ -221,6 +222,7 @@ The repository includes future-facing donor trust and receiving-account protecti
 
 ```text
 docs/DONOR_TRUST_GUIDE.md
+docs/RECEIVING_CHANNEL_PUBLICATION_POLICY.md
 docs/RECEIVING_ACCOUNT_PROTECTION.md
 docs/PUBLIC_SUMMARY_CHECKLIST.md
 ```
@@ -296,7 +298,7 @@ Near-term priorities:
 
 1. collect and assess RC3 external review evidence;
 2. test the beneficiary-safe relief workflow with fictional review records;
-3. keep donor trust, account protection, and public summary docs easy to understand;
+3. keep donor trust, receiving-channel publication, account protection, and public summary docs easy to understand;
 4. keep the static public status page aligned with current inactive status;
 5. resolve legal/tax review and wallet-governance blockers before any activation proposal;
 6. keep read-only importer implementation behind reviewed design and manual reconciliation gates;

@@ -6,16 +6,25 @@ Open Aid Ledger is a transparency-first public ledger template for voluntary dig
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
-VERSION: 0.9.0-static-public-status-page
+VERSION: 1.0.0-rc3-external-review-evidence-pack
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
+ACTIVATION_APPROVED: NO
 CUSTODY_AUTOMATION: NO
 PRIVATE_KEYS_IN_REPO: FORBIDDEN
 TRADING_USE: FORBIDDEN
 RETURN_PROMISE: FORBIDDEN
 ```
 
-Donation collection is intentionally inactive. Wallet addresses are intentionally unpublished until wallet governance, ledger validation, privacy controls, reporting, and public-safety checks are complete.
+Donation collection is intentionally inactive. Live receiving details are intentionally unpublished until governance, ledger validation, privacy controls, reporting, and public-safety checks are complete.
+
+## Do not send yet
+
+Do not send funds based on private messages, screenshots, comments, or copies of old receiving information.
+
+A future active release must publish status, asset, network, approved receiving channel, ledger policy, reporting policy, privacy controls, and freeze procedure from an approved repository source.
+
+If the public status still says `DONATIONS_ACTIVE: NO` or `WALLETS_PUBLISHED: NO`, do not send.
 
 ## Public status dashboard
 
@@ -23,12 +32,20 @@ Donation collection is intentionally inactive. Wallet addresses are intentionall
 |---|---:|---|
 | Repository publication | READY | Public template and safety docs are present. |
 | Ledger validators | READY | Empty and sample ledgers are validated in CI. |
-| Wallet publication | BLOCKED | No real wallet address is published yet. |
+| Receiving-channel publication | BLOCKED | No live receiving detail is published yet. |
 | Donation activation | BLOCKED | `DONATIONS_ACTIVE` remains `NO`. |
 | Custody automation | FORBIDDEN | No signing, transfers, withdrawal APIs, or private keys. |
 | Beneficiary privacy | REQUIRED | Public reports must redact beneficiary-sensitive information. |
+| Donor trust guidance | READY FOR REVIEW | Donor-facing trust and verification guides are documented. |
 | Governance | READY FOR REVIEW | Maintainer checklists and emergency freeze procedure are documented. |
 | Blockchain importer | DESIGN ONLY | Read-only importer design exists; no network fetcher is implemented. |
+
+## Donor trust and verification
+
+- [Donor trust guide](DONOR_TRUST_GUIDE.md)
+- [Receiving channel publication policy](RECEIVING_CHANNEL_PUBLICATION_POLICY.md)
+- [Receiving account protection checklist](RECEIVING_ACCOUNT_PROTECTION.md)
+- [Public summary checklist](PUBLIC_SUMMARY_CHECKLIST.md)
 
 ## Reports
 
@@ -65,4 +82,4 @@ This project is not a payment processor, charity-registration claim, custody wal
 
 ## Next milestone
 
-The next milestone is donation-readiness final review. It must remain dry-run only unless a maintainer deliberately publishes reviewed wallet metadata and changes donation status in a dedicated reviewed commit.
+The next milestone is RC3 evidence review and donation-readiness final review. It must remain dry-run only unless a maintainer deliberately publishes reviewed receiving-channel metadata and changes donation status in a dedicated reviewed commit.
