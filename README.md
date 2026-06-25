@@ -44,6 +44,7 @@ It is designed for:
 - Provides beneficiary-safe intake, partner attestation, and disbursement decision record templates.
 - Provides donation-readiness dry-run checks before any donation activation.
 - Provides a static public status page and validator for GitHub Pages readiness.
+- Provides donor trust, public summary, and receiving-account protection guides while keeping donation collection inactive.
 - Provides v1.0.0-rc1 donation-ready candidate review artifacts while keeping donation collection inactive.
 - Provides v1.0.0-rc2 external review and activation-gate artifacts while keeping donation collection inactive.
 - Provides v1.0.0-rc3 external review evidence-pack artifacts while keeping donation collection inactive.
@@ -96,6 +97,9 @@ docs/                            Governance, legal notes, roadmap, and operating
   docs/BENEFICIARY_INTAKE_REVIEW.md       Beneficiary-safe intake and review workflow
   docs/PARTNER_ATTESTATION_TEMPLATE.md    Partner attestation template
   docs/DISBURSEMENT_DECISION_RECORD_TEMPLATE.md Disbursement decision record template
+  docs/PUBLIC_SUMMARY_CHECKLIST.md        Public-safe case summary checklist
+  docs/RECEIVING_ACCOUNT_PROTECTION.md    Future receiving-account protection checklist
+  docs/DONOR_TRUST_GUIDE.md               Future donor trust and verification guide
   docs/PUBLIC_STATUS_PAGE.md              Static public status page rules
   docs/DONATION_READINESS_DRY_RUN.md          Donation readiness dry-run gates
   docs/DRY_RUN_WALLET_PUBLICATION_REVIEW.md Dry-run wallet publication checklist
@@ -194,10 +198,11 @@ The repository includes review-only workflow documents for handling real hardshi
 docs/BENEFICIARY_INTAKE_REVIEW.md
 docs/PARTNER_ATTESTATION_TEMPLATE.md
 docs/DISBURSEMENT_DECISION_RECORD_TEMPLATE.md
+docs/PUBLIC_SUMMARY_CHECKLIST.md
 BENEFICIARY_PRIVACY_POLICY.md
 ```
 
-These documents help maintainers review need, privacy, partner confirmation, and future disbursement records while keeping donation collection inactive and wallet publication blocked.
+These documents help maintainers review need, privacy, partner confirmation, future disbursement records, and public summaries while keeping donation collection inactive and wallet publication blocked.
 
 The repository also includes fictional relief-review examples:
 
@@ -209,6 +214,20 @@ examples/relief-review/FAM-2026-001_disbursement_decision.sample.md
 ```
 
 These samples do not use real beneficiary data and do not imply that funds have been collected or moved.
+
+## Donor trust and future receiving protection
+
+The repository includes future-facing donor trust and receiving-account protection docs:
+
+```text
+docs/DONOR_TRUST_GUIDE.md
+docs/RECEIVING_ACCOUNT_PROTECTION.md
+docs/PUBLIC_SUMMARY_CHECKLIST.md
+```
+
+These documents explain how future donors should verify status, approved receiving channels, campaign status, ledger reporting, privacy controls, and freeze procedures before sending support.
+
+They do not activate donation collection and do not publish live receiving details.
 
 ## Donation readiness dry run
 
@@ -277,10 +296,11 @@ Near-term priorities:
 
 1. collect and assess RC3 external review evidence;
 2. test the beneficiary-safe relief workflow with fictional review records;
-3. keep the static public status page aligned with current inactive status;
-4. resolve legal/tax review and wallet-governance blockers before any activation proposal;
-5. keep read-only importer implementation behind reviewed design and manual reconciliation gates;
-6. keep donation activation inactive until all launch gates pass.
+3. keep donor trust, account protection, and public summary docs easy to understand;
+4. keep the static public status page aligned with current inactive status;
+5. resolve legal/tax review and wallet-governance blockers before any activation proposal;
+6. keep read-only importer implementation behind reviewed design and manual reconciliation gates;
+7. keep donation activation inactive until all launch gates pass.
 
 The first donation-ready release should not be cut until the safety and reporting foundation is stable.
 
