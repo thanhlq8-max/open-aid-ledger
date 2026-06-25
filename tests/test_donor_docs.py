@@ -58,6 +58,22 @@ def test_dashboard_keeps_user_goals_and_shareable_snapshot() -> None:
         assert phrase in text
 
 
+def test_dashboard_keeps_one_screen_operating_board() -> None:
+    text = read("docs/index.md")
+    for phrase in [
+        "One-screen operating board",
+        "Role | Next action | Use this file | Done when",
+        "Donor | Check current status before sending.",
+        "Maintainer | Run a dry-run operation with sample data.",
+        "Reviewer | Check evidence and unresolved blockers.",
+        "Current blockers",
+        "RECEIVING_CHANNEL_PUBLICATION: BLOCKED",
+        "DONATION_ACTIVATION: BLOCKED",
+        "GO_LIVE: NO",
+    ]:
+        assert phrase in text
+
+
 def test_donor_quickstart_preserves_inactive_status_and_safe_flow() -> None:
     text = read("docs/DONOR_QUICKSTART.md")
     for phrase in [
