@@ -17,16 +17,21 @@ def test_donor_docs_exist() -> None:
         assert (ROOT / path).is_file(), path
 
 
-def test_start_here_keeps_simple_front_door() -> None:
+def test_start_here_keeps_operating_cockpit() -> None:
     text = read("docs/START_HERE.md")
     for phrase in [
-        "This is the shortest operating path",
+        "This is the operating cockpit",
         "DONATIONS_ACTIVE: NO",
         "WALLETS_PUBLISHED: NO",
         "ACTIVATION_APPROVED: NO",
-        "Donor reads Donor Quickstart.",
-        "GO_LIVE = NO",
-        "Use it as the front door.",
+        "Donor path",
+        "Maintainer path",
+        "Reviewer path",
+        "IF DONATIONS_ACTIVE is NO OR WALLETS_PUBLISHED is NO:",
+        "IF any blocker remains:",
+        "RECEIVING_CHANNEL_PUBLICATION: BLOCKED",
+        "DONATION_ACTIVATION: BLOCKED",
+        "GO_LIVE: NO",
     ]:
         assert phrase in text
 
