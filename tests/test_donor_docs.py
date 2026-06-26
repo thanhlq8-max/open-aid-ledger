@@ -31,8 +31,12 @@ def test_start_here_keeps_operating_cockpit() -> None:
         "Donor path",
         "Maintainer path",
         "Reviewer path",
+        "dry-run evidence loop",
+        "examples/dry-run/README.md",
+        "examples/dry-run/DRY_RUN_001_REVIEW_PACKET.sample.md",
         "IF DONATIONS_ACTIVE is NO OR WALLETS_PUBLISHED is NO:",
         "IF any blocker remains:",
+        "DRY_RUN_EVIDENCE_LOOP_READY: YES",
         "DASHBOARD_READY: YES",
         "RECEIVING_CHANNEL_PUBLICATION: BLOCKED",
         "DONATION_ACTIVATION: BLOCKED",
@@ -52,6 +56,7 @@ def test_dashboard_keeps_user_goals_and_shareable_snapshot() -> None:
         "Shareable status snapshot",
         "Official dashboard: docs/index.md",
         "Start here: docs/START_HERE.md",
+        "Dry-run evidence loop: examples/dry-run/README.md",
         "Donation activation | BLOCKED",
         "Custody automation | FORBIDDEN",
     ]:
@@ -64,7 +69,8 @@ def test_dashboard_keeps_one_screen_operating_board() -> None:
         "One-screen operating board",
         "Role | Next action | Use this file | Done when",
         "Donor | Check current status before sending.",
-        "Maintainer | Run a dry-run operation with sample data.",
+        "Maintainer | Run the dry-run evidence loop with sample data.",
+        "examples/dry-run/README.md",
         "Reviewer | Check evidence and unresolved blockers.",
         "Current blockers",
         "RECEIVING_CHANNEL_PUBLICATION: BLOCKED",
@@ -109,4 +115,5 @@ def test_public_status_links_donor_entry_points() -> None:
     assert "[Start Here](START_HERE.md)" in text
     assert "[Donor Quickstart](DONOR_QUICKSTART.md)" in text
     assert "[Donor FAQ](DONOR_FAQ.md)" in text
+    assert "[Dry-run Evidence Loop](../examples/dry-run/README.md)" in text
     assert "If the public status still says `DONATIONS_ACTIVE: NO`" in text
