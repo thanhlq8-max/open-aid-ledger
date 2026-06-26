@@ -15,6 +15,20 @@ PUBLIC_TRANSPARENCY: YES
 SAFETY_FIRST: YES
 ```
 
+## Public dashboard
+
+Open the published dashboard:
+
+```text
+https://thanhlq8-max.github.io/open-aid-ledger/
+```
+
+Repository dashboard source:
+
+```text
+docs/index.md
+```
+
 ## Start here
 
 Use one front door first:
@@ -49,7 +63,7 @@ Donation collection is inactive. Live receiving details are not published.
 
 ## User dashboard
 
-Open the public dashboard:
+Open the public dashboard source:
 
 ```text
 docs/index.md
