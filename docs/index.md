@@ -66,7 +66,7 @@ If the public status still says `DONATIONS_ACTIVE: NO` or `WALLETS_PUBLISHED: NO
 | Role | Next action | Use this file | Done when |
 |---|---|---|---|
 | Donor | Check current status before sending. | `docs/DONOR_QUICKSTART.md` | Status is active and official source is clear. |
-| Maintainer | Run the dry-run evidence loop with sample data. | `examples/dry-run/README.md` | Operation report and review packet are both complete. |
+| Maintainer | Run the dry-run evidence loop with sample data. | `examples/dry-run/README.md` and `docs/DRY_RUN_OPERATIONS_RUNBOOK.md` | Operation report and review packet are both complete. |
 | Reviewer | Check evidence and unresolved blockers. | `docs/REVIEW_PACKET_TEMPLATE.md` | Review result is recorded. |
 | Maintainer | Decide go/no-go from readiness matrix. | `docs/OPERATIONAL_READINESS_MATRIX.md` | `GO_LIVE` remains `NO` while blockers remain. |
 
@@ -95,7 +95,7 @@ Dry-run evidence loop: examples/dry-run/README.md
 ## Minimal path
 
 ```text
-README.md -> docs/START_HERE.md -> docs/index.md -> examples/dry-run/README.md
+README.md -> docs/START_HERE.md -> docs/index.md -> examples/dry-run/README.md -> docs/DRY_RUN_OPERATIONS_RUNBOOK.md
 ```
 
 Then use only the document needed for the task:
@@ -103,6 +103,7 @@ Then use only the document needed for the task:
 ```text
 Donor: docs/DONOR_QUICKSTART.md
 Maintainer: examples/dry-run/README.md
+Runbook: docs/DRY_RUN_OPERATIONS_RUNBOOK.md
 Reviewer: docs/REVIEW_PACKET_TEMPLATE.md
 Go/no-go: docs/OPERATIONAL_READINESS_MATRIX.md
 ```
