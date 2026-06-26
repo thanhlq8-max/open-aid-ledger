@@ -23,7 +23,9 @@ def test_pages_landing_page_links_public_dashboard_and_preserves_status() -> Non
     for phrase in [
         "Open Aid Ledger",
         "Public dashboard",
-        "[Open the public dashboard](docs/index.md)",
+        "https://thanhlq8-max.github.io/open-aid-ledger/",
+        "Repository dashboard source",
+        "[Open the repository dashboard source](docs/index.md)",
         "DONATIONS_ACTIVE: NO",
         "WALLETS_PUBLISHED: NO",
         "ACTIVATION_APPROVED: NO",
