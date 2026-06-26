@@ -10,11 +10,30 @@ def read(path: str) -> str:
 
 def test_donor_docs_exist() -> None:
     for path in [
+        "index.md",
         "docs/START_HERE.md",
         "docs/DONOR_QUICKSTART.md",
         "docs/DONOR_FAQ.md",
     ]:
         assert (ROOT / path).is_file(), path
+
+
+def test_pages_landing_page_links_public_dashboard_and_preserves_status() -> None:
+    text = read("index.md")
+    for phrase in [
+        "Open Aid Ledger",
+        "Public dashboard",
+        "[Open the public dashboard](docs/index.md)",
+        "DONATIONS_ACTIVE: NO",
+        "WALLETS_PUBLISHED: NO",
+        "ACTIVATION_APPROVED: NO",
+        "GO_LIVE: NO",
+        "docs/START_HERE.md",
+        "docs/DONOR_QUICKSTART.md",
+        "examples/dry-run/README.md",
+        "documentation-only",
+    ]:
+        assert phrase in text
 
 
 def test_start_here_keeps_operating_cockpit() -> None:
