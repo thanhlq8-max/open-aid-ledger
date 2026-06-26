@@ -7,6 +7,7 @@ Open Aid Ledger is a transparency-first public ledger template for voluntary dig
 - [Start Here](START_HERE.md)
 - [Donor Quickstart](DONOR_QUICKSTART.md)
 - [Donor FAQ](DONOR_FAQ.md)
+- [Dry-run Evidence Loop](../examples/dry-run/README.md)
 
 Use `Start Here` as the front door. Use detailed docs only when the flow points to them.
 
@@ -54,6 +55,7 @@ If the public status still says `DONATIONS_ACTIVE: NO` or `WALLETS_PUBLISHED: NO
 | Public status | READY | Current status is visible and explicit. |
 | Public ledger template | READY | Ledger templates and validators exist. |
 | Dry-run operation | READY | Maintainers can test the flow with sample data. |
+| Evidence loop | READY | Dry-run sample artifacts are indexed in `examples/dry-run/README.md`. |
 | Review packet | READY | Reviewers can record evidence and blockers. |
 | Receiving-channel publication | BLOCKED | No live receiving detail is published yet. |
 | Donation activation | BLOCKED | `DONATIONS_ACTIVE` remains `NO`. |
@@ -64,7 +66,7 @@ If the public status still says `DONATIONS_ACTIVE: NO` or `WALLETS_PUBLISHED: NO
 | Role | Next action | Use this file | Done when |
 |---|---|---|---|
 | Donor | Check current status before sending. | `docs/DONOR_QUICKSTART.md` | Status is active and official source is clear. |
-| Maintainer | Run a dry-run operation with sample data. | `docs/DRY_RUN_OPERATIONS_RUNBOOK.md` | Dry-run report is complete. |
+| Maintainer | Run the dry-run evidence loop with sample data. | `examples/dry-run/README.md` | Operation report and review packet are both complete. |
 | Reviewer | Check evidence and unresolved blockers. | `docs/REVIEW_PACKET_TEMPLATE.md` | Review result is recorded. |
 | Maintainer | Decide go/no-go from readiness matrix. | `docs/OPERATIONAL_READINESS_MATRIX.md` | `GO_LIVE` remains `NO` while blockers remain. |
 
@@ -87,19 +89,20 @@ ACTIVATION_APPROVED: NO
 GO_LIVE: NO
 Official dashboard: docs/index.md
 Start here: docs/START_HERE.md
+Dry-run evidence loop: examples/dry-run/README.md
 ```
 
 ## Minimal path
 
 ```text
-README.md -> docs/START_HERE.md -> docs/index.md
+README.md -> docs/START_HERE.md -> docs/index.md -> examples/dry-run/README.md
 ```
 
 Then use only the document needed for the task:
 
 ```text
 Donor: docs/DONOR_QUICKSTART.md
-Maintainer: docs/DRY_RUN_OPERATIONS_RUNBOOK.md
+Maintainer: examples/dry-run/README.md
 Reviewer: docs/REVIEW_PACKET_TEMPLATE.md
 Go/no-go: docs/OPERATIONAL_READINESS_MATRIX.md
 ```
