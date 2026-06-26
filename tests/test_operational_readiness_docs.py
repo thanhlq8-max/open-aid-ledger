@@ -13,6 +13,7 @@ def test_operational_readiness_docs_exist() -> None:
         "docs/OPERATIONAL_READINESS_MATRIX.md",
         "docs/DRY_RUN_OPERATIONS_RUNBOOK.md",
         "docs/REVIEW_PACKET_TEMPLATE.md",
+        "examples/dry-run/README.md",
         "examples/dry-run/DRY_RUN_001_OPERATION_REPORT.sample.md",
         "examples/dry-run/DRY_RUN_001_REVIEW_PACKET.sample.md",
     ]
@@ -74,5 +75,24 @@ def test_sample_review_packet_tracks_blockers_and_no_go_live() -> None:
         "LIVE_RECEIVING_DETAILS_INCLUDED: NO",
         "REAL_BENEFICIARY_DATA_INCLUDED: NO",
         "GO_LIVE_APPROVED: NO",
+    ]:
+        assert phrase in text
+
+
+def test_dry_run_evidence_loop_index_keeps_repeatable_order() -> None:
+    text = read("examples/dry-run/README.md")
+    for phrase in [
+        "Dry-Run Evidence Loop",
+        "DONATIONS_ACTIVE: NO",
+        "WALLETS_PUBLISHED: NO",
+        "ACTIVATION_APPROVED: NO",
+        "GO_LIVE: NO",
+        "Read docs/DRY_RUN_OPERATIONS_RUNBOOK.md",
+        "Review DRY_RUN_001_OPERATION_REPORT.sample.md",
+        "Review DRY_RUN_001_REVIEW_PACKET.sample.md",
+        "Compare blockers with docs/OPERATIONAL_READINESS_MATRIX.md",
+        "IF any production gate remains incomplete:",
+        "GO_LIVE = NO",
+        "SAMPLE_ONLY",
     ]:
         assert phrase in text
