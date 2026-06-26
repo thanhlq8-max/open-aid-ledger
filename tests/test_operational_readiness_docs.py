@@ -14,6 +14,7 @@ def test_operational_readiness_docs_exist() -> None:
         "docs/DRY_RUN_OPERATIONS_RUNBOOK.md",
         "docs/REVIEW_PACKET_TEMPLATE.md",
         "examples/dry-run/DRY_RUN_001_OPERATION_REPORT.sample.md",
+        "examples/dry-run/DRY_RUN_001_REVIEW_PACKET.sample.md",
     ]
     for path in required_paths:
         assert (ROOT / path).is_file(), path
@@ -57,3 +58,21 @@ def test_sample_operation_report_remains_sample_only() -> None:
     assert "ACTIVATION_APPROVED: NO" in text
     assert "GO_LIVE_DECISION: NO" in text
     assert "production gates remain incomplete" in text
+
+
+def test_sample_review_packet_tracks_blockers_and_no_go_live() -> None:
+    text = read("examples/dry-run/DRY_RUN_001_REVIEW_PACKET.sample.md")
+    for phrase in [
+        "DRY-RUN-001-REVIEW-PACKET",
+        "SAMPLE_ONLY",
+        "DONATIONS_ACTIVE: NO",
+        "WALLETS_PUBLISHED: NO",
+        "ACTIVATION_APPROVED: NO",
+        "GO_LIVE: NO",
+        "DECISION: BLOCKED",
+        "Production gates remain incomplete",
+        "LIVE_RECEIVING_DETAILS_INCLUDED: NO",
+        "REAL_BENEFICIARY_DATA_INCLUDED: NO",
+        "GO_LIVE_APPROVED: NO",
+    ]:
+        assert phrase in text
