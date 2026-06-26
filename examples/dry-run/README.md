@@ -37,6 +37,28 @@ Use this order:
 | `rc2-external-review.example.json` | rc2 external review fixture | SAMPLE_ONLY |
 | `rc3-evidence-pack.example.json` | rc3 evidence fixture | SAMPLE_ONLY |
 
+## Completion checklist
+
+The sample evidence loop is complete only when all items below are true:
+
+- [ ] Current status remains inactive.
+- [ ] Operation report is inspectable.
+- [ ] Review packet records findings and blockers.
+- [ ] No live receiving details are present.
+- [ ] No real beneficiary data is present.
+- [ ] No active collection is implied.
+- [ ] Latest validation evidence is recorded or marked as required.
+- [ ] All unresolved production blockers remain listed.
+- [ ] `GO_LIVE` remains `NO`.
+
+Reviewer result:
+
+```text
+DRY_RUN_EVIDENCE_LOOP_COMPLETE: NO
+REVIEW_DECISION: BLOCKED
+REASON: production gates remain incomplete
+```
+
 ## Completion rule
 
 ```text
