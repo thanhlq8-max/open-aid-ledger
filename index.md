@@ -8,13 +8,19 @@ Transparency-first public ledger template for voluntary digital-asset support to
 
 ## Public dashboard
 
-Use the dashboard as the official starting point:
+Use this published dashboard as the official starting point:
+
+```text
+https://thanhlq8-max.github.io/open-aid-ledger/
+```
+
+Repository dashboard source:
 
 ```text
 docs/index.md
 ```
 
-[Open the public dashboard](docs/index.md)
+[Open the repository dashboard source](docs/index.md)
 
 ## Current status
 
