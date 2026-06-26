@@ -27,7 +27,7 @@ SAFETY_FIRST: YES
 
 ```text
 1. Donor checks public dashboard.
-2. Maintainer runs dry-run operation.
+2. Maintainer runs dry-run evidence loop.
 3. Reviewer checks evidence and blockers.
 4. Maintainer fixes blockers.
 5. CI and public-safety checks pass.
@@ -55,12 +55,13 @@ Use receiving information only from the official public dashboard or an approved
 
 ## Maintainer path
 
-Before any future operating proposal, run:
+Before any future operating proposal, run the evidence loop:
 
 ```text
+examples/dry-run/README.md
 docs/DRY_RUN_OPERATIONS_RUNBOOK.md
 examples/dry-run/DRY_RUN_001_OPERATION_REPORT.sample.md
-docs/REVIEW_PACKET_TEMPLATE.md
+examples/dry-run/DRY_RUN_001_REVIEW_PACKET.sample.md
 docs/OPERATIONAL_READINESS_MATRIX.md
 ```
 
@@ -79,6 +80,7 @@ Check only what affects go/no-go:
 public dashboard clarity
 donor source-of-truth
 shareable status snapshot
+dry-run evidence loop
 receiving-channel control
 account protection
 beneficiary privacy
@@ -93,6 +95,7 @@ CI result
 DONOR_ENTRYPOINT_READY: YES
 DASHBOARD_READY: YES
 DRY_RUN_READY: YES
+DRY_RUN_EVIDENCE_LOOP_READY: YES
 REVIEW_PACKET_READY: YES
 RECEIVING_CHANNEL_PUBLICATION: BLOCKED
 DONATION_ACTIVATION: BLOCKED
