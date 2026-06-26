@@ -96,3 +96,19 @@ def test_dry_run_evidence_loop_index_keeps_repeatable_order() -> None:
         "SAMPLE_ONLY",
     ]:
         assert phrase in text
+
+
+def test_dry_run_completion_checklist_preserves_blocked_result() -> None:
+    text = read("examples/dry-run/README.md")
+    for phrase in [
+        "Completion checklist",
+        "Current status remains inactive.",
+        "No live receiving details are present.",
+        "No real beneficiary data is present.",
+        "No active collection is implied.",
+        "All unresolved production blockers remain listed.",
+        "DRY_RUN_EVIDENCE_LOOP_COMPLETE: NO",
+        "REVIEW_DECISION: BLOCKED",
+        "REASON: production gates remain incomplete",
+    ]:
+        assert phrase in text
