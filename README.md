@@ -12,6 +12,12 @@ Open the shortest user guide first:
 docs/QUICK_ACCESS.md
 ```
 
+Share the project consistently:
+
+```text
+docs/SHARE_KIT.md
+```
+
 Public dashboard:
 
 ```text
@@ -111,6 +117,7 @@ Key files:
 
 ```text
 docs/QUICK_ACCESS.md
+docs/SHARE_KIT.md
 docs/START_HERE.md
 docs/index.md
 docs/DONOR_QUICKSTART.md
