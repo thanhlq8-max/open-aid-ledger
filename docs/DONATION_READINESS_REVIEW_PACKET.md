@@ -21,6 +21,7 @@ GO_LIVE: NO
 | Public dashboard | `docs/index.md` | READY |
 | Quick access | `docs/QUICK_ACCESS.md` | READY |
 | Share kit | `docs/SHARE_KIT.md` | READY |
+| Governance model | `docs/DONATION_GOVERNANCE_MODEL.md` | DRAFT |
 | Activation checklist | `docs/DONATION_ACTIVATION_CHECKLIST.md` | BLOCKED |
 | Readiness matrix | `docs/OPERATIONAL_READINESS_MATRIX.md` | BLOCKED |
 | Receiving channel policy | `docs/RECEIVING_CHANNEL_PUBLICATION_POLICY.md` | BLOCKED |
