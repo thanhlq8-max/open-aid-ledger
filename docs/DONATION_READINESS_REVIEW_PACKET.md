@@ -25,7 +25,8 @@ GO_LIVE: NO
 | Activation checklist | `docs/DONATION_ACTIVATION_CHECKLIST.md` | BLOCKED |
 | Readiness matrix | `docs/OPERATIONAL_READINESS_MATRIX.md` | BLOCKED |
 | Receiving channel policy | `docs/RECEIVING_CHANNEL_PUBLICATION_POLICY.md` | BLOCKED |
-| Account protection | `docs/RECEIVING_ACCOUNT_PROTECTION.md` | REVIEW_REQUIRED |
+| Account protection baseline | `docs/RECEIVING_ACCOUNT_PROTECTION.md` | BASELINE_EXISTS |
+| Account protection review | `docs/DONATION_ACCOUNT_PROTECTION_REVIEW.md` | REVIEW_REQUIRED |
 | Legal and tax note | `docs/VN_LEGAL_AND_TAX_NOTE.md` | REVIEW_REQUIRED |
 | Dry-run evidence loop | `examples/dry-run/README.md` | READY_FOR_DRY_RUN |
 | Review packet template | `docs/REVIEW_PACKET_TEMPLATE.md` | READY |
