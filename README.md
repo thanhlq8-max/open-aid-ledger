@@ -4,6 +4,20 @@ Transparency-first public ledger template for voluntary digital-asset support to
 
 Open Aid Ledger is designed to make support easier to access, easier to use, easier to share, safer to operate, and clearer for donors.
 
+## Quick access
+
+Open the shortest user guide first:
+
+```text
+docs/QUICK_ACCESS.md
+```
+
+Public dashboard:
+
+```text
+https://thanhlq8-max.github.io/open-aid-ledger/
+```
+
 ## Project goals
 
 ```text
@@ -96,6 +110,7 @@ This repo provides a public template for:
 Key files:
 
 ```text
+docs/QUICK_ACCESS.md
 docs/START_HERE.md
 docs/index.md
 docs/DONOR_QUICKSTART.md
