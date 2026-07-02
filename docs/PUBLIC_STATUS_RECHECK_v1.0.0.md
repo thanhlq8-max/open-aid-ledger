@@ -8,12 +8,14 @@ It does not create a release tag, create a GitHub Release, publish receiving det
 
 ```text
 RELEASE_TARGET: v1.0.0
-PUBLIC_STATUS_RECHECK: PASS_WITH_RELEASE_BLOCKERS
+PUBLIC_STATUS_RECHECK: PASS
 PUBLIC_FRONT_DOOR: PASS
 PUBLIC_DASHBOARD: PASS
 QUICK_ACCESS: PASS
 SHARE_KIT: PASS
-FINAL_RUN_URL: NOT_ATTACHED
+FINAL_RUN_URL: https://github.com/thanhlq8-max/open-aid-ledger/actions/runs/77196823903
+FINAL_RUN_LABEL: Validate #116
+FINAL_COMMIT: 95f6424
 RELEASE_TAG_CREATED: NO
 GITHUB_RELEASE_CREATED: NO
 ```
@@ -27,7 +29,7 @@ GITHUB_RELEASE_CREATED: NO
 | Public dashboard source | `docs/index.md` | PASS |
 | Quick access | `docs/QUICK_ACCESS.md` | PASS |
 | Share kit | `docs/SHARE_KIT.md` | PASS |
-| Release validation evidence | `docs/RELEASE_VALIDATION_EVIDENCE_v1.0.0.md` | PASS_WITH_BLOCKER |
+| Release validation evidence | `docs/RELEASE_VALIDATION_EVIDENCE_v1.0.0.md` | PASS |
 
 ## Public status alignment
 
@@ -43,7 +45,6 @@ GO_LIVE: NO
 ## Release blockers remaining
 
 ```text
-FINAL_RUN_URL: NOT_ATTACHED
 RELEASE_TAG_CREATED: NO
 GITHUB_RELEASE_CREATED: NO
 ```
@@ -51,10 +52,10 @@ GITHUB_RELEASE_CREATED: NO
 ## Release gate
 
 ```text
-IF final run evidence is not attached:
-    DO_NOT_TAG_RELEASE
+IF release notes are final and tag is not created:
+    TAGGING_MAY_PROCEED
 ```
 
 ## Next allowed step
 
-Attach the final GitHub Actions run URL or screenshot reference, then prepare the final release notes update before tagging `v1.0.0`.
+Prepare final release notes, then tag `v1.0.0` manually if the maintainer approves.
