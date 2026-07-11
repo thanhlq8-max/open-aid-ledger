@@ -237,12 +237,21 @@ Purpose: prepare a traceable repository/template release without changing operat
 
 ## 6. CURRENT STATE
 
+Head tracking policy:
+
+```text
+CURRENT_HEAD: RESOLVE_FROM_GIT_AT_RUNTIME
+DO_NOT_STORE_MOVING_HEAD_AS_DURABLE_STATE: YES
+```
+
+Audited evidence baseline:
+
 ```yaml
 DEFAULT_BRANCH: main
-CURRENT_HEAD: 97bb9c8a057e7f723c46758bb51527cf64e69987
-HEAD_MESSAGE: Guard final release notes file
-HEAD_VALIDATION: USER_SCREENSHOT_SHOWS_3_OF_3_CHECKS_PASS
-EVIDENCE_LEVEL: E2
+AUDITED_BASELINE_HEAD: 97bb9c8a057e7f723c46758bb51527cf64e69987
+AUDITED_BASELINE_MESSAGE: Guard final release notes file
+AUDITED_BASELINE_VALIDATION: USER_SCREENSHOT_SHOWS_3_OF_3_CHECKS_PASS
+AUDITED_BASELINE_EVIDENCE_LEVEL: E2
 RELEASE_TARGET: v1.0.0
 RELEASE_TAG: NOT_CREATED
 GITHUB_RELEASE: NOT_VERIFIED
@@ -311,13 +320,12 @@ Status: OPEN
 
 Confirmed:
 
-- Current `main` head is `97bb9c8a057e7f723c46758bb51527cf64e69987`.
-- User screenshot shows 3/3 checks passed for that commit.
+- Audited baseline `97bb9c8a057e7f723c46758bb51527cf64e69987` has user screenshot evidence showing 3/3 checks passed.
 - `docs/RELEASE_VALIDATION_EVIDENCE_v1.0.0.md` still records `95f6424` as the final commit.
 
-Impact: final release evidence does not identify the current intended release head.
+Impact: final release evidence does not identify the audited intended release baseline.
 
-Required fix: separate validated content baseline from tag commit and avoid self-referential evidence updates.
+Required fix: separate validated content baseline from release metadata and final tag target.
 
 ### ISSUE-003 — READINESS_PACKET_INDEX_DRIFT
 
@@ -339,11 +347,11 @@ Required fix: update the packet without changing any blocked or inactive status.
 
 ### ISSUE-004 — PROJECT_STATE_WAS_MISSING
 
-Status: FIXED_BY_THIS_COMMIT
+Status: FIXED
 
 Impact: objective, release state, drift, decisions and next allowed work were distributed across many documents and conversation history.
 
-Fix: add this `PROJECT_STATE.md` as the repository control contract.
+Fix: add this `PROJECT_STATE.md` as the repository control contract and guard its core locks in tests.
 
 ### ISSUE-005 — TAG_VALIDATION_TRIGGER_GAP
 
@@ -457,7 +465,7 @@ Status: OPEN
 
 Symptom: updating the evidence file creates a newer commit than the commit recorded as final.
 
-Prevention: distinguish `VALIDATED_BASELINE_COMMIT`, `RELEASE_METADATA_COMMIT` and final tag target.
+Prevention: distinguish `VALIDATED_BASELINE_COMMIT`, `RELEASE_METADATA_COMMIT` and final tag target; resolve moving head from Git at runtime.
 
 Status: OPEN
 
