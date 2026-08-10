@@ -124,10 +124,7 @@ def test_release_consistency_rejects_stale_final_claims(
 def test_release_consistency_rejects_draft_notes_as_runbook_base(tmp_path: Path) -> None:
     target = _copy_validator_fixture(tmp_path)
     path = target / "docs" / "RELEASE_TAGGING_RUNBOOK_v1.0.0.md"
-    text = path.read_text(encoding="utf-8").replace(
-        "docs/RELEASE_NOTES_v1.0.0.md",
-        "docs/RELEASE_NOTES_DRAFT_v1.0.0.md",
-    )
+    text = path.read_text(encoding="utf-8") + "\nUse docs/RELEASE_NOTES_DRAFT_v1.0.0.md as the release base.\n"
     path.write_text(text, encoding="utf-8")
 
     result = _run_validator(target)
