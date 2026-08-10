@@ -8,10 +8,16 @@ This is release-preparation only. It does not publish receiving details, activat
 
 ```text
 RELEASE_TARGET: v1.0.0
-RELEASE_STATUS: READY_FOR_TAGGING_REVIEW
+RELEASE_STATUS: FINAL_VALIDATION_PENDING
 REPOSITORY_TEMPLATE_READY: YES
+RELEASE_TAG_TARGET: NOT_SELECTED
+FINAL_CI_EVIDENCE: NOT_ATTACHED
+FINAL_RELEASE_PUBLIC_STATUS_RECHECK: PENDING_FINAL_TARGET
+POST_MERGE_PAGES_RUNTIME: PENDING_AUTHORITATIVE_EVIDENCE
 LIVE_OPERATION: NO
 ```
+
+`REPOSITORY_TEMPLATE_READY: YES` describes the implemented template scope. It is not approval to tag or publish the repository release.
 
 ## Release scope
 
@@ -23,7 +29,7 @@ The official release should present the project as:
 - a validation-gated public transparency template;
 - an inactive operational baseline until separate review approves any future activation.
 
-## Required release evidence
+## Completed release-preparation evidence
 
 - [x] README front door is clear.
 - [x] Public dashboard URL is visible.
@@ -37,27 +43,36 @@ The official release should present the project as:
 - [x] Reconciliation dry-run review exists.
 - [x] Freeze dry-run review exists.
 - [x] Two-reviewer rule exists.
-- [x] CI validation passes on the release commit.
-- [x] Public-safety scan passes on the release commit.
-- [x] No private keys, seed phrases, or credentials are present.
+- [x] Public-safety scanner blind spot is fixed and regression-guarded.
+- [x] Remote GitHub Actions are pinned to immutable commit SHAs and regression-guarded.
 - [x] No live receiving details are published.
 
-## Release blocker list
+## Remaining release blockers
+
+- [ ] Select the exact final intended release target.
+- [ ] Complete the release identity transition consistently across public status files.
+- [ ] Run complete fresh validation on the exact final target.
+- [ ] Attach authoritative final CI evidence for that target.
+- [ ] Complete the final public-status recheck against that target.
+- [ ] Obtain authoritative Pages runtime evidence required by the current project state.
+- [ ] Confirm final release notes match the selected target.
+- [ ] Receive explicit maintainer approval for the tag.
+
+## Release blocker state
 
 ```text
-RELEASE_NOTES: READY
+RELEASE_NOTES: FINAL_VALIDATION_PENDING
+RELEASE_TAG_TARGET: NOT_SELECTED
 RELEASE_TAG: NOT_CREATED
-FINAL_CI_EVIDENCE: ATTACHED
-PUBLIC_STATUS_RECHECK: PASS
+FINAL_CI_EVIDENCE: NOT_ATTACHED
+FINAL_RELEASE_PUBLIC_STATUS_RECHECK: PENDING_FINAL_TARGET
+TAGGING_STATUS: BLOCKED
 ```
 
 ## Release go/no-go rule
 
-```text
-IF maintainer approves final tag:
-    TAGGING_MAY_PROCEED
-```
+Tagging remains blocked while any item in the remaining release blockers is unresolved. Repository release approval is separate from operating activation.
 
 ## Next allowed step
 
-Create or update final release notes for `v1.0.0`, then tag manually if maintainer approval is explicit.
+Harden and validate the release packet, then perform the release identity transition and fresh final-target validation in a separately reviewed step.
