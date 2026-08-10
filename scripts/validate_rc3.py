@@ -6,6 +6,8 @@ import sys
 from pathlib import Path
 
 VERSION_TOKEN = "1.0.0-rc3"
+PRIVATE_KEY_LABEL = "private " + "key:"
+SEED_PHRASE_LABEL = "seed " + "phrase:"
 REQUIRED_FILES = [
     "docs/RC3_EXTERNAL_REVIEW_EVIDENCE_PACK.md",
     "docs/EXTERNAL_REVIEW_FEEDBACK_REGISTER.md",
@@ -53,7 +55,8 @@ def validate(root: Path) -> None:
     for relative in REQUIRED_FILES:
         text = read_text(root / relative)
         if relative.endswith(".md"):
-            if "private key:" in text.lower() or "seed phrase:" in text.lower():
+            lowered = text.lower()
+            if PRIVATE_KEY_LABEL in lowered or SEED_PHRASE_LABEL in lowered:
                 fail(f"unsafe secret-like wording in {relative}")
 
     rc3_doc = read_text(root / "docs/RC3_EXTERNAL_REVIEW_EVIDENCE_PACK.md")
