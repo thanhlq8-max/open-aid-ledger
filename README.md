@@ -64,6 +64,8 @@ Then follow only the links needed for your role: donor, maintainer, or reviewer.
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
 VERSION: 1.0.0-rc3-external-review-evidence-pack
+RELEASE_TARGET: v1.0.0
+RELEASE_TAG_CREATED: NO
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 ACTIVATION_APPROVED: NO
@@ -71,6 +73,8 @@ CUSTODY_AUTOMATION: NO
 TRADING_USE: FORBIDDEN
 RETURN_PROMISE: FORBIDDEN
 ```
+
+`VERSION` is the currently published release-candidate identity. `RELEASE_TARGET` is the planned repository/template release and does not claim that the `v1.0.0` tag or GitHub Release exists.
 
 Current rule:
 
@@ -155,12 +159,13 @@ NO_BENEFICIARY_DOXXING
 
 ## Validation
 
-The repository uses GitHub Actions `Validate` to run compile checks, ledger validators, readiness validators, RC gates, public-safety scan, tests, and sample report generation.
+The repository uses GitHub Actions `Validate` to run compile checks, ledger validators, readiness validators, release/status consistency validation, RC gates, public-safety scan, tests, and sample report generation.
 
 For local development, install dev requirements and run:
 
 ```powershell
 python -m compileall scripts tests
+python scripts\validate_release_consistency.py .
 python scripts\check_public_safety.py .
 python -m pytest -q
 ```
