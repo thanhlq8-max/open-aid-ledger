@@ -5,6 +5,7 @@ import sys
 
 def test_candidate_validator_passes_repository_root():
     root = Path(__file__).resolve().parents[1]
+    assert (root / "VERSION").read_text(encoding="utf-8").strip() == "1.0.0"
     result = subprocess.run(
         [sys.executable, "scripts/validate_candidate.py", "."],
         cwd=root,

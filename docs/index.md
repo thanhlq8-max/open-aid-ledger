@@ -26,7 +26,7 @@ SAFETY_FIRST: YES
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
-VERSION: 1.0.0-rc3-external-review-evidence-pack
+VERSION: 1.0.0
 RELEASE_TARGET: v1.0.0
 RELEASE_TAG_CREATED: NO
 DONATIONS_ACTIVE: NO
@@ -37,7 +37,7 @@ TRADING_USE: FORBIDDEN
 RETURN_PROMISE: FORBIDDEN
 ```
 
-`VERSION` is the current release-candidate identity. `RELEASE_TARGET` is the planned repository/template release only; it does not imply that the `v1.0.0` tag exists.
+`VERSION` is the current repository release identity. `RELEASE_TARGET` is the planned repository/template release tag only; it does not imply that the `v1.0.0` tag exists.
 
 Donation collection is inactive. Live receiving details are not published.
 
@@ -87,7 +87,7 @@ GO_LIVE: NO
 
 ```text
 Open Aid Ledger status:
-VERSION: 1.0.0-rc3-external-review-evidence-pack
+VERSION: 1.0.0
 RELEASE_TARGET: v1.0.0
 RELEASE_TAG_CREATED: NO
 DONATIONS_ACTIVE: NO
@@ -133,4 +133,4 @@ This project is not a payment processor, charity-registration claim, custody wal
 
 ## Next milestone
 
-The next milestone is release-consistency validation and final repository/template release review. Donation activation remains a separate blocked process.
+The next milestone is fresh final-target validation and final repository/template release review. Donation activation remains a separate blocked process.

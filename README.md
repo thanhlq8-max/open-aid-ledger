@@ -63,7 +63,7 @@ Then follow only the links needed for your role: donor, maintainer, or reviewer.
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
-VERSION: 1.0.0-rc3-external-review-evidence-pack
+VERSION: 1.0.0
 RELEASE_TARGET: v1.0.0
 RELEASE_TAG_CREATED: NO
 DONATIONS_ACTIVE: NO
@@ -74,7 +74,7 @@ TRADING_USE: FORBIDDEN
 RETURN_PROMISE: FORBIDDEN
 ```
 
-`VERSION` is the currently published release-candidate identity. `RELEASE_TARGET` is the planned repository/template release and does not claim that the `v1.0.0` tag or GitHub Release exists.
+`VERSION` is the current repository release identity. `RELEASE_TARGET` is the planned repository/template release tag and does not claim that the `v1.0.0` tag or GitHub Release exists.
 
 Current rule:
 

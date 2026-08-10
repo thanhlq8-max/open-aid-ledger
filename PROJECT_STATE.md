@@ -2,7 +2,7 @@
 
 STATUS: ACTIVE_RELEASE_CANDIDATE
 PROJECT: Open Aid Ledger
-VERSION: 1.0.0-RC
+VERSION: 1.0.0
 LAST_UPDATED: 2026-08-10
 TARGET_REPO: thanhlq8-max/open-aid-ledger
 TARGET_BRANCH: main
@@ -274,6 +274,8 @@ RELEASE_PACKET_MERGE_COMMIT: 600025b6b6c55d18ec4c6894da3ccbd521a85a72
 RELEASE_PACKET_POST_MERGE_CI: UNKNOWN_FROM_AVAILABLE_PR_RUN_ENDPOINT
 POST_MERGE_VALIDATE_CI: UNKNOWN_FROM_AVAILABLE_PR_RUN_ENDPOINT
 POST_MERGE_PAGES_RUNTIME: UNKNOWN_FROM_AVAILABLE_ENDPOINTS
+CURRENT_RELEASE_IDENTITY: 1.0.0
+RELEASE_IDENTITY_TRANSITION_COMPLETE: YES
 RELEASE_TARGET: v1.0.0
 RELEASE_TAG: NOT_CREATED
 GITHUB_RELEASE: NOT_VERIFIED
@@ -292,6 +294,8 @@ Current release-packet state:
 
 ```text
 RELEASE_PACKET_HARDENING_COMPLETE: YES
+CURRENT_RELEASE_IDENTITY: 1.0.0
+RELEASE_IDENTITY_TRANSITION_COMPLETE: YES
 RELEASE_TAG_TARGET: NOT_SELECTED
 FINAL_CI_EVIDENCE: NOT_ATTACHED
 FINAL_RELEASE_PUBLIC_STATUS_RECHECK: PENDING_FINAL_TARGET
@@ -336,16 +340,16 @@ Claims must not exceed the current evidence level.
 
 ### ISSUE-001 — PUBLIC_VERSION_DRIFT
 
-Status: FIXED_BY_PR_20
+Status: FIXED_BY_RELEASE_IDENTITY_GUARD
 
 Confirmed fix:
 
-- `README.md` and `docs/index.md` keep `VERSION: 1.0.0-rc3-external-review-evidence-pack` as the current public release-candidate identity.
-- Both files now distinguish `RELEASE_TARGET: v1.0.0` and `RELEASE_TAG_CREATED: NO` from the current RC identity.
-- `scripts/validate_release_consistency.py` validates the cross-file version/release-target contract.
-- PR #20 head `4b4e48dd884fb226fe51820d1bbb2c098020c3ef` passed Validate #125 before merge.
+- `README.md`, `docs/index.md`, and the current-status section of `docs/POST_PUBLISH_STATUS.md` carry `VERSION: 1.0.0` as the current repository release identity.
+- Current identity files distinguish `RELEASE_TARGET: v1.0.0` and `RELEASE_TAG_CREATED: NO` from the existence of a tag or GitHub Release.
+- `scripts/validate_release_consistency.py` validates the cross-file version/release-target contract and includes the current-status section of `docs/POST_PUBLISH_STATUS.md`.
+- Historical RC metadata is preserved below an explicit historical-section boundary and is not treated as current identity.
 
-Result: public version identity and planned release target are explicitly separated and mechanically guarded.
+Result: current repository identity is aligned to `1.0.0` without claiming the release tag exists, and current-status version drift is mechanically guarded.
 
 ### ISSUE-002 — RELEASE_EVIDENCE_COMMIT_DRIFT
 
@@ -433,11 +437,11 @@ Status: OPEN
 
 Confirmed:
 
-The `v1.0.0` repository release has not been established by fresh authoritative release evidence in this state-sync task.
+The `v1.0.0` repository release has not been established by fresh authoritative release evidence.
 
-Impact: the repository remains a release candidate.
+Impact: the repository identity can be `1.0.0` while the project remains an unreleased release candidate because `RELEASE_TAG_CREATED: NO`, final target evidence is incomplete, and Pages runtime evidence is unresolved.
 
-Required fix: complete the release identity transition, obtain the remaining runtime/final-head verification, select the exact final intended release head, run fresh complete validation, then tag/release only after explicit maintainer approval.
+Required fix: obtain the remaining runtime/final-head verification, select the exact final intended release head, run fresh complete validation, then tag/release only after explicit maintainer approval.
 
 ### ISSUE-009 — STALE_RELEASE_PACKET_FINAL_CLAIMS
 
@@ -457,9 +461,9 @@ Confirmed fix:
 Limitation:
 
 - The available connected workflow-run endpoint returns no authoritative push-triggered Validate record for merge commit `600025b6b6c55d18ec4c6894da3ccbd521a85a72`.
-- This fix does not perform the release identity transition, select a final tag target, prove Pages runtime, create a tag or create a GitHub Release.
+- This fix does not select a final tag target, prove Pages runtime, create a tag or create a GitHub Release.
 
-Result: release-packet final-readiness semantics are now mechanically guarded while final release authority remains blocked.
+Result: release-packet final-readiness semantics are mechanically guarded while final release authority remains blocked.
 
 ## 9. DECISION LOG
 
@@ -525,7 +529,13 @@ Status: LOCKED
 
 ### D-011 — Release-packet hardening remains separate from release authority
 
-Decision: PR #25 fixes stale final-release claims and adds semantic regression guards. Its merge does not select the final release target, perform the `1.0.0` identity transition, establish post-merge Pages runtime, authorize a tag, create a GitHub Release, or change operating status.
+Decision: PR #25 fixes stale final-release claims and adds semantic regression guards. Its merge does not select the final release target, establish post-merge Pages runtime, authorize a tag, create a GitHub Release, or change operating status.
+
+Status: LOCKED
+
+### D-012 — Release identity does not equal release publication
+
+Decision: setting the current repository identity to `1.0.0` does not create `v1.0.0`, establish final CI or Pages evidence, authorize tagging, create a GitHub Release, activate donations or change custody behavior.
 
 Status: LOCKED
 
@@ -533,11 +543,11 @@ Status: LOCKED
 
 ### B-001 — STATUS_DRIFT_ACROSS_PUBLIC_FILES
 
-Symptom: README, dashboard, readiness packet and release files describe different versions or stages.
+Symptom: README, dashboard, current-status documents, readiness packet and release files describe different versions or stages.
 
-Prevention: cross-file status/version validation runs before tagging.
+Prevention: cross-file status/version validation covers README, `docs/index.md` and the current-status section of `docs/POST_PUBLISH_STATUS.md` before tagging, while historical RC metadata remains explicitly separated.
 
-Status: MITIGATED_BY_PR_20_GUARD_ACTIVE
+Status: MITIGATED_BY_RELEASE_IDENTITY_GUARD_ACTIVE
 
 ### B-002 — SELF_REFERENTIAL_RELEASE_EVIDENCE
 
@@ -575,7 +585,7 @@ Status: MITIGATED_BY_PR_20_GUARD_ACTIVE
 
 Symptom: documentation says official release while the tag or GitHub Release does not exist.
 
-Prevention: public version remains release-candidate until the tag and release are freshly verified.
+Prevention: current repository identity may be `1.0.0`, but public status must continue to state `RELEASE_TAG_CREATED: NO` until tag/release existence is freshly verified.
 
 Status: OPEN
 
@@ -602,9 +612,11 @@ Current release decision:
 ```text
 RELEASE_TARGET: v1.0.0
 RELEASE_STATUS: BLOCKED_FOR_CONSISTENCY_PATCHES
-RELEASE_BLOCKING_DETAIL: IDENTITY_TRANSITION_FINAL_VERIFICATION_AND_POST_MERGE_PAGES_RUNTIME_PENDING
+RELEASE_BLOCKING_DETAIL: FINAL_VERIFICATION_AND_POST_MERGE_PAGES_RUNTIME_PENDING
 SECURITY_HARDENING_PATCHES_COMPLETE: YES
 RELEASE_PACKET_HARDENING_COMPLETE: YES
+CURRENT_RELEASE_IDENTITY: 1.0.0
+RELEASE_IDENTITY_TRANSITION_COMPLETE: YES
 RELEASE_TAG_TARGET: NOT_SELECTED
 FINAL_CI_EVIDENCE: NOT_ATTACHED
 FINAL_RELEASE_PUBLIC_STATUS_RECHECK: PENDING_FINAL_TARGET
@@ -614,11 +626,12 @@ GITHUB_RELEASE_CREATED: NOT_VERIFIED
 LIVE_OPERATION: NO
 ```
 
-`RELEASE_STATUS: BLOCKED_FOR_CONSISTENCY_PATCHES` remains a mechanically guarded compatibility token in the current state contract. This state sync does not transition that token; it records that the bounded release-consistency, security-hardening and release-packet-hardening patches are complete while identity/runtime/final-verification gates remain unresolved.
+`RELEASE_STATUS: BLOCKED_FOR_CONSISTENCY_PATCHES` remains a mechanically guarded compatibility token in the current state contract. The release identity transition is complete, but runtime/final-verification gates remain unresolved and release publication remains blocked.
 
-Release consistency, security and release-packet prerequisites completed:
+Release consistency, security, release-packet and identity prerequisites completed:
 
-- public version/status files are aligned with an explicit RC-versus-target contract;
+- current repository identity is `1.0.0` across `VERSION`, README, public dashboard and current post-publish status;
+- current-status identity consistency is mechanically guarded while historical RC metadata remains preserved as history;
 - readiness evidence index is current;
 - release evidence model no longer self-references incorrectly;
 - `v*` tag pushes trigger Validate;
@@ -628,9 +641,8 @@ Release consistency, security and release-packet prerequisites completed:
 
 Remaining release gates:
 
-- perform a separately reviewed release identity transition from the current RC identity to `1.0.0` across current public identity/status files while preserving inactive operating locks;
 - obtain authoritative post-merge GitHub Pages runtime evidence for the pinned Pages workflow or keep release blocked;
-- after the identity transition, select the exact final intended release head;
+- after the identity-transition candidate is merged and read back, select the exact final intended release head;
 - run fresh complete validation on that exact final head;
 - attach authoritative final CI evidence and complete the final public-status recheck against that exact target;
 - verify release notes match the selected tag target;
@@ -648,8 +660,8 @@ Remaining release gates:
 5. Repair release evidence semantics. — COMPLETE / PR #20
 6. Add tag-triggered validation. — COMPLETE / PR #20
 7. Harden release packet against stale final-readiness claims. — COMPLETE / PR #25
-8. Perform release identity transition from RC to `1.0.0` on current public identity/status files. — PENDING SEPARATE REVIEW
-9. Select exact final intended head and run complete fresh validation. — PENDING IDENTITY TRANSITION
+8. Perform release identity transition from RC to `1.0.0` on current public identity/status files. — COMPLETE / CURRENT CANDIDATE
+9. Select exact final intended head and run complete fresh validation. — PENDING MERGE READ-BACK
 10. Complete final public-status recheck and final evidence attachment. — PENDING FINAL HEAD
 11. Tag `v1.0.0` after explicit approval. — BLOCKED
 12. Create GitHub Release from final notes. — BLOCKED
@@ -674,13 +686,12 @@ Remaining release gates:
 
 ```text
 NEXT_ALLOWED_WORK:
-- read back this state-only sync after merge and confirm all safety locks remain unchanged;
-- design and implement a separately reviewed release identity transition from the current RC identity to `1.0.0` across current public identity/status files;
-- extend release-consistency coverage to any current-status document included in that identity transition so current identity cannot drift silently;
-- preserve historical dry-run sample metadata instead of rewriting it as current release identity;
+- validate this exact identity-transition candidate and review the seven-file diff before merge;
+- after merge, read back the actual main merge SHA and confirm current identity `1.0.0` plus all inactive safety locks;
 - obtain authoritative post-merge GitHub Pages runtime evidence for the pinned workflow on main;
 - verify GitHub security settings and branch protection read-only if the connector exposes authoritative evidence;
-- only after the identity-transition candidate is merged and freshly read back, select the exact final v1.0.0 candidate head and run complete fresh validation;
+- only after merge read-back, select the exact final v1.0.0 candidate head and run complete fresh validation;
+- complete the final public-status recheck and attach authoritative final evidence for the selected target;
 - prepare tag and GitHub Release only after a separate explicit maintainer approval.
 ```
 
@@ -692,13 +703,12 @@ NEXT_FORBIDDEN_WORK:
 - activate donation collection;
 - add custody or transfer automation;
 - claim legal, tax or regulatory approval;
-- claim official v1.0.0 release before fresh tag/release verification;
-- change `VERSION` or public release identity as part of this state-only sync;
-- rewrite historical dry-run sample version metadata merely to match a future current release identity;
+- claim official v1.0.0 release merely because current repository identity is `1.0.0`;
+- rewrite historical dry-run or RC metadata merely to match the current release identity;
 - mark the release packet READY or select a final tag target without exact-target evidence;
 - tag or publish a release without final-head validation and explicit approval;
 - claim post-merge Pages runtime PASS without an authoritative run record;
-- change action major versions as part of this state-sync or final-verification step;
+- change action major versions as part of this identity-transition or final-verification step;
 - expand unrelated features before runtime and final release verification are complete.
 ```
 

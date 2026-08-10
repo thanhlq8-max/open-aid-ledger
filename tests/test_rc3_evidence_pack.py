@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_rc3_validator_passes_repository_root():
+    assert (ROOT / "VERSION").read_text(encoding="utf-8").strip() == "1.0.0"
     result = subprocess.run(
         [sys.executable, "scripts/validate_rc3.py", "."],
         cwd=ROOT,
@@ -21,6 +22,7 @@ def test_rc3_validator_passes_repository_root():
 
 def test_rc3_dry_run_flags_remain_inactive():
     data = json.loads((ROOT / "examples/dry-run/rc3-evidence-pack.example.json").read_text(encoding="utf-8"))
+    assert data["release_candidate"] == "1.0.0-rc3"
     assert data["donations_active"] is False
     assert data["wallets_published"] is False
     assert data["activation_approved"] is False

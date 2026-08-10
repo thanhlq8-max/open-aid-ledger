@@ -5,7 +5,6 @@ import json
 import sys
 from pathlib import Path
 
-VERSION_TOKEN = "1.0.0-rc3"
 PRIVATE_KEY_LABEL = "private " + "key:"
 SEED_PHRASE_LABEL = "seed " + "phrase:"
 REQUIRED_FILES = [
@@ -44,8 +43,8 @@ def read_text(path: Path) -> str:
 
 def validate(root: Path) -> None:
     version = read_text(root / "VERSION").strip()
-    if VERSION_TOKEN not in version:
-        fail(f"VERSION missing token: {VERSION_TOKEN}")
+    if not version:
+        fail("VERSION is empty")
 
     readme = read_text(root / "README.md")
     for marker in REQUIRED_README_MARKERS:
