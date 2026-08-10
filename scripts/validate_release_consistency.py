@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate release-candidate identity and release-preparation consistency."""
+"""Validate release identity and release-preparation consistency."""
 
 from __future__ import annotations
 
@@ -9,6 +9,9 @@ import sys
 
 
 RELEASE_TARGET = "v1.0.0"
+CURRENT_IDENTITY_FILES = ["README.md", "docs/index.md"]
+POST_PUBLISH_STATUS = "docs/POST_PUBLISH_STATUS.md"
+POST_PUBLISH_HISTORY_MARKER = "## Historical release-candidate checkpoints"
 REQUIRED_READINESS_DOCS = [
     "docs/DONATION_SCOPE_REVIEW.md",
     "docs/DONOR_ACTIVE_MODE_GUIDE_DRAFT.md",
@@ -73,6 +76,16 @@ def _read_required(root: Path, relative: str) -> str | None:
     return path.read_text(encoding="utf-8")
 
 
+def _validate_current_identity_text(relative: str, text: str, version: str) -> int | None:
+    if f"VERSION: {version}" not in text:
+        return _fail(f"{relative} does not match VERSION")
+    if f"RELEASE_TARGET: {RELEASE_TARGET}" not in text:
+        return _fail(f"{relative} missing release target")
+    if "RELEASE_TAG_CREATED: NO" not in text:
+        return _fail(f"{relative} must not claim the release tag exists")
+    return None
+
+
 def validate(root: Path) -> int:
     version_path = root / "VERSION"
     if not version_path.exists():
@@ -82,16 +95,26 @@ def validate(root: Path) -> int:
     if not version:
         return _fail("VERSION is empty")
 
-    for relative in ["README.md", "docs/index.md"]:
+    for relative in CURRENT_IDENTITY_FILES:
         text = _read_required(root, relative)
         if text is None:
             return _fail(f"{relative} not found")
-        if f"VERSION: {version}" not in text:
-            return _fail(f"{relative} does not match VERSION")
-        if f"RELEASE_TARGET: {RELEASE_TARGET}" not in text:
-            return _fail(f"{relative} missing release target")
-        if "RELEASE_TAG_CREATED: NO" not in text:
-            return _fail(f"{relative} must not claim the release tag exists")
+        result = _validate_current_identity_text(relative, text, version)
+        if result is not None:
+            return result
+
+    post_publish = _read_required(root, POST_PUBLISH_STATUS)
+    if post_publish is None:
+        return _fail(f"{POST_PUBLISH_STATUS} not found")
+    if POST_PUBLISH_HISTORY_MARKER not in post_publish:
+        return _fail(f"{POST_PUBLISH_STATUS} missing historical-section boundary")
+    current_post_publish = post_publish.split(POST_PUBLISH_HISTORY_MARKER, 1)[0]
+    result = _validate_current_identity_text(POST_PUBLISH_STATUS, current_post_publish, version)
+    if result is not None:
+        return result
+    for line in current_post_publish.splitlines():
+        if line.startswith("VERSION:") and line != f"VERSION: {version}":
+            return _fail(f"{POST_PUBLISH_STATUS} contains stale current identity: {line}")
 
     evidence_relative = "docs/RELEASE_VALIDATION_EVIDENCE_v1.0.0.md"
     evidence = _read_required(root, evidence_relative)
@@ -149,7 +172,7 @@ def validate(root: Path) -> int:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Validate release-candidate and release-target consistency.")
+    parser = argparse.ArgumentParser(description="Validate release identity and release-target consistency.")
     parser.add_argument("root", nargs="?", default=".", help="Repository root.")
     args = parser.parse_args()
     return validate(Path(args.root).resolve())
