@@ -3,7 +3,7 @@
 STATUS: ACTIVE_RELEASE_CANDIDATE
 PROJECT: Open Aid Ledger
 VERSION: 1.0.0-RC
-LAST_UPDATED: 2026-07-11
+LAST_UPDATED: 2026-08-10
 TARGET_REPO: thanhlq8-max/open-aid-ledger
 TARGET_BRANCH: main
 PRIMARY_MODE: CONTROL
@@ -214,6 +214,7 @@ Files include:
 - `.github/workflows/validate.yml`
 - `scripts/check_public_safety.py`
 - `scripts/validate_static_status.py`
+- `scripts/validate_release_consistency.py`
 - `scripts/validate_readiness.py`
 - `scripts/validate_candidate.py`
 - `scripts/validate_rc1.py`
@@ -252,6 +253,11 @@ AUDITED_BASELINE_HEAD: 97bb9c8a057e7f723c46758bb51527cf64e69987
 AUDITED_BASELINE_MESSAGE: Guard final release notes file
 AUDITED_BASELINE_VALIDATION: USER_SCREENSHOT_SHOWS_3_OF_3_CHECKS_PASS
 AUDITED_BASELINE_EVIDENCE_LEVEL: E2
+RELEASE_CONSISTENCY_PR: 20
+RELEASE_CONSISTENCY_PR_HEAD: 4b4e48dd884fb226fe51820d1bbb2c098020c3ef
+RELEASE_CONSISTENCY_PR_VALIDATION: VALIDATE_125_PASS
+RELEASE_CONSISTENCY_MERGE_COMMIT: e341c469fd62fdc5e6e7efeb471a766a3fb59310
+POST_MERGE_CI: UNKNOWN_FROM_AVAILABLE_PR_RUN_ENDPOINT
 RELEASE_TARGET: v1.0.0
 RELEASE_TAG: NOT_CREATED
 GITHUB_RELEASE: NOT_VERIFIED
@@ -278,6 +284,7 @@ python scripts\validate_readiness.py .
 python scripts\validate_ledger.py --donations ledger\donations.csv --disbursements ledger\disbursements.csv --enforce-balance
 python scripts\validate_ledger.py --donations examples\sample-ledger\donations.csv --disbursements examples\sample-ledger\disbursements.csv --enforce-balance
 python scripts\validate_static_status.py .
+python scripts\validate_release_consistency.py .
 python scripts\validate_candidate.py .
 python scripts\validate_rc1.py .
 python scripts\validate_rc2.py .
@@ -302,38 +309,37 @@ Claims must not exceed the current evidence level.
 
 ### ISSUE-001 — PUBLIC_VERSION_DRIFT
 
-Status: OPEN
+Status: FIXED_BY_PR_20
 
-Confirmed:
+Confirmed fix:
 
-- `README.md` reports `1.0.0-rc3-external-review-evidence-pack`.
-- `docs/index.md` reports the same RC3 version.
-- Release documents target `v1.0.0` and say ready for tagging review.
+- `README.md` and `docs/index.md` keep `VERSION: 1.0.0-rc3-external-review-evidence-pack` as the current public release-candidate identity.
+- Both files now distinguish `RELEASE_TARGET: v1.0.0` and `RELEASE_TAG_CREATED: NO` from the current RC identity.
+- `scripts/validate_release_consistency.py` validates the cross-file version/release-target contract.
+- PR #20 head `4b4e48dd884fb226fe51820d1bbb2c098020c3ef` passed Validate #125 before merge.
 
-Impact: public-facing version and release-preparation state are inconsistent.
-
-Required fix: define one release-candidate version contract and validate it across public files.
+Result: public version identity and planned release target are explicitly separated and mechanically guarded.
 
 ### ISSUE-002 — RELEASE_EVIDENCE_COMMIT_DRIFT
 
-Status: OPEN
+Status: FIXED_BY_PR_20
 
-Confirmed:
+Confirmed fix:
 
-- Audited baseline `97bb9c8a057e7f723c46758bb51527cf64e69987` has user screenshot evidence showing 3/3 checks passed.
-- `docs/RELEASE_VALIDATION_EVIDENCE_v1.0.0.md` still records `95f6424` as the final commit.
+- `docs/RELEASE_VALIDATION_EVIDENCE_v1.0.0.md` now records the historical `VALIDATED_BASELINE_COMMIT` separately.
+- `RELEASE_METADATA_COMMIT` is resolved from Git at runtime.
+- `RELEASE_TAG_TARGET` remains `NOT_SELECTED` until the final intended commit is freshly validated.
+- The old self-referential `FINAL_COMMIT` field is rejected by the release-consistency validator.
 
-Impact: final release evidence does not identify the audited intended release baseline.
-
-Required fix: separate validated content baseline from release metadata and final tag target.
+Result: historical validation evidence no longer claims to be a moving final tag target.
 
 ### ISSUE-003 — READINESS_PACKET_INDEX_DRIFT
 
-Status: OPEN
+Status: FIXED_BY_PR_20
 
-Confirmed:
+Confirmed fix:
 
-`docs/DONATION_READINESS_REVIEW_PACKET.md` does not yet index several later review records:
+`docs/DONATION_READINESS_REVIEW_PACKET.md` now indexes:
 
 - donation scope review;
 - donor active-mode guide draft;
@@ -341,9 +347,7 @@ Confirmed:
 - freeze dry-run review;
 - two-reviewer approval rule.
 
-Impact: the central readiness packet is not a complete evidence index.
-
-Required fix: update the packet without changing any blocked or inactive status.
+The packet explicitly preserves each document's `DRAFT`, `REVIEW_REQUIRED`, or `DRY_RUN_ONLY` status instead of treating existence as approval.
 
 ### ISSUE-004 — PROJECT_STATE_WAS_MISSING
 
@@ -355,15 +359,13 @@ Fix: add this `PROJECT_STATE.md` as the repository control contract and guard it
 
 ### ISSUE-005 — TAG_VALIDATION_TRIGGER_GAP
 
-Status: OPEN
+Status: FIXED_BY_PR_20
 
-Confirmed:
+Confirmed fix:
 
-`.github/workflows/validate.yml` runs for pull requests and pushes to `main`; it does not declare a tag trigger.
+`.github/workflows/validate.yml` now declares `tags: ["v*"]` under push triggers and runs the release-consistency validator.
 
-Impact: pushing `v1.0.0` will not independently run the Validate workflow for the tag.
-
-Required fix: add a reviewed `v*` tag trigger or a dedicated release verification workflow.
+Result: a future `v*` tag push will trigger Validate. Tag creation itself remains a separate explicit maintainer action.
 
 ### ISSUE-006 — PUBLIC_SAFETY_SCAN_EXCLUSION
 
@@ -395,11 +397,11 @@ Status: OPEN
 
 Confirmed:
 
-The `v1.0.0` ref was not found during audit.
+The `v1.0.0` repository release has not been established by fresh authoritative release evidence in this state-sync task.
 
-Impact: the repository is still a release candidate.
+Impact: the repository remains a release candidate.
 
-Required fix: close release consistency issues, validate final head, then tag only after explicit maintainer approval.
+Required fix: complete security hardening, select the final intended release head, run fresh complete validation, then tag/release only after explicit maintainer approval.
 
 ## 9. DECISION LOG
 
@@ -451,15 +453,21 @@ Decision: future development must update this file when objective, release state
 
 Status: LOCKED
 
+### D-009 — Release consistency completed before security hardening
+
+Decision: PR #20 completed the bounded release-consistency fixes for ISSUE-001/002/003/005. Security hardening remains separate work and no release action is authorized by the merge.
+
+Status: LOCKED
+
 ## 10. BUG MEMORY
 
 ### B-001 — STATUS_DRIFT_ACROSS_PUBLIC_FILES
 
 Symptom: README, dashboard, readiness packet and release files describe different versions or stages.
 
-Prevention: add cross-file status/version validation before tagging.
+Prevention: cross-file status/version validation runs before tagging.
 
-Status: OPEN
+Status: MITIGATED_BY_PR_20_GUARD_ACTIVE
 
 ### B-002 — SELF_REFERENTIAL_RELEASE_EVIDENCE
 
@@ -467,7 +475,7 @@ Symptom: updating the evidence file creates a newer commit than the commit recor
 
 Prevention: distinguish `VALIDATED_BASELINE_COMMIT`, `RELEASE_METADATA_COMMIT` and final tag target; resolve moving head from Git at runtime.
 
-Status: OPEN
+Status: MITIGATED_BY_PR_20_GUARD_ACTIVE
 
 ### B-003 — DOCUMENT_EXISTS_NOT_REVIEW_COMPLETE
 
@@ -489,15 +497,15 @@ Status: OPEN
 
 Symptom: release tag is pushed but no tag-specific validation runs.
 
-Prevention: add tag validation trigger before official release.
+Prevention: tag-triggered Validate workflow plus release-consistency validation.
 
-Status: OPEN
+Status: MITIGATED_BY_PR_20_GUARD_ACTIVE
 
 ### B-006 — UNVERIFIED_RELEASE_CLAIM
 
 Symptom: documentation says official release while the tag or GitHub Release does not exist.
 
-Prevention: public version remains release-candidate until the tag is verified.
+Prevention: public version remains release-candidate until the tag and release are freshly verified.
 
 Status: OPEN
 
@@ -508,40 +516,48 @@ Current release decision:
 ```text
 RELEASE_TARGET: v1.0.0
 RELEASE_STATUS: BLOCKED_FOR_CONSISTENCY_PATCHES
+RELEASE_BLOCKING_DETAIL: SECURITY_HARDENING_AND_FINAL_VERIFICATION_PENDING
 RELEASE_TAG_CREATED: NO
 GITHUB_RELEASE_CREATED: NOT_VERIFIED
 LIVE_OPERATION: NO
 ```
 
-Tagging is allowed only when:
+Release consistency prerequisites completed by PR #20:
 
-- public version/status files are aligned;
+- public version/status files are aligned with an explicit RC-versus-target contract;
 - readiness evidence index is current;
 - release evidence model no longer self-references incorrectly;
-- final intended head passes required validation;
-- release notes match the tag target;
-- maintainer gives explicit tag approval.
+- `v*` tag pushes trigger Validate.
+
+Remaining release gates:
+
+- public-safety scanner coverage hardening is reviewed and merged;
+- trusted GitHub Actions revisions are evaluated and pinned in a separate reviewed patch;
+- final intended release head passes fresh complete validation;
+- release notes match the selected tag target;
+- maintainer gives explicit tag approval;
+- GitHub Release creation remains a separate explicit action.
 
 ## 12. ROADMAP
 
 ### Phase R1 — Release consistency
 
-1. Add and validate `PROJECT_STATE.md`.
-2. Add cross-file release/status validator.
-3. Align README and dashboard release-candidate version.
-4. Update the central readiness evidence index.
-5. Repair release evidence semantics.
-6. Add tag-triggered validation.
-7. Run complete CI on the final intended head.
-8. Tag `v1.0.0` after explicit approval.
-9. Create GitHub Release from final notes.
+1. Add and validate `PROJECT_STATE.md`. — COMPLETE
+2. Add cross-file release/status validator. — COMPLETE / PR #20
+3. Align README and dashboard release-candidate version. — COMPLETE / PR #20
+4. Update the central readiness evidence index. — COMPLETE / PR #20
+5. Repair release evidence semantics. — COMPLETE / PR #20
+6. Add tag-triggered validation. — COMPLETE / PR #20
+7. Run complete CI on the final intended head. — PENDING FINAL HEAD
+8. Tag `v1.0.0` after explicit approval. — BLOCKED
+9. Create GitHub Release from final notes. — BLOCKED
 
 ### Phase R2 — Security hardening
 
-1. Narrow public-safety scanner exclusions.
-2. Add regression fixtures for secret-like and policy-safe text.
-3. Evaluate immutable action pinning.
-4. Verify GitHub security settings and branch protection.
+1. Narrow public-safety scanner exclusions. — NEXT
+2. Add regression fixtures for secret-like and policy-safe text. — NEXT WITH SCANNER PATCH
+3. Evaluate immutable action pinning. — AFTER SCANNER PATCH
+4. Verify GitHub security settings and branch protection. — READ_ONLY REVIEW ALLOWED
 
 ### Phase R3 — User utility and adoption
 
@@ -555,12 +571,11 @@ Tagging is allowed only when:
 
 ```text
 NEXT_ALLOWED_WORK:
-- guard PROJECT_STATE existence and required locks;
-- implement cross-file version/status consistency validation;
-- update readiness packet evidence index;
-- add tag validation trigger;
-- repair public-safety scan coverage with tests;
-- prepare final v1.0.0 release after all gates pass.
+- harden public-safety scanner coverage with regression tests in a dedicated PR-B;
+- after PR-B is merged and freshly validated, evaluate and pin trusted GitHub Actions revisions in dedicated PR-C;
+- verify GitHub security settings and branch protection read-only;
+- after security patches merge, run complete fresh validation on the final intended v1.0.0 release head;
+- prepare tag and GitHub Release only after a separate explicit maintainer approval.
 ```
 
 ## 14. NEXT FORBIDDEN WORK
@@ -571,9 +586,10 @@ NEXT_FORBIDDEN_WORK:
 - activate donation collection;
 - add custody or transfer automation;
 - claim legal, tax or regulatory approval;
-- claim official v1.0.0 release before the tag exists;
-- tag or publish a release without final-head validation;
-- expand features before release consistency and safety gaps are resolved.
+- claim official v1.0.0 release before fresh tag/release verification;
+- tag or publish a release without final-head validation and explicit approval;
+- combine PR-B scanner hardening with PR-C supply-chain pinning;
+- expand unrelated features before release consistency, security hardening and final verification are complete.
 ```
 
 ## 15. HANDOFF CONTRACT
