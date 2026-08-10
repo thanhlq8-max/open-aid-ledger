@@ -32,6 +32,8 @@ RELEASE_PACKET_REQUIREMENTS = {
     "docs/OFFICIAL_RELEASE_READINESS.md": [
         f"RELEASE_TARGET: {RELEASE_TARGET}",
         "RELEASE_STATUS: FINAL_VALIDATION_PENDING",
+        "CURRENT_RELEASE_IDENTITY: 1.0.0",
+        "RELEASE_IDENTITY_TRANSITION_COMPLETE: YES",
         "RELEASE_TAG_TARGET: NOT_SELECTED",
         "FINAL_CI_EVIDENCE: NOT_ATTACHED",
         "FINAL_RELEASE_PUBLIC_STATUS_RECHECK: PENDING_FINAL_TARGET",
@@ -40,6 +42,8 @@ RELEASE_PACKET_REQUIREMENTS = {
     ],
     "docs/PUBLIC_STATUS_RECHECK_v1.0.0.md": [
         f"RELEASE_TARGET: {RELEASE_TARGET}",
+        "CURRENT_RELEASE_IDENTITY: 1.0.0",
+        "RELEASE_IDENTITY_TRANSITION_COMPLETE: YES",
         "RELEASE_TAG_TARGET: NOT_SELECTED",
         "FINAL_RELEASE_PUBLIC_STATUS_RECHECK: PENDING_FINAL_TARGET",
         "FINAL_CI_EVIDENCE: NOT_ATTACHED",
@@ -62,6 +66,16 @@ STALE_FINAL_CLAIMS = [
     "TAGGING_MAY_PROCEED",
     "Status: ready for maintainer tagging approval.",
 ]
+STALE_POST_IDENTITY_CLAIMS = {
+    "docs/OFFICIAL_RELEASE_READINESS.md": [
+        "- [ ] Complete the release identity transition consistently across public status files.",
+        "perform the release identity transition and fresh final-target validation",
+    ],
+    "docs/PUBLIC_STATUS_RECHECK_v1.0.0.md": [
+        "after the exact release target and release identity are fixed",
+        "separately reviewed release identity transition produces an exact final candidate",
+    ],
+}
 
 
 def _fail(message: str) -> int:
@@ -143,6 +157,9 @@ def validate(root: Path) -> int:
             for token in STALE_FINAL_CLAIMS:
                 if token in text:
                     return _fail(f"{relative} contains stale final-release claim: {token}")
+            for token in STALE_POST_IDENTITY_CLAIMS.get(relative, []):
+                if token in text:
+                    return _fail(f"{relative} contains stale post-identity transition claim: {token}")
 
         runbook = _read_required(root, "docs/RELEASE_TAGGING_RUNBOOK_v1.0.0.md")
         if runbook is None:
