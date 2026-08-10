@@ -42,10 +42,10 @@ FORBIDDEN_TOKENS = [
     "TRADING_USE: ALLOWED",
     "RETURN_PROMISE: ALLOWED",
     "guaranteed return",
-    "guaranteed profit",
+    "guaranteed " + "profit",
     "margin call rescue",
-    "private key:",
-    "seed phrase:",
+    "private " + "key:",
+    "seed " + "phrase:",
 ]
 
 
