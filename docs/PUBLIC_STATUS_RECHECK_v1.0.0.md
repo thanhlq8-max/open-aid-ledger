@@ -1,39 +1,40 @@
 # Public Status Recheck: v1.0.0
 
-This document records the public status recheck for the planned `v1.0.0` repository/template release.
+This document records the public-status verification required for the planned `v1.0.0` repository/template release.
 
 It does not create a release tag, create a GitHub Release, publish receiving details, or change operating status.
 
-## Current recheck result
+## Current recheck state
 
 ```text
 RELEASE_TARGET: v1.0.0
-PUBLIC_STATUS_RECHECK: PASS
-PUBLIC_FRONT_DOOR: PASS
-PUBLIC_DASHBOARD: PASS
-QUICK_ACCESS: PASS
-SHARE_KIT: PASS
-FINAL_RUN_URL: https://github.com/thanhlq8-max/open-aid-ledger/actions/runs/77196823903
-FINAL_RUN_LABEL: Validate #116
-FINAL_COMMIT: 95f6424
+RELEASE_TAG_TARGET: NOT_SELECTED
+FINAL_RELEASE_PUBLIC_STATUS_RECHECK: PENDING_FINAL_TARGET
+FINAL_CI_EVIDENCE: NOT_ATTACHED
 RELEASE_TAG_CREATED: NO
 GITHUB_RELEASE_CREATED: NO
 ```
 
-## Evidence checked
+The historical public-status recheck and Validate #116 evidence are not final release evidence for the future tag target. A new final recheck must be performed after the exact release target and release identity are fixed.
 
-| Area | Evidence | Result |
+## Final recheck requirements
+
+The final release target must be checked against all of the following:
+
+| Area | Required evidence | Current final-release state |
 |---|---|---:|
-| README front door | `README.md` | PASS |
-| Public dashboard URL | `README.md` | PASS |
-| Public dashboard source | `docs/index.md` | PASS |
-| Quick access | `docs/QUICK_ACCESS.md` | PASS |
-| Share kit | `docs/SHARE_KIT.md` | PASS |
-| Release validation evidence | `docs/RELEASE_VALIDATION_EVIDENCE_v1.0.0.md` | PASS |
+| README front door | `README.md` at exact final target | PENDING |
+| Public dashboard source | `docs/index.md` at exact final target | PENDING |
+| Quick access | `docs/QUICK_ACCESS.md` at exact final target | PENDING |
+| Share kit | `docs/SHARE_KIT.md` at exact final target | PENDING |
+| Release validation evidence | `docs/RELEASE_VALIDATION_EVIDENCE_v1.0.0.md` | PENDING |
+| Release notes | `docs/RELEASE_NOTES_v1.0.0.md` | PENDING |
+| GitHub Actions | fresh run for exact final target | PENDING |
+| GitHub Pages | authoritative runtime evidence required by project state | PENDING |
 
-## Public status alignment
+## Operating-status invariants
 
-The checked public files consistently show that the repository is a public template and that live operation is not active.
+The final recheck must preserve these inactive operating locks:
 
 ```text
 DONATIONS_ACTIVE: NO
@@ -42,20 +43,23 @@ ACTIVATION_APPROVED: NO
 GO_LIVE: NO
 ```
 
+Repository release readiness does not imply donation activation or live operation.
+
 ## Release blockers remaining
 
 ```text
+RELEASE_TAG_TARGET: NOT_SELECTED
+FINAL_RELEASE_PUBLIC_STATUS_RECHECK: PENDING_FINAL_TARGET
+FINAL_CI_EVIDENCE: NOT_ATTACHED
 RELEASE_TAG_CREATED: NO
 GITHUB_RELEASE_CREATED: NO
+TAGGING_STATUS: BLOCKED
 ```
 
 ## Release gate
 
-```text
-IF release notes are final and tag is not created:
-    TAGGING_MAY_PROCEED
-```
+Do not approve tagging until the exact final target is selected, freshly validated, and this final public-status recheck is completed against that target.
 
 ## Next allowed step
 
-Prepare final release notes, then tag `v1.0.0` manually if the maintainer approves.
+Complete release-packet hardening first. Perform the final public-status recheck only after the separately reviewed release identity transition produces an exact final candidate.
