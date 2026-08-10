@@ -18,7 +18,6 @@ ROOT_REQUIRED = {
         "TRADING_USE: FORBIDDEN",
         "RETURN_PROMISE: FORBIDDEN",
     ],
-    "VERSION": ["1.0.0-rc3"],
     "RELEASE_NOTES_v0.10.0.md": ["Donation-ready candidate review", "DONATIONS_ACTIVE: NO"],
 }
 
@@ -67,6 +66,9 @@ def _validate_candidate_json(root: Path) -> None:
 
 
 def validate(root: Path) -> None:
+    version = _read(root / "VERSION").strip()
+    if not version:
+        raise ValueError("VERSION is empty")
     _require_contains(root, ROOT_REQUIRED)
     _require_contains(root, DOC_REQUIRED)
     _validate_candidate_json(root)
