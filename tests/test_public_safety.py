@@ -16,3 +16,12 @@ def test_public_safety_scan_flags_unsafe_assignment(tmp_path: Path) -> None:
     errors = scan(tmp_path)
     assert errors
 
+
+def test_public_safety_scan_scans_validator_named_files(tmp_path: Path) -> None:
+    token = "password" + ": hunter2\n"
+    target = tmp_path / "validate_fixture.py"
+    target.write_text(token, encoding="utf-8")
+
+    errors = scan(tmp_path)
+
+    assert any("validate_fixture.py" in error for error in errors)
