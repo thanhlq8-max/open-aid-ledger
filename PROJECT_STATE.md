@@ -272,6 +272,11 @@ RELEASE_PACKET_PR_HEAD: c8dec7e6dad267fe5b9ded06ed4eb342f5fbd9e7
 RELEASE_PACKET_PR_VALIDATION: VALIDATE_136_PASS_96_TESTS
 RELEASE_PACKET_MERGE_COMMIT: 600025b6b6c55d18ec4c6894da3ccbd521a85a72
 RELEASE_PACKET_POST_MERGE_CI: UNKNOWN_FROM_AVAILABLE_PR_RUN_ENDPOINT
+RELEASE_IDENTITY_PR: 27
+RELEASE_IDENTITY_PR_HEAD: 6c1057b27dc22388293b2dfc79bf9234aea3052b
+RELEASE_IDENTITY_PR_VALIDATION: VALIDATE_144_PASS_97_TESTS
+RELEASE_IDENTITY_MERGE_COMMIT: f851d4ad879ccb7720087df84030c4df4179ac52
+RELEASE_IDENTITY_POST_MERGE_CI: UNKNOWN_FROM_AVAILABLE_PR_RUN_ENDPOINT
 POST_MERGE_VALIDATE_CI: UNKNOWN_FROM_AVAILABLE_PR_RUN_ENDPOINT
 POST_MERGE_PAGES_RUNTIME: UNKNOWN_FROM_AVAILABLE_ENDPOINTS
 CURRENT_RELEASE_IDENTITY: 1.0.0
@@ -450,10 +455,10 @@ Status: FIXED_BY_PR_25
 Confirmed fix:
 
 - `docs/RELEASE_NOTES_v1.0.0.md` no longer treats historical Validate #116 / commit `95f6424` as final release evidence.
-- `docs/OFFICIAL_RELEASE_READINESS.md` now records `FINAL_VALIDATION_PENDING`, `RELEASE_TAG_TARGET: NOT_SELECTED`, `FINAL_CI_EVIDENCE: NOT_ATTACHED`, and `TAGGING_STATUS: BLOCKED`.
-- `docs/PUBLIC_STATUS_RECHECK_v1.0.0.md` now requires a final recheck against the exact selected target instead of retaining a historical PASS as final release evidence.
+- `docs/OFFICIAL_RELEASE_READINESS.md` records `FINAL_VALIDATION_PENDING`, `RELEASE_TAG_TARGET: NOT_SELECTED`, `FINAL_CI_EVIDENCE: NOT_ATTACHED`, and `TAGGING_STATUS: BLOCKED`.
+- `docs/PUBLIC_STATUS_RECHECK_v1.0.0.md` requires a final recheck against the exact selected target instead of retaining a historical PASS as final release evidence.
 - `docs/RELEASE_TAGGING_RUNBOOK_v1.0.0.md` uses `docs/RELEASE_NOTES_v1.0.0.md` as the release text base and blocks tagging until exact-target evidence exists.
-- `scripts/validate_release_consistency.py` now validates pending-release semantics across the release packet and rejects stale final-release claims while the release target remains unselected.
+- `scripts/validate_release_consistency.py` validates pending-release semantics across the release packet and rejects stale final-release claims while the release target remains unselected.
 - `tests/test_release_consistency.py` adds positive and negative regression coverage for stale readiness, final-CI, final-commit, tagging and obsolete draft-notes-base claims.
 - PR #25 head `c8dec7e6dad267fe5b9ded06ed4eb342f5fbd9e7` passed Validate #136 with 96 tests before merge.
 - PR #25 merged as `600025b6b6c55d18ec4c6894da3ccbd521a85a72`, and read-back confirms the release-packet hardening is present on `main`.
@@ -605,6 +610,14 @@ Prevention: validate release-packet pending-state tokens together and reject sta
 
 Status: MITIGATED_BY_PR_25_GUARD_ACTIVE
 
+### B-009 — POST_IDENTITY_RELEASE_STATE_DRIFT
+
+Symptom: after the repository identity transition completes, current release-control documents can still describe that transition as pending and route maintainers backward to a completed gate.
+
+Prevention: require `CURRENT_RELEASE_IDENTITY: 1.0.0` and `RELEASE_IDENTITY_TRANSITION_COMPLETE: YES` in current readiness/recheck documents and reject known stale post-identity transition wording in `scripts/validate_release_consistency.py` with regression coverage in `tests/test_release_consistency.py`.
+
+Status: MITIGATED_BY_POST_IDENTITY_GUARD_ACTIVE
+
 ## 11. RELEASE GATE
 
 Current release decision:
@@ -637,12 +650,13 @@ Release consistency, security, release-packet and identity prerequisites complet
 - `v*` tag pushes trigger Validate;
 - broad public-safety scanner exclusion is removed and regression-guarded by PR #22;
 - all seven remote GitHub Actions used by repository workflows are pinned to immutable SHAs and regression-guarded by PR #23;
-- release notes, official readiness, final public-status recheck and tagging runbook are aligned to `FINAL_VALIDATION_PENDING` / `RELEASE_TAG_TARGET: NOT_SELECTED` semantics and regression-guarded by PR #25.
+- release notes, official readiness, final public-status recheck and tagging runbook remain aligned to pending exact-target semantics;
+- post-identity readiness/recheck semantics record identity completion and are guarded against regression to stale pending-transition wording.
 
 Remaining release gates:
 
 - obtain authoritative post-merge GitHub Pages runtime evidence for the pinned Pages workflow or keep release blocked;
-- after the identity-transition candidate is merged and read back, select the exact final intended release head;
+- select the exact final intended release head only after this post-identity state sync is merged and read back and no later repository mutation supersedes it;
 - run fresh complete validation on that exact final head;
 - attach authoritative final CI evidence and complete the final public-status recheck against that exact target;
 - verify release notes match the selected tag target;
@@ -660,8 +674,8 @@ Remaining release gates:
 5. Repair release evidence semantics. — COMPLETE / PR #20
 6. Add tag-triggered validation. — COMPLETE / PR #20
 7. Harden release packet against stale final-readiness claims. — COMPLETE / PR #25
-8. Perform release identity transition from RC to `1.0.0` on current public identity/status files. — COMPLETE / CURRENT CANDIDATE
-9. Select exact final intended head and run complete fresh validation. — PENDING MERGE READ-BACK
+8. Perform release identity transition from RC to `1.0.0` on current public identity/status files. — COMPLETE / PR #27
+9. Select exact final intended head and run complete fresh validation. — PENDING EXACT FINAL TARGET
 10. Complete final public-status recheck and final evidence attachment. — PENDING FINAL HEAD
 11. Tag `v1.0.0` after explicit approval. — BLOCKED
 12. Create GitHub Release from final notes. — BLOCKED
@@ -686,11 +700,11 @@ Remaining release gates:
 
 ```text
 NEXT_ALLOWED_WORK:
-- validate this exact identity-transition candidate and review the seven-file diff before merge;
-- after merge, read back the actual main merge SHA and confirm current identity `1.0.0` plus all inactive safety locks;
+- after merge, read back this bounded post-identity state sync and confirm the PR #27 evidence fields plus all inactive safety locks;
 - obtain authoritative post-merge GitHub Pages runtime evidence for the pinned workflow on main;
 - verify GitHub security settings and branch protection read-only if the connector exposes authoritative evidence;
-- only after merge read-back, select the exact final v1.0.0 candidate head and run complete fresh validation;
+- only after the post-identity state-sync merge is read back and no later mutation supersedes it, select the exact final v1.0.0 candidate head;
+- run complete fresh validation on that exact selected target;
 - complete the final public-status recheck and attach authoritative final evidence for the selected target;
 - prepare tag and GitHub Release only after a separate explicit maintainer approval.
 ```
@@ -708,7 +722,7 @@ NEXT_FORBIDDEN_WORK:
 - mark the release packet READY or select a final tag target without exact-target evidence;
 - tag or publish a release without final-head validation and explicit approval;
 - claim post-merge Pages runtime PASS without an authoritative run record;
-- change action major versions as part of this identity-transition or final-verification step;
+- change action major versions as part of this post-identity state-sync or final-verification step;
 - expand unrelated features before runtime and final release verification are complete.
 ```
 

@@ -98,9 +98,13 @@ def test_release_packet_stays_blocked_until_final_target_is_selected() -> None:
         ],
         "docs/OFFICIAL_RELEASE_READINESS.md": [
             "RELEASE_STATUS: FINAL_VALIDATION_PENDING",
+            "CURRENT_RELEASE_IDENTITY: 1.0.0",
+            "RELEASE_IDENTITY_TRANSITION_COMPLETE: YES",
             "TAGGING_STATUS: BLOCKED",
         ],
         "docs/PUBLIC_STATUS_RECHECK_v1.0.0.md": [
+            "CURRENT_RELEASE_IDENTITY: 1.0.0",
+            "RELEASE_IDENTITY_TRANSITION_COMPLETE: YES",
             "FINAL_RELEASE_PUBLIC_STATUS_RECHECK: PENDING_FINAL_TARGET",
             "TAGGING_STATUS: BLOCKED",
         ],
@@ -141,6 +145,34 @@ def test_release_consistency_rejects_stale_final_claims(
 
     assert result.returncode != 0
     assert "stale final-release claim" in result.stderr
+
+
+@pytest.mark.parametrize(
+    ("relative", "stale_claim"),
+    [
+        (
+            "docs/OFFICIAL_RELEASE_READINESS.md",
+            "- [ ] Complete the release identity transition consistently across public status files.",
+        ),
+        (
+            "docs/PUBLIC_STATUS_RECHECK_v1.0.0.md",
+            "Perform the final public-status recheck only after the separately reviewed release identity transition produces an exact final candidate.",
+        ),
+    ],
+)
+def test_release_consistency_rejects_stale_post_identity_transition_claims(
+    tmp_path: Path,
+    relative: str,
+    stale_claim: str,
+) -> None:
+    target = _copy_validator_fixture(tmp_path)
+    path = target / relative
+    path.write_text(path.read_text(encoding="utf-8") + f"\n{stale_claim}\n", encoding="utf-8")
+
+    result = _run_validator(target)
+
+    assert result.returncode != 0
+    assert "stale post-identity transition claim" in result.stderr
 
 
 def test_release_consistency_rejects_draft_notes_as_runbook_base(tmp_path: Path) -> None:

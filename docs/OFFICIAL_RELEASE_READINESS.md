@@ -10,6 +10,8 @@ This is release-preparation only. It does not publish receiving details, activat
 RELEASE_TARGET: v1.0.0
 RELEASE_STATUS: FINAL_VALIDATION_PENDING
 REPOSITORY_TEMPLATE_READY: YES
+CURRENT_RELEASE_IDENTITY: 1.0.0
+RELEASE_IDENTITY_TRANSITION_COMPLETE: YES
 RELEASE_TAG_TARGET: NOT_SELECTED
 FINAL_CI_EVIDENCE: NOT_ATTACHED
 FINAL_RELEASE_PUBLIC_STATUS_RECHECK: PENDING_FINAL_TARGET
@@ -18,6 +20,8 @@ LIVE_OPERATION: NO
 ```
 
 `REPOSITORY_TEMPLATE_READY: YES` describes the implemented template scope. It is not approval to tag or publish the repository release.
+
+`RELEASE_IDENTITY_TRANSITION_COMPLETE: YES` records that the current repository identity is aligned to `1.0.0`. It does not select a final tag target or establish final CI, Pages, tag, GitHub Release, or operating-activation evidence.
 
 ## Release scope
 
@@ -45,12 +49,12 @@ The official release should present the project as:
 - [x] Two-reviewer rule exists.
 - [x] Public-safety scanner blind spot is fixed and regression-guarded.
 - [x] Remote GitHub Actions are pinned to immutable commit SHAs and regression-guarded.
+- [x] Release identity transition is complete across current public status files.
 - [x] No live receiving details are published.
 
 ## Remaining release blockers
 
 - [ ] Select the exact final intended release target.
-- [ ] Complete the release identity transition consistently across public status files.
 - [ ] Run complete fresh validation on the exact final target.
 - [ ] Attach authoritative final CI evidence for that target.
 - [ ] Complete the final public-status recheck against that target.
@@ -75,4 +79,4 @@ Tagging remains blocked while any item in the remaining release blockers is unre
 
 ## Next allowed step
 
-Harden and validate the release packet, then perform the release identity transition and fresh final-target validation in a separately reviewed step.
+Select the exact final intended release candidate only after post-identity state sync is merged and read back, then run fresh complete validation and collect the required final CI, public-status and Pages evidence for that exact target.

@@ -8,6 +8,8 @@ It does not create a release tag, create a GitHub Release, publish receiving det
 
 ```text
 RELEASE_TARGET: v1.0.0
+CURRENT_RELEASE_IDENTITY: 1.0.0
+RELEASE_IDENTITY_TRANSITION_COMPLETE: YES
 RELEASE_TAG_TARGET: NOT_SELECTED
 FINAL_RELEASE_PUBLIC_STATUS_RECHECK: PENDING_FINAL_TARGET
 FINAL_CI_EVIDENCE: NOT_ATTACHED
@@ -15,7 +17,7 @@ RELEASE_TAG_CREATED: NO
 GITHUB_RELEASE_CREATED: NO
 ```
 
-The historical public-status recheck and Validate #116 evidence are not final release evidence for the future tag target. A new final recheck must be performed after the exact release target and release identity are fixed.
+The historical public-status recheck and Validate #116 evidence are not final release evidence for the future tag target. The current repository identity is already fixed at `1.0.0`; a new final recheck must be performed after the exact final release target is selected and freshly validated.
 
 ## Final recheck requirements
 
@@ -62,4 +64,4 @@ Do not approve tagging until the exact final target is selected, freshly validat
 
 ## Next allowed step
 
-Complete release-packet hardening first. Perform the final public-status recheck only after the separately reviewed release identity transition produces an exact final candidate.
+After this post-identity state sync is merged and read back, select the exact final intended release candidate, obtain fresh complete validation plus authoritative Pages evidence for that exact target, then perform this final public-status recheck and attach the resulting evidence before any tag approval.
