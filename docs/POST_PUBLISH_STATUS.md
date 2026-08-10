@@ -2,9 +2,12 @@
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
-VERSION: 1.0.0-rc3-external-review-evidence-pack
+VERSION: 1.0.0
+RELEASE_TARGET: v1.0.0
+RELEASE_TAG_CREATED: NO
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
+ACTIVATION_APPROVED: NO
 CUSTODY_AUTOMATION: NO
 PRIVATE_KEYS_IN_REPO: FORBIDDEN
 TRADING_USE: FORBIDDEN
@@ -27,21 +30,23 @@ RETURN_PROMISE: FORBIDDEN
 
 ## Current gate
 
-The project is still not donation-active.
+The current repository identity is `1.0.0`, but the `v1.0.0` release tag and GitHub Release are not established by this identity transition.
 
-The next release should be a pre-1.0 release candidate focused on final review, not real donation activation.
+Final-target validation, final public-status recheck, required Pages runtime evidence, exact tag-target selection, and explicit maintainer tag approval remain pending. The project is still not donation-active.
 
-## v0.10.0 status
+## Historical release-candidate checkpoints
+
+### v0.10.0 status
 
 Pre-1.0 donation-ready candidate review materials are present. Donation collection remains inactive and wallet publication remains disabled.
 
-
-
-## RC2 external review activation gate
+### RC2 external review activation gate
 
 RC2 adds external review and wallet-publication precheck documentation. Donation collection remains inactive and real wallets remain unpublished.
 
-## v1.0.0-rc3 status
+### v1.0.0-rc3 status
+
+Historical release-candidate identity:
 
 ```text
 VERSION: 1.0.0-rc3-external-review-evidence-pack
@@ -50,4 +55,4 @@ WALLETS_PUBLISHED: NO
 ACTIVATION_APPROVED: NO
 ```
 
-The project remains in non-activating review mode.
+This historical checkpoint remained in non-activating review mode. It is retained as history and is not the current repository identity.
