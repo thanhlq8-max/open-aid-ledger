@@ -9,10 +9,12 @@ import pytest
 
 
 ROOT = Path(__file__).resolve().parents[1]
+POST_PUBLISH_HISTORY_MARKER = "## Historical release-candidate checkpoints"
 VALIDATOR_FIXTURE_FILES = [
     "VERSION",
     "README.md",
     "docs/index.md",
+    "docs/POST_PUBLISH_STATUS.md",
     "docs/RELEASE_VALIDATION_EVIDENCE_v1.0.0.md",
     "docs/RELEASE_NOTES_v1.0.0.md",
     "docs/OFFICIAL_RELEASE_READINESS.md",
@@ -50,13 +52,33 @@ def test_release_consistency_validator_passes() -> None:
     assert "release consistency OK" in result.stdout
 
 
-def test_public_status_keeps_release_candidate_distinct_from_release_target() -> None:
+def test_current_identity_files_match_version_and_release_target() -> None:
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-    for relative in ["README.md", "docs/index.md"]:
-        text = (ROOT / relative).read_text(encoding="utf-8")
-        assert f"VERSION: {version}" in text
-        assert "RELEASE_TARGET: v1.0.0" in text
-        assert "RELEASE_TAG_CREATED: NO" in text
+    current_texts = {
+        "README.md": (ROOT / "README.md").read_text(encoding="utf-8"),
+        "docs/index.md": (ROOT / "docs" / "index.md").read_text(encoding="utf-8"),
+    }
+    post_publish = (ROOT / "docs" / "POST_PUBLISH_STATUS.md").read_text(encoding="utf-8")
+    current_texts["docs/POST_PUBLISH_STATUS.md"] = post_publish.split(POST_PUBLISH_HISTORY_MARKER, 1)[0]
+
+    for relative, text in current_texts.items():
+        assert f"VERSION: {version}" in text, relative
+        assert "RELEASE_TARGET: v1.0.0" in text, relative
+        assert "RELEASE_TAG_CREATED: NO" in text, relative
+
+
+def test_release_consistency_rejects_stale_current_post_publish_identity(tmp_path: Path) -> None:
+    target = _copy_validator_fixture(tmp_path)
+    path = target / "docs" / "POST_PUBLISH_STATUS.md"
+    text = path.read_text(encoding="utf-8")
+    current, history = text.split(POST_PUBLISH_HISTORY_MARKER, 1)
+    current += "\nVERSION: stale-current-identity\n"
+    path.write_text(current + POST_PUBLISH_HISTORY_MARKER + history, encoding="utf-8")
+
+    result = _run_validator(target)
+
+    assert result.returncode != 0
+    assert "stale current identity" in result.stderr
 
 
 def test_release_evidence_does_not_claim_self_referential_final_commit() -> None:
