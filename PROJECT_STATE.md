@@ -220,9 +220,10 @@ Files include:
 - `scripts/validate_rc1.py`
 - `scripts/validate_rc2.py`
 - `scripts/validate_rc3.py`
+- `tests/test_workflow_action_pinning.py`
 - `tests/`
 
-Purpose: prevent unsafe public content, broken templates and status drift.
+Purpose: prevent unsafe public content, broken templates, mutable workflow dependencies and status drift.
 
 ### MODULE-07 — Release preparation
 
@@ -257,7 +258,17 @@ RELEASE_CONSISTENCY_PR: 20
 RELEASE_CONSISTENCY_PR_HEAD: 4b4e48dd884fb226fe51820d1bbb2c098020c3ef
 RELEASE_CONSISTENCY_PR_VALIDATION: VALIDATE_125_PASS
 RELEASE_CONSISTENCY_MERGE_COMMIT: e341c469fd62fdc5e6e7efeb471a766a3fb59310
-POST_MERGE_CI: UNKNOWN_FROM_AVAILABLE_PR_RUN_ENDPOINT
+RELEASE_CONSISTENCY_POST_MERGE_CI: UNKNOWN_FROM_AVAILABLE_PR_RUN_ENDPOINT
+PUBLIC_SAFETY_PR: 22
+PUBLIC_SAFETY_PR_HEAD: eacbfeca26487f70bb71b0a21159480fd3c342e7
+PUBLIC_SAFETY_PR_VALIDATION: VALIDATE_130_PASS_89_TESTS
+PUBLIC_SAFETY_MERGE_COMMIT: 914e2b1a15c656b52d816ac8e84adf5b48713451
+SUPPLY_CHAIN_PR: 23
+SUPPLY_CHAIN_PR_HEAD: a519e96c8fb5141b0e9420944a7724e05626cb00
+SUPPLY_CHAIN_PR_VALIDATION: VALIDATE_132_PASS
+SUPPLY_CHAIN_MERGE_COMMIT: 7b4ea9883da55e8d3d73d314f5e2dae2a3f7c4e9
+POST_MERGE_VALIDATE_CI: UNKNOWN_FROM_AVAILABLE_PR_RUN_ENDPOINT
+POST_MERGE_PAGES_RUNTIME: UNKNOWN_FROM_AVAILABLE_ENDPOINTS
 RELEASE_TARGET: v1.0.0
 RELEASE_TAG: NOT_CREATED
 GITHUB_RELEASE: NOT_VERIFIED
@@ -290,6 +301,7 @@ python scripts\validate_rc1.py .
 python scripts\validate_rc2.py .
 python scripts\validate_rc3.py .
 python scripts\check_public_safety.py .
+python -m pytest tests\test_workflow_action_pinning.py -q
 python -m pytest -q
 ```
 
@@ -369,27 +381,36 @@ Result: a future `v*` tag push will trigger Validate. Tag creation itself remain
 
 ### ISSUE-006 — PUBLIC_SAFETY_SCAN_EXCLUSION
 
-Status: OPEN
+Status: FIXED_BY_PR_22
 
-Confirmed:
+Confirmed fix:
 
-`scripts/check_public_safety.py` skips its own file and every file whose name starts with `validate_`.
+- `scripts/check_public_safety.py` now skips only its own scanner source instead of excluding every filename that starts with `validate_`.
+- `scripts/validate_static_status.py` and `scripts/validate_rc3.py` preserve their forbidden-token semantics while composing scanner-sensitive guard literals so validator source does not self-match.
+- `tests/test_public_safety.py` includes a regression fixture proving unsafe content in `validate_fixture.py` is scanned and reported.
+- PR #22 head `eacbfeca26487f70bb71b0a21159480fd3c342e7` passed Validate #130, including public-safety scan and 89 tests, before merge.
+- PR #22 merged as `914e2b1a15c656b52d816ac8e84adf5b48713451` and the fix is present on `main`.
 
-Impact: validator source files are outside the public-safety scan coverage.
-
-Required fix: replace broad filename exclusion with narrow line-level or fixture-aware handling and regression tests.
+Result: validator sources are no longer excluded by a broad filename rule, and the regression guard prevents the original blind spot from returning silently.
 
 ### ISSUE-007 — SUPPLY_CHAIN_PINNING
 
-Status: OPEN_RISK
+Status: FIXED_BY_PR_23_WITH_PAGES_RUNTIME_VERIFICATION_PENDING
 
-Confirmed:
+Confirmed fix:
 
-The Validate workflow references GitHub Actions by major version tags rather than immutable commit SHAs.
+- `.github/workflows/validate.yml` pins `actions/checkout` and `actions/setup-python` to full 40-character commit SHAs.
+- `.github/workflows/jekyll-gh-pages.yml` pins its five remote GitHub Actions to full 40-character commit SHAs.
+- `tests/test_workflow_action_pinning.py` rejects future remote `uses:` entries that are not pinned to full 40-character SHAs.
+- PR #23 head `a519e96c8fb5141b0e9420944a7724e05626cb00` passed Validate #132 before merge; the run executed the pinned Validate workflow action SHAs successfully.
+- PR #23 merged as `7b4ea9883da55e8d3d73d314f5e2dae2a3f7c4e9`, and read-back of both workflow files confirms all seven immutable pins are present on `main`.
 
-Impact: workflow dependencies are mutable.
+Limitation:
 
-Required fix: evaluate and pin trusted action revisions in a separate security patch.
+- The available connected workflow-run endpoint filters to pull-request-triggered runs and returns no authoritative push-triggered run record for the merge commit.
+- Post-merge GitHub Pages runtime on the pinned five-action workflow therefore remains `UNKNOWN_FROM_AVAILABLE_ENDPOINTS` and must not be claimed as PASS.
+
+Result: the mutable action-ref defect is mechanically fixed on `main`; release readiness still requires bounded post-merge Pages runtime evidence.
 
 ### ISSUE-008 — RELEASE_NOT_YET_CREATED
 
@@ -401,7 +422,7 @@ The `v1.0.0` repository release has not been established by fresh authoritative 
 
 Impact: the repository remains a release candidate.
 
-Required fix: complete security hardening, select the final intended release head, run fresh complete validation, then tag/release only after explicit maintainer approval.
+Required fix: obtain the remaining runtime/final-head verification, select the final intended release head, run fresh complete validation, then tag/release only after explicit maintainer approval.
 
 ## 9. DECISION LOG
 
@@ -459,6 +480,12 @@ Decision: PR #20 completed the bounded release-consistency fixes for ISSUE-001/0
 
 Status: LOCKED
 
+### D-010 — Security hardening remains separate from release authority
+
+Decision: PR #22 and PR #23 complete the bounded scanner and immutable-action patches. Their merges do not authorize tagging, GitHub Release creation, donation activation or custody behavior. Post-merge Pages runtime and final release-head verification remain separate evidence gates.
+
+Status: LOCKED
+
 ## 10. BUG MEMORY
 
 ### B-001 — STATUS_DRIFT_ACROSS_PUBLIC_FILES
@@ -489,9 +516,9 @@ Status: OPEN
 
 Symptom: broad filename exclusions remove source files from public-safety coverage.
 
-Prevention: use narrow allowlists and regression fixtures.
+Prevention: use exact self-exclusions, scanner-safe guard literals and regression fixtures that prove validator-named files remain scanned.
 
-Status: OPEN
+Status: MITIGATED_BY_PR_22_GUARD_ACTIVE
 
 ### B-005 — TAG_WITHOUT_TAG_CI
 
@@ -509,6 +536,14 @@ Prevention: public version remains release-candidate until the tag and release a
 
 Status: OPEN
 
+### B-007 — MUTABLE_WORKFLOW_ACTION_REF
+
+Symptom: workflow dependencies use mutable major-version tags that can move without a repository commit.
+
+Prevention: pin every remote workflow action to a full 40-character commit SHA and enforce the rule in `tests/test_workflow_action_pinning.py`.
+
+Status: MITIGATED_BY_PR_23_GUARD_ACTIVE
+
 ## 11. RELEASE GATE
 
 Current release decision:
@@ -516,26 +551,31 @@ Current release decision:
 ```text
 RELEASE_TARGET: v1.0.0
 RELEASE_STATUS: BLOCKED_FOR_CONSISTENCY_PATCHES
-RELEASE_BLOCKING_DETAIL: SECURITY_HARDENING_AND_FINAL_VERIFICATION_PENDING
+RELEASE_BLOCKING_DETAIL: FINAL_VERIFICATION_AND_POST_MERGE_PAGES_RUNTIME_PENDING
+SECURITY_HARDENING_PATCHES_COMPLETE: YES
 RELEASE_TAG_CREATED: NO
 GITHUB_RELEASE_CREATED: NOT_VERIFIED
 LIVE_OPERATION: NO
 ```
 
-Release consistency prerequisites completed by PR #20:
+`RELEASE_STATUS: BLOCKED_FOR_CONSISTENCY_PATCHES` remains a mechanically guarded compatibility token in the current state contract. This state sync does not change that release-gate contract; it records that the bounded consistency/security patches themselves are complete while later verification gates remain unresolved.
+
+Release consistency and security prerequisites completed:
 
 - public version/status files are aligned with an explicit RC-versus-target contract;
 - readiness evidence index is current;
 - release evidence model no longer self-references incorrectly;
-- `v*` tag pushes trigger Validate.
+- `v*` tag pushes trigger Validate;
+- broad public-safety scanner exclusion is removed and regression-guarded by PR #22;
+- all seven remote GitHub Actions used by repository workflows are pinned to immutable SHAs and regression-guarded by PR #23.
 
 Remaining release gates:
 
-- public-safety scanner coverage hardening is reviewed and merged;
-- trusted GitHub Actions revisions are evaluated and pinned in a separate reviewed patch;
-- final intended release head passes fresh complete validation;
-- release notes match the selected tag target;
-- maintainer gives explicit tag approval;
+- obtain authoritative post-merge GitHub Pages runtime evidence for the pinned Pages workflow or keep release blocked;
+- select the exact final intended release head;
+- run fresh complete validation on that exact final head;
+- verify release notes match the selected tag target;
+- maintainer gives explicit final tag approval;
 - GitHub Release creation remains a separate explicit action.
 
 ## 12. ROADMAP
@@ -554,10 +594,11 @@ Remaining release gates:
 
 ### Phase R2 — Security hardening
 
-1. Narrow public-safety scanner exclusions. — NEXT
-2. Add regression fixtures for secret-like and policy-safe text. — NEXT WITH SCANNER PATCH
-3. Evaluate immutable action pinning. — AFTER SCANNER PATCH
-4. Verify GitHub security settings and branch protection. — READ_ONLY REVIEW ALLOWED
+1. Narrow public-safety scanner exclusions. — COMPLETE / PR #22
+2. Add regression fixtures for validator-name scan coverage. — COMPLETE / PR #22
+3. Pin remote GitHub Actions to immutable commit SHAs and guard the rule. — COMPLETE / PR #23
+4. Verify GitHub security settings and branch protection. — READ_ONLY REVIEW ALLOWED / PENDING
+5. Verify post-merge Pages runtime using the pinned workflow. — PENDING AUTHORITATIVE RUN EVIDENCE
 
 ### Phase R3 — User utility and adoption
 
@@ -571,10 +612,10 @@ Remaining release gates:
 
 ```text
 NEXT_ALLOWED_WORK:
-- harden public-safety scanner coverage with regression tests in a dedicated PR-B;
-- after PR-B is merged and freshly validated, evaluate and pin trusted GitHub Actions revisions in dedicated PR-C;
+- obtain authoritative post-merge GitHub Pages runtime evidence for the pinned workflow on main;
 - verify GitHub security settings and branch protection read-only;
-- after security patches merge, run complete fresh validation on the final intended v1.0.0 release head;
+- after state sync and runtime evidence, select the exact final v1.0.0 candidate head;
+- run complete fresh validation on that exact final release candidate;
 - prepare tag and GitHub Release only after a separate explicit maintainer approval.
 ```
 
@@ -588,8 +629,9 @@ NEXT_FORBIDDEN_WORK:
 - claim legal, tax or regulatory approval;
 - claim official v1.0.0 release before fresh tag/release verification;
 - tag or publish a release without final-head validation and explicit approval;
-- combine PR-B scanner hardening with PR-C supply-chain pinning;
-- expand unrelated features before release consistency, security hardening and final verification are complete.
+- claim post-merge Pages runtime PASS without an authoritative run record;
+- change action major versions as part of this state-sync or final-verification step;
+- expand unrelated features before security/runtime and final release verification are complete.
 ```
 
 ## 15. HANDOFF CONTRACT
