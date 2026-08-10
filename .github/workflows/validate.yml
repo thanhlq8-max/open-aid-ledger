@@ -4,6 +4,7 @@ on:
   pull_request:
   push:
     branches: [main]
+    tags: ["v*"]
 
 jobs:
   validate:
@@ -29,6 +30,8 @@ jobs:
         run: python scripts/validate_ledger.py --donations examples/sample-ledger/donations.csv --disbursements examples/sample-ledger/disbursements.csv --enforce-balance
       - name: Validate static public status page
         run: python scripts/validate_static_status.py .
+      - name: Validate release consistency
+        run: python scripts/validate_release_consistency.py .
       - name: Validate candidate review
         run: python scripts/validate_candidate.py .
       - name: Validate rc1 candidate
