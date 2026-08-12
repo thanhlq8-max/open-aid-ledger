@@ -1,48 +1,45 @@
 # Release Tagging Runbook: v1.0.0
 
-This runbook prepares the final manual steps for the `v1.0.0` repository/template release.
+This runbook is now a completed release record for the published `v1.0.0` repository/template release.
 
-It does not create a release tag, create a GitHub Release, publish receiving details, or change operating status.
+It does not publish receiving details or change operating status.
 
-## Current status
+## Completed status
 
 ```text
 RELEASE_TARGET: v1.0.0
-TAGGING_RUNBOOK: READY
-RELEASE_TAG_TARGET: NOT_SELECTED
-RELEASE_TAG_CREATED: NO
-GITHUB_RELEASE_CREATED: NO
-FINAL_RUN_URL: NOT_ATTACHED
-TAGGING_STATUS: BLOCKED
+TAGGING_RUNBOOK: COMPLETE
+RELEASE_TAG_TARGET: 21b341c50d8e2277eda4134c66bd2ea3155a816e
+RELEASE_TAG_CREATED: YES
+GITHUB_RELEASE_CREATED: YES
+FINAL_RUN_URL: https://github.com/thanhlq8-max/open-aid-ledger/actions/runs/31373591930
+PAGES_RUN_URL: https://github.com/thanhlq8-max/open-aid-ledger/actions/runs/31373591958
+TAG_VALIDATE: VALIDATE_148_PASS
+TAG_VALIDATE_RUN_URL: https://github.com/thanhlq8-max/open-aid-ledger/actions/runs/31565722944
+TAGGING_STATUS: COMPLETE
 LIVE_OPERATION: NO
 ```
 
-`TAGGING_RUNBOOK: READY` means the procedure is documented. It does not mean the release itself is ready to tag.
+## Preconditions completed
 
-## Preconditions
+- [x] final `main` release target selected as `21b341c50d8e2277eda4134c66bd2ea3155a816e`;
+- [x] release identity is `1.0.0` consistently across `VERSION`, README, and public dashboard source;
+- [x] complete repository validation passed on that exact target in Validate #147 attempt 2;
+- [x] final public-status recheck completed against that target;
+- [x] GitHub Pages #62 built and deployed on that target;
+- [x] final release notes matched the repository/template release scope;
+- [x] public dashboard remained inactive for donation operation;
+- [x] no live receiving details were published;
+- [x] maintainer explicitly approved the final repository release gate;
+- [x] tag `v1.0.0` was created on the exact target;
+- [x] GitHub Release was published;
+- [x] tag-triggered Validate #148 passed.
 
-Before creating a tag or GitHub Release, confirm:
+## Historical local validation sequence
 
-- [ ] latest `main` commit is the exact intended release commit;
-- [ ] release identity is `1.0.0` consistently across `VERSION`, README, and public dashboard source;
-- [ ] `RELEASE_TAG_TARGET` identifies the exact final intended commit;
-- [ ] complete repository validation passed on that exact commit;
-- [ ] final run URL or equivalent authoritative evidence is attached to release evidence;
-- [ ] final public-status recheck is complete against that exact commit;
-- [ ] required GitHub Pages runtime evidence is attached;
-- [ ] `docs/RELEASE_NOTES_v1.0.0.md` matches the selected target;
-- [ ] public dashboard still shows inactive operating status;
-- [ ] no live receiving details are published;
-- [ ] maintainer has explicitly approved the final tag.
-
-## Local validation sequence
-
-Run from the local clone after the release identity transition is committed:
+The release-preparation validation sequence was:
 
 ```powershell
-git checkout main
-git pull origin main
-git status --short
 python -m compileall scripts tests
 python scripts\validate_wallets.py wallets.example.json --allow-placeholders
 python scripts\validate_campaigns.py campaigns\campaigns.example.json --allow-inactive-template
@@ -59,38 +56,20 @@ python scripts\check_public_safety.py .
 python -m pytest -q
 ```
 
-Only after every precondition is satisfied and the maintainer gives explicit final approval:
-
-```powershell
-git tag -a v1.0.0 -m "Open Aid Ledger v1.0.0"
-git push origin v1.0.0
-```
-
-## GitHub Release checklist
-
-- [ ] Open GitHub Releases.
-- [ ] Draft a new release from tag `v1.0.0`.
-- [ ] Use `docs/RELEASE_NOTES_v1.0.0.md` as the release text base.
-- [ ] Link the final validation evidence file.
-- [ ] Link the final public status recheck file.
-- [ ] Confirm the release text says this is a repository/template release.
-- [ ] Confirm the release text does not describe live operation.
-
-## Release gate
-
-```text
-IF RELEASE_TAG_TARGET is NOT_SELECTED:
-    DO_NOT_TAG_RELEASE
-IF FINAL_RUN_URL is NOT_ATTACHED:
-    DO_NOT_TAG_RELEASE
-IF any precondition is unresolved:
-    DO_NOT_TAG_RELEASE
-```
-
-## Final expected release identity
+## Published release identity
 
 ```text
 TAG: v1.0.0
+TAG_TARGET: 21b341c50d8e2277eda4134c66bd2ea3155a816e
 RELEASE_TYPE: repository-template-release
+GITHUB_RELEASE_ID: 369005821
 LIVE_OPERATION: NO
 ```
+
+The published tag is retained as historical release evidence. Do not delete, recreate, or move it merely to follow later `main` commits.
+
+## Post-release follow-up
+
+- Use `docs/RELEASE_NOTES_v1.0.0.md` as the canonical corrected release text if GitHub Release metadata needs manual correction.
+- Keep post-release documentation commits distinct from the immutable release target.
+- Preserve all inactive operating locks unless a separate activation proposal is explicitly approved.

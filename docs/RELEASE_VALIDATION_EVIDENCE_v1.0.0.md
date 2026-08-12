@@ -1,26 +1,41 @@
 # Release Validation Evidence: v1.0.0
 
-This document records validation evidence for the planned `v1.0.0` repository/template release.
+This document records historical and final validation evidence for the published `v1.0.0` repository/template release.
 
-It does not create a release tag, create a GitHub Release, or change operating status.
+Repository release evidence does not change operating status.
 
-## Current validation status
+## Published release evidence
 
 ```text
 RELEASE_TARGET: v1.0.0
+RELEASE_STATUS: RELEASED
+RELEASE_TAG_TARGET: 21b341c50d8e2277eda4134c66bd2ea3155a816e
+FINAL_TARGET_VALIDATE: VALIDATE_147_ATTEMPT_2_PASS
+FINAL_RUN_URL: https://github.com/thanhlq8-max/open-aid-ledger/actions/runs/31373591930
+PAGES_RUNTIME: PAGES_62_PASS
+PAGES_RUN_URL: https://github.com/thanhlq8-max/open-aid-ledger/actions/runs/31373591958
+RELEASE_TAG_CREATED: YES
+GITHUB_RELEASE_CREATED: YES
+TAG_VALIDATE: VALIDATE_148_PASS
+TAG_VALIDATE_RUN_URL: https://github.com/thanhlq8-max/open-aid-ledger/actions/runs/31565722944
+GITHUB_RELEASE_ID: 369005821
+LIVE_OPERATION: NO
+```
+
+The `v1.0.0` tag points to exact commit `21b341c50d8e2277eda4134c66bd2ea3155a816e`. Validate #147 attempt 2 passed on that exact target after maintainer approval. GitHub Pages #62 built and deployed successfully on the same target. After tag publication, Validate #148 passed on `v1.0.0`.
+
+## Historical validation baseline
+
+```text
 VALIDATED_BASELINE_COMMIT: 95f6424
 VALIDATED_BASELINE_RUN_URL: https://github.com/thanhlq8-max/open-aid-ledger/actions/runs/77196823903
 VALIDATED_BASELINE_RUN_LABEL: Validate #116
 VALIDATED_BASELINE_STATUS: PASS
-RELEASE_METADATA_COMMIT: RESOLVE_FROM_GIT_AT_RUNTIME
-RELEASE_TAG_TARGET: NOT_SELECTED
-RELEASE_TAG_CREATED: NO
-GITHUB_RELEASE_CREATED: NO
 ```
 
-`VALIDATED_BASELINE_COMMIT` records the historical commit that has attached validation evidence. It is not a moving claim about the future release tag target. `RELEASE_METADATA_COMMIT` and the final tag target must be resolved from Git after the last release-preparation mutation and freshly validated before tagging.
+The historical baseline is retained for traceability. It is not the final release target.
 
-## Maintainer-provided evidence
+## Historical maintainer-provided evidence
 
 - Screenshot evidence: GitHub Actions page showing `Validate #116` passed for commit `95f6424`.
 - Log archive evidence: `logs_77196823903.zip`.
@@ -28,33 +43,21 @@ GITHUB_RELEASE_CREATED: NO
 - Log check: public safety scan completed with `public safety scan OK`.
 - Log check: compile step completed for scripts and tests.
 
-## Required final checks
+## Final release checks completed
 
-Before selecting a final tag target, run the complete repository validation on the final intended commit, including:
+- Exact release target selected and read back.
+- Complete repository validation passed on that target.
+- Public-safety scan and full tests passed in Validate #147 attempt 2.
+- GitHub Pages exact-target build/deploy passed in Pages #62.
+- Final public-status recheck passed while all inactive operating locks remained unchanged.
+- Maintainer explicitly approved the repository release gate.
+- Tag `v1.0.0` was created on the selected target.
+- GitHub Release was published.
+- Tag-triggered Validate #148 passed.
 
-```powershell
-python -m compileall scripts tests
-python scripts\validate_release_consistency.py .
-python scripts\check_public_safety.py .
-python -m pytest -q
-```
+## Evidence semantics
 
-The GitHub Actions `Validate` workflow must also pass for the final intended commit. Tag-specific validation is configured for `v*` pushes, but creating the tag remains a separate maintainer-approved action.
-
-## Release gate
-
-```text
-IF final intended commit has fresh validation evidence
-AND release notes match the target
-AND maintainer explicitly approves the tag:
-    TAGGING_MAY_PROCEED
-ELSE:
-    TAGGING_BLOCKED
-```
-
-## Notes for final release
-
-- Use this file as the historical and final-evidence index for `v1.0.0`.
-- Do not update a file with a self-referential claim that its own commit is already the final tag target.
-- Do not treat repository release evidence as an operating activation approval.
-- Tagging and GitHub Release creation remain separate manual actions.
+- Do not use a later post-release `main` commit as the historical `v1.0.0` tag target.
+- Do not add a self-referential `FINAL_COMMIT` field to a commit that describes itself.
+- Do not treat repository release evidence as operating activation approval.
+- Keep later post-release state synchronization separate from the immutable release-target record.

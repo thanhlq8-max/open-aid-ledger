@@ -65,7 +65,8 @@ Then follow only the links needed for your role: donor, maintainer, or reviewer.
 PROJECT_STATUS: PUBLIC_TEMPLATE
 VERSION: 1.0.0
 RELEASE_TARGET: v1.0.0
-RELEASE_TAG_CREATED: NO
+RELEASE_TAG_CREATED: YES
+GITHUB_RELEASE_CREATED: YES
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 ACTIVATION_APPROVED: NO
@@ -74,7 +75,7 @@ TRADING_USE: FORBIDDEN
 RETURN_PROMISE: FORBIDDEN
 ```
 
-`VERSION` is the current repository release identity. `RELEASE_TARGET` is the planned repository/template release tag and does not claim that the `v1.0.0` tag or GitHub Release exists.
+`VERSION` is the current repository release identity. `RELEASE_TARGET` is the published repository/template release tag. The `v1.0.0` tag and GitHub Release exist, but repository release publication does not activate donation collection, publish live receiving details, or approve live operation.
 
 Current rule:
 
@@ -170,7 +171,7 @@ python scripts\check_public_safety.py .
 python -m pytest -q
 ```
 
-Use the full validation command list from the workflow when preparing a release.
+Use the full validation command list from the workflow when preparing changes.
 
 ## License
 

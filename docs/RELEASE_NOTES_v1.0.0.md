@@ -1,12 +1,29 @@
-# Release Notes: v1.0.0
+# Open Aid Ledger v1.0.0
 
-Status: release-candidate closeout. Tagging is blocked until the exact final release target is selected and freshly validated.
+Status: released repository/template baseline.
 
 ## Release summary
 
-Open Aid Ledger v1.0.0 is planned as a public repository/template release for transparent status dashboards, review packets, dry-run evidence, and safety-first operating controls.
+Open Aid Ledger v1.0.0 is the published public repository/template release for transparent status dashboards, review packets, dry-run evidence, and safety-first operating controls.
 
-This planned release does not activate collection, publish receiving details, or approve live operation.
+This release does not activate collection, publish receiving details, or approve live operation.
+
+## Release evidence
+
+```text
+RELEASE_TARGET: v1.0.0
+RELEASE_STATUS: RELEASED
+RELEASE_TAG_TARGET: 21b341c50d8e2277eda4134c66bd2ea3155a816e
+FINAL_CI_EVIDENCE: VALIDATE_147_ATTEMPT_2_PASS
+FINAL_RELEASE_PUBLIC_STATUS_RECHECK: PASS
+PAGES_RUNTIME: PAGES_62_PASS
+RELEASE_TAG_CREATED: YES
+GITHUB_RELEASE_CREATED: YES
+TAG_VALIDATE: VALIDATE_148_PASS
+LIVE_OPERATION: NO
+```
+
+The exact release target is the merge commit for PR #28. Validate #147 attempt 2 passed on that exact commit before tagging. GitHub Pages run #62 built and deployed successfully on the same commit. The `v1.0.0` tag points to that commit, and tag-triggered Validate #148 passed after publication.
 
 ## Highlights
 
@@ -31,51 +48,30 @@ This planned release does not activate collection, publish receiving details, or
 - Public-safety scanner hardening.
 - Immutable GitHub Actions pinning with regression coverage.
 
-## Current release evidence
+## Operating-status boundary
+
+Repository release publication is separate from operating activation. The following locks remain unchanged:
 
 ```text
-RELEASE_TARGET: v1.0.0
-RELEASE_STATUS: FINAL_VALIDATION_PENDING
-RELEASE_TAG_TARGET: NOT_SELECTED
-FINAL_CI_EVIDENCE: NOT_ATTACHED
-RELEASE_TAG_CREATED: NO
-GITHUB_RELEASE_CREATED: NO
-LIVE_OPERATION: NO
+DONATIONS_ACTIVE: NO
+WALLETS_PUBLISHED: NO
+ACTIVATION_APPROVED: NO
+CUSTODY_AUTOMATION: NO
+GO_LIVE: NO
+TRADING_USE: FORBIDDEN
+RETURN_PROMISE: FORBIDDEN
 ```
 
-Historical validation records are indexed in `docs/RELEASE_VALIDATION_EVIDENCE_v1.0.0.md`. Historical runs are not final evidence for the future release tag target.
+Do not send funds while `DONATIONS_ACTIVE` or `WALLETS_PUBLISHED` remains `NO`.
 
-## Validation required before tagging
+## Validation references
 
-Run the complete repository validation on the exact final intended release commit, including:
+- Final exact-target validation: GitHub Actions `Validate` #147, attempt 2.
+- GitHub Pages exact-target runtime: Pages #62.
+- Tag-triggered validation: GitHub Actions `Validate` #148.
+- Historical and final evidence index: `docs/RELEASE_VALIDATION_EVIDENCE_v1.0.0.md`.
+- Final public-status evidence: `docs/PUBLIC_STATUS_RECHECK_v1.0.0.md`.
 
-```powershell
-python -m compileall scripts tests
-python scripts\validate_wallets.py wallets.example.json --allow-placeholders
-python scripts\validate_campaigns.py campaigns\campaigns.example.json --allow-inactive-template
-python scripts\validate_readiness.py .
-python scripts\validate_ledger.py --donations ledger\donations.csv --disbursements ledger\disbursements.csv --enforce-balance
-python scripts\validate_ledger.py --donations examples\sample-ledger\donations.csv --disbursements examples\sample-ledger\disbursements.csv --enforce-balance
-python scripts\validate_static_status.py .
-python scripts\validate_release_consistency.py .
-python scripts\validate_candidate.py .
-python scripts\validate_rc1.py .
-python scripts\validate_rc2.py .
-python scripts\validate_rc3.py .
-python scripts\check_public_safety.py .
-python -m pytest -q
-```
+## Post-release work
 
-The exact final intended commit must also have fresh GitHub Actions validation evidence. Any required Pages runtime evidence must be attached before release readiness is claimed.
-
-## Release gate
-
-Tagging remains blocked until all of the following are true:
-
-1. the exact final release target is selected;
-2. the release identity transition is complete and internally consistent;
-3. fresh complete validation passes on that exact target;
-4. final public-status and Pages evidence requirements are satisfied;
-5. the maintainer gives explicit final tag approval.
-
-Use `docs/RELEASE_TAGGING_RUNBOOK_v1.0.0.md` only after those gates are satisfied.
+Future repository changes should preserve the released `v1.0.0` record as history. New utility or adoption work belongs on `main` after review and does not alter the already-published tag target.

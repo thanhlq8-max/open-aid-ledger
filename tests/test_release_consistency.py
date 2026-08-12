@@ -10,8 +10,10 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 POST_PUBLISH_HISTORY_MARKER = "## Historical release-candidate checkpoints"
+RELEASE_TAG_TARGET = "21b341c50d8e2277eda4134c66bd2ea3155a816e"
 VALIDATOR_FIXTURE_FILES = [
     "VERSION",
+    "PROJECT_STATE.md",
     "README.md",
     "docs/index.md",
     "docs/POST_PUBLISH_STATUS.md",
@@ -52,7 +54,7 @@ def test_release_consistency_validator_passes() -> None:
     assert "release consistency OK" in result.stdout
 
 
-def test_current_identity_files_match_version_and_release_target() -> None:
+def test_current_identity_files_match_published_release() -> None:
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
     current_texts = {
         "README.md": (ROOT / "README.md").read_text(encoding="utf-8"),
@@ -64,7 +66,8 @@ def test_current_identity_files_match_version_and_release_target() -> None:
     for relative, text in current_texts.items():
         assert f"VERSION: {version}" in text, relative
         assert "RELEASE_TARGET: v1.0.0" in text, relative
-        assert "RELEASE_TAG_CREATED: NO" in text, relative
+        assert "RELEASE_TAG_CREATED: YES" in text, relative
+        assert "GITHUB_RELEASE_CREATED: YES" in text, relative
 
 
 def test_release_consistency_rejects_stale_current_post_publish_identity(tmp_path: Path) -> None:
@@ -81,36 +84,40 @@ def test_release_consistency_rejects_stale_current_post_publish_identity(tmp_pat
     assert "stale current identity" in result.stderr
 
 
-def test_release_evidence_does_not_claim_self_referential_final_commit() -> None:
+def test_release_evidence_preserves_historical_baseline_and_final_target() -> None:
     text = (ROOT / "docs" / "RELEASE_VALIDATION_EVIDENCE_v1.0.0.md").read_text(encoding="utf-8")
     assert "VALIDATED_BASELINE_COMMIT:" in text
-    assert "RELEASE_METADATA_COMMIT: RESOLVE_FROM_GIT_AT_RUNTIME" in text
-    assert "RELEASE_TAG_TARGET: NOT_SELECTED" in text
+    assert f"RELEASE_TAG_TARGET: {RELEASE_TAG_TARGET}" in text
+    assert "FINAL_TARGET_VALIDATE: VALIDATE_147_ATTEMPT_2_PASS" in text
+    assert "TAG_VALIDATE: VALIDATE_148_PASS" in text
     assert "FINAL_COMMIT:" not in text
 
 
-def test_release_packet_stays_blocked_until_final_target_is_selected() -> None:
+def test_release_packet_records_published_state() -> None:
     required = {
         "docs/RELEASE_NOTES_v1.0.0.md": [
-            "RELEASE_STATUS: FINAL_VALIDATION_PENDING",
-            "RELEASE_TAG_TARGET: NOT_SELECTED",
-            "FINAL_CI_EVIDENCE: NOT_ATTACHED",
+            "RELEASE_STATUS: RELEASED",
+            f"RELEASE_TAG_TARGET: {RELEASE_TAG_TARGET}",
+            "FINAL_CI_EVIDENCE: VALIDATE_147_ATTEMPT_2_PASS",
+            "RELEASE_TAG_CREATED: YES",
+            "GITHUB_RELEASE_CREATED: YES",
+            "TAG_VALIDATE: VALIDATE_148_PASS",
         ],
         "docs/OFFICIAL_RELEASE_READINESS.md": [
-            "RELEASE_STATUS: FINAL_VALIDATION_PENDING",
-            "CURRENT_RELEASE_IDENTITY: 1.0.0",
-            "RELEASE_IDENTITY_TRANSITION_COMPLETE: YES",
-            "TAGGING_STATUS: BLOCKED",
+            "RELEASE_STATUS: RELEASED",
+            "FINAL_RELEASE_PUBLIC_STATUS_RECHECK: PASS",
+            "POST_MERGE_PAGES_RUNTIME: PAGES_62_PASS",
+            "TAGGING_STATUS: COMPLETE",
         ],
         "docs/PUBLIC_STATUS_RECHECK_v1.0.0.md": [
-            "CURRENT_RELEASE_IDENTITY: 1.0.0",
-            "RELEASE_IDENTITY_TRANSITION_COMPLETE: YES",
-            "FINAL_RELEASE_PUBLIC_STATUS_RECHECK: PENDING_FINAL_TARGET",
-            "TAGGING_STATUS: BLOCKED",
+            "FINAL_RELEASE_PUBLIC_STATUS_RECHECK: PASS",
+            "PAGES_RUNTIME: PAGES_62_PASS",
+            "TAGGING_STATUS: COMPLETE",
         ],
         "docs/RELEASE_TAGGING_RUNBOOK_v1.0.0.md": [
-            "RELEASE_TAG_TARGET: NOT_SELECTED",
-            "FINAL_RUN_URL: NOT_ATTACHED",
+            "TAGGING_RUNBOOK: COMPLETE",
+            f"RELEASE_TAG_TARGET: {RELEASE_TAG_TARGET}",
+            "TAGGING_STATUS: COMPLETE",
             "docs/RELEASE_NOTES_v1.0.0.md",
         ],
     }
@@ -119,20 +126,18 @@ def test_release_packet_stays_blocked_until_final_target_is_selected() -> None:
         for token in tokens:
             assert token in text, (relative, token)
 
-    runbook = (ROOT / "docs" / "RELEASE_TAGGING_RUNBOOK_v1.0.0.md").read_text(encoding="utf-8")
-    assert "docs/RELEASE_NOTES_DRAFT_v1.0.0.md" not in runbook
-
 
 @pytest.mark.parametrize(
     ("relative", "stale_claim"),
     [
-        ("docs/RELEASE_NOTES_v1.0.0.md", "RELEASE_STATUS: READY_FOR_TAGGING_REVIEW"),
-        ("docs/OFFICIAL_RELEASE_READINESS.md", "FINAL_CI_EVIDENCE: ATTACHED"),
-        ("docs/PUBLIC_STATUS_RECHECK_v1.0.0.md", "FINAL_COMMIT: deadbeef"),
-        ("docs/RELEASE_TAGGING_RUNBOOK_v1.0.0.md", "TAGGING_MAY_PROCEED"),
+        ("README.md", "RELEASE_TAG_CREATED: NO"),
+        ("docs/RELEASE_NOTES_v1.0.0.md", "RELEASE_STATUS: FINAL_VALIDATION_PENDING"),
+        ("docs/OFFICIAL_RELEASE_READINESS.md", "FINAL_CI_EVIDENCE: NOT_ATTACHED"),
+        ("docs/PUBLIC_STATUS_RECHECK_v1.0.0.md", "FINAL_RELEASE_PUBLIC_STATUS_RECHECK: PENDING_FINAL_TARGET"),
+        ("docs/RELEASE_TAGGING_RUNBOOK_v1.0.0.md", "TAGGING_STATUS: BLOCKED"),
     ],
 )
-def test_release_consistency_rejects_stale_final_claims(
+def test_release_consistency_rejects_stale_pre_release_claims(
     tmp_path: Path,
     relative: str,
     stale_claim: str,
@@ -144,35 +149,23 @@ def test_release_consistency_rejects_stale_final_claims(
     result = _run_validator(target)
 
     assert result.returncode != 0
-    assert "stale final-release claim" in result.stderr
+    assert "stale pre-release token" in result.stderr
 
 
-@pytest.mark.parametrize(
-    ("relative", "stale_claim"),
-    [
-        (
-            "docs/OFFICIAL_RELEASE_READINESS.md",
-            "- [ ] Complete the release identity transition consistently across public status files.",
-        ),
-        (
-            "docs/PUBLIC_STATUS_RECHECK_v1.0.0.md",
-            "Perform the final public-status recheck only after the separately reviewed release identity transition produces an exact final candidate.",
-        ),
-    ],
-)
-def test_release_consistency_rejects_stale_post_identity_transition_claims(
-    tmp_path: Path,
-    relative: str,
-    stale_claim: str,
-) -> None:
+def test_release_consistency_rejects_wrong_release_target(tmp_path: Path) -> None:
     target = _copy_validator_fixture(tmp_path)
-    path = target / relative
-    path.write_text(path.read_text(encoding="utf-8") + f"\n{stale_claim}\n", encoding="utf-8")
+    path = target / "docs" / "RELEASE_NOTES_v1.0.0.md"
+    text = path.read_text(encoding="utf-8").replace(
+        f"RELEASE_TAG_TARGET: {RELEASE_TAG_TARGET}",
+        "RELEASE_TAG_TARGET: deadbeef",
+        1,
+    )
+    path.write_text(text, encoding="utf-8")
 
     result = _run_validator(target)
 
     assert result.returncode != 0
-    assert "stale post-identity transition claim" in result.stderr
+    assert "missing published-release token" in result.stderr
 
 
 def test_release_consistency_rejects_draft_notes_as_runbook_base(tmp_path: Path) -> None:

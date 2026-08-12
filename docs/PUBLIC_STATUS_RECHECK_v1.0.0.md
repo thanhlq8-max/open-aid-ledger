@@ -1,42 +1,46 @@
 # Public Status Recheck: v1.0.0
 
-This document records the public-status verification required for the planned `v1.0.0` repository/template release.
+This document records the completed public-status verification for the published `v1.0.0` repository/template release.
 
-It does not create a release tag, create a GitHub Release, publish receiving details, or change operating status.
+It does not publish receiving details or change operating status.
 
-## Current recheck state
+## Final recheck state
 
 ```text
 RELEASE_TARGET: v1.0.0
 CURRENT_RELEASE_IDENTITY: 1.0.0
 RELEASE_IDENTITY_TRANSITION_COMPLETE: YES
-RELEASE_TAG_TARGET: NOT_SELECTED
-FINAL_RELEASE_PUBLIC_STATUS_RECHECK: PENDING_FINAL_TARGET
-FINAL_CI_EVIDENCE: NOT_ATTACHED
-RELEASE_TAG_CREATED: NO
-GITHUB_RELEASE_CREATED: NO
+RELEASE_TAG_TARGET: 21b341c50d8e2277eda4134c66bd2ea3155a816e
+FINAL_RELEASE_PUBLIC_STATUS_RECHECK: PASS
+FINAL_CI_EVIDENCE: VALIDATE_147_ATTEMPT_2_PASS
+PAGES_RUNTIME: PAGES_62_PASS
+RELEASE_TAG_CREATED: YES
+GITHUB_RELEASE_CREATED: YES
+TAG_VALIDATE: VALIDATE_148_PASS
+TAGGING_STATUS: COMPLETE
 ```
 
-The historical public-status recheck and Validate #116 evidence are not final release evidence for the future tag target. The current repository identity is already fixed at `1.0.0`; a new final recheck must be performed after the exact final release target is selected and freshly validated.
+The exact release target was selected and validated before tagging. Repository release publication is now established, while operating activation remains separately blocked.
 
-## Final recheck requirements
+## Final recheck evidence
 
-The final release target must be checked against all of the following:
-
-| Area | Required evidence | Current final-release state |
+| Area | Evidence | Final release state |
 |---|---|---:|
-| README front door | `README.md` at exact final target | PENDING |
-| Public dashboard source | `docs/index.md` at exact final target | PENDING |
-| Quick access | `docs/QUICK_ACCESS.md` at exact final target | PENDING |
-| Share kit | `docs/SHARE_KIT.md` at exact final target | PENDING |
-| Release validation evidence | `docs/RELEASE_VALIDATION_EVIDENCE_v1.0.0.md` | PENDING |
-| Release notes | `docs/RELEASE_NOTES_v1.0.0.md` | PENDING |
-| GitHub Actions | fresh run for exact final target | PENDING |
-| GitHub Pages | authoritative runtime evidence required by project state | PENDING |
+| README front door | `README.md` at exact release target | PASS |
+| Public dashboard source | `docs/index.md` at exact release target | PASS |
+| Quick access | `docs/QUICK_ACCESS.md` at exact release target | PASS |
+| Share kit | `docs/SHARE_KIT.md` at exact release target | PASS |
+| Release validation evidence | `docs/RELEASE_VALIDATION_EVIDENCE_v1.0.0.md` | PASS |
+| Release notes | `docs/RELEASE_NOTES_v1.0.0.md` | PASS |
+| GitHub Actions exact target | Validate #147 attempt 2 | PASS |
+| GitHub Pages exact target | Pages #62 build/deploy | PASS |
+| Tag target | `v1.0.0` -> `21b341c50d8e2277eda4134c66bd2ea3155a816e` | PASS |
+| Tag-triggered validation | Validate #148 | PASS |
+| GitHub Release | published, non-draft, non-prerelease | PASS |
 
 ## Operating-status invariants
 
-The final recheck must preserve these inactive operating locks:
+The final recheck preserves these inactive operating locks:
 
 ```text
 DONATIONS_ACTIVE: NO
@@ -45,23 +49,8 @@ ACTIVATION_APPROVED: NO
 GO_LIVE: NO
 ```
 
-Repository release readiness does not imply donation activation or live operation.
+Repository release publication does not imply donation activation or live operation.
 
-## Release blockers remaining
+## Post-release status
 
-```text
-RELEASE_TAG_TARGET: NOT_SELECTED
-FINAL_RELEASE_PUBLIC_STATUS_RECHECK: PENDING_FINAL_TARGET
-FINAL_CI_EVIDENCE: NOT_ATTACHED
-RELEASE_TAG_CREATED: NO
-GITHUB_RELEASE_CREATED: NO
-TAGGING_STATUS: BLOCKED
-```
-
-## Release gate
-
-Do not approve tagging until the exact final target is selected, freshly validated, and this final public-status recheck is completed against that target.
-
-## Next allowed step
-
-After this post-identity state sync is merged and read back, select the exact final intended release candidate, obtain fresh complete validation plus authoritative Pages evidence for that exact target, then perform this final public-status recheck and attach the resulting evidence before any tag approval.
+The repository release gate is complete. Future public-status changes must not reinterpret the release as activation and must keep historical release evidence distinct from later `main` commits.

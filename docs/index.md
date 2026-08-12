@@ -28,7 +28,8 @@ SAFETY_FIRST: YES
 PROJECT_STATUS: PUBLIC_TEMPLATE
 VERSION: 1.0.0
 RELEASE_TARGET: v1.0.0
-RELEASE_TAG_CREATED: NO
+RELEASE_TAG_CREATED: YES
+GITHUB_RELEASE_CREATED: YES
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 ACTIVATION_APPROVED: NO
@@ -37,7 +38,7 @@ TRADING_USE: FORBIDDEN
 RETURN_PROMISE: FORBIDDEN
 ```
 
-`VERSION` is the current repository release identity. `RELEASE_TARGET` is the planned repository/template release tag only; it does not imply that the `v1.0.0` tag exists.
+`VERSION` is the current repository release identity. `RELEASE_TARGET` is the published repository/template release tag. Release publication does not imply donation activation or live operation.
 
 Donation collection is inactive. Live receiving details are not published.
 
@@ -53,6 +54,7 @@ If the public status still says `DONATIONS_ACTIVE: NO` or `WALLETS_PUBLISHED: NO
 
 | Area | Status | User meaning |
 |---|---:|---|
+| Repository release | RELEASED | `v1.0.0` is published as the repository/template release. |
 | Access path | READY | Start with one page: `START_HERE.md`. |
 | Donor guidance | READY | Donor Quickstart and FAQ are available. |
 | Shareability | READY | Share this dashboard or `START_HERE.md`, not screenshots or copied receiving data. |
@@ -89,7 +91,8 @@ GO_LIVE: NO
 Open Aid Ledger status:
 VERSION: 1.0.0
 RELEASE_TARGET: v1.0.0
-RELEASE_TAG_CREATED: NO
+RELEASE_TAG_CREATED: YES
+GITHUB_RELEASE_CREATED: YES
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 ACTIVATION_APPROVED: NO
@@ -133,4 +136,4 @@ This project is not a payment processor, charity-registration claim, custody wal
 
 ## Next milestone
 
-The next milestone is fresh final-target validation and final repository/template release review. Donation activation remains a separate blocked process.
+The repository/template release is complete. The next milestone is reproducible user utility and adoption work while donation activation remains a separate blocked process.
