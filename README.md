@@ -12,6 +12,12 @@ Open the shortest user guide first:
 docs/QUICK_ACCESS.md
 ```
 
+Try the reproducible sample workflow:
+
+```text
+docs/REPRODUCIBLE_SAMPLE_WALKTHROUGH.md
+```
+
 Share the project consistently:
 
 ```text
@@ -122,6 +128,7 @@ Key files:
 
 ```text
 docs/QUICK_ACCESS.md
+docs/REPRODUCIBLE_SAMPLE_WALKTHROUGH.md
 docs/SHARE_KIT.md
 docs/START_HERE.md
 docs/index.md
