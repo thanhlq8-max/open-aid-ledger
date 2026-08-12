@@ -3,6 +3,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PROJECT_STATE = ROOT / "PROJECT_STATE.md"
+RELEASE_TAG_TARGET = "21b341c50d8e2277eda4134c66bd2ea3155a816e"
 
 
 def test_project_state_contract_exists() -> None:
@@ -24,7 +25,27 @@ def test_project_state_preserves_core_locks() -> None:
         assert token in text
 
 
-def test_project_state_blocks_unverified_release_claim() -> None:
+def test_project_state_records_verified_release() -> None:
     text = PROJECT_STATE.read_text(encoding="utf-8")
-    assert "RELEASE_TAG_CREATED: NO" in text
-    assert "RELEASE_STATUS: BLOCKED_FOR_CONSISTENCY_PATCHES" in text
+    for token in [
+        "STATUS: ACTIVE_RELEASED_PUBLIC_TEMPLATE",
+        "RELEASE_STATUS: RELEASED",
+        f"RELEASE_TAG_TARGET: {RELEASE_TAG_TARGET}",
+        "RELEASE_TAG_CREATED: YES",
+        "GITHUB_RELEASE_CREATED: YES",
+        "TAG_VALIDATE: VALIDATE_148_PASS",
+    ]:
+        assert token in text
+
+
+def test_project_state_does_not_regress_to_pre_release_gate() -> None:
+    text = PROJECT_STATE.read_text(encoding="utf-8")
+    for stale in [
+        "RELEASE_TAG_TARGET: NOT_SELECTED",
+        "FINAL_CI_EVIDENCE: NOT_ATTACHED",
+        "FINAL_RELEASE_PUBLIC_STATUS_RECHECK: PENDING_FINAL_TARGET",
+        "TAGGING_STATUS: BLOCKED",
+        "RELEASE_TAG_CREATED: NO",
+        "GITHUB_RELEASE_CREATED: NOT_VERIFIED",
+    ]:
+        assert stale not in text
