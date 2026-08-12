@@ -4,7 +4,10 @@
 PROJECT_STATUS: PUBLIC_TEMPLATE
 VERSION: 1.0.0
 RELEASE_TARGET: v1.0.0
-RELEASE_TAG_CREATED: NO
+RELEASE_TAG_TARGET: 21b341c50d8e2277eda4134c66bd2ea3155a816e
+RELEASE_TAG_CREATED: YES
+GITHUB_RELEASE_CREATED: YES
+TAG_VALIDATE: VALIDATE_148_PASS
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 ACTIVATION_APPROVED: NO
@@ -27,12 +30,23 @@ RETURN_PROMISE: FORBIDDEN
 - Initial issue closeout.
 - Donation readiness dry run.
 - Static public status page finalization.
+- `v1.0.0` repository/template release publication.
+- Tag-triggered release validation.
 
 ## Current gate
 
-The current repository identity is `1.0.0`, but the `v1.0.0` release tag and GitHub Release are not established by this identity transition.
+The `v1.0.0` repository/template release is published from exact target `21b341c50d8e2277eda4134c66bd2ea3155a816e`.
 
-Final-target validation, final public-status recheck, required Pages runtime evidence, exact tag-target selection, and explicit maintainer tag approval remain pending. The project is still not donation-active.
+Final-target validation, public-status recheck, GitHub Pages runtime evidence, maintainer approval, tag creation, GitHub Release publication, and tag-triggered Validate have been completed for the repository release. This does not activate donation collection, publish live receiving details, or approve live operation.
+
+The current operating locks remain:
+
+```text
+DONATIONS_ACTIVE: NO
+WALLETS_PUBLISHED: NO
+ACTIVATION_APPROVED: NO
+GO_LIVE: NO
+```
 
 ## Historical release-candidate checkpoints
 
