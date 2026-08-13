@@ -3,7 +3,7 @@
 STATUS: ACTIVE_RELEASED_PUBLIC_TEMPLATE
 PROJECT: Open Aid Ledger
 VERSION: 1.0.0
-LAST_UPDATED: 2026-08-12
+LAST_UPDATED: 2026-08-13
 TARGET_REPO: thanhlq8-max/open-aid-ledger
 TARGET_BRANCH: main
 PRIMARY_MODE: CONTROL
@@ -84,6 +84,8 @@ Build and maintain a public, transparency-first repository template that helps m
 ### Success definition
 
 - README provides a clear front door.
+- A first-time visitor can understand what the repository is, whether it is live, and what to try next without reading `PROJECT_STATE.md`.
+- Public navigation uses plain language first and keeps control-state syntax in a secondary technical layer.
 - GitHub Pages dashboard is public and status-aligned.
 - Sample ledger and report generation are reproducible.
 - Validation and public-safety checks pass in CI.
@@ -106,6 +108,7 @@ PUBLIC_VALUE: reusable safety-first baseline for maintainers and reviewers
 
 - Static public dashboard.
 - README and quick-access documentation.
+- Human-first public navigation and plain-language status explanations.
 - Reproducible sample walkthrough and expected outputs.
 - Sample campaign metadata.
 - Sample donation and disbursement ledgers.
@@ -159,7 +162,7 @@ Files:
 - `docs/SHARE_KIT.md`
 - `docs/REPRODUCIBLE_SAMPLE_WALKTHROUGH.md`
 
-Purpose: route users to the shortest authoritative path and provide a first reproducible utility path.
+Purpose: explain the project to a first-time human visitor, route people by intent or role, and provide the shortest reproducible utility path before exposing deeper control documentation.
 
 ### MODULE-02 — Public dashboard
 
@@ -169,7 +172,7 @@ Files:
 - `index.md`
 - `.github/workflows/jekyll-gh-pages.yml`
 
-Purpose: publish status, warnings, readiness and role-based navigation.
+Purpose: publish a human-readable public landing page, current safety status, useful next actions and deeper maintainer/reviewer links while preserving machine-readable status tokens for validation.
 
 ### MODULE-03 — Ledger and report workflow
 
@@ -288,6 +291,10 @@ POST_RELEASE_SYNC_VALIDATE: VALIDATE_150_PASS
 POST_RELEASE_SYNC_PAGES: PAGES_63_PASS
 GITHUB_RELEASE_METADATA_STATUS: SYNCHRONIZED
 GITHUB_RELEASE_METADATA_READBACK: PASS_2026-08-12
+R3_WALKTHROUGH_PR: 30
+R3_WALKTHROUGH_MERGE_COMMIT: 148ab547d4f9934b5f682af3a2dc956499285c37
+R3_WALKTHROUGH_POST_MERGE_VALIDATE: VALIDATE_152_PASS
+R3_WALKTHROUGH_POST_MERGE_PAGES: PAGES_64_PASS
 PUBLIC_PAGES_URL: https://thanhlq8-max.github.io/open-aid-ledger/
 ```
 
@@ -321,8 +328,12 @@ GITHUB_RELEASE_METADATA_STATUS: SYNCHRONIZED
 Current R3 task:
 
 ```text
-R3_CURRENT_TASK: REPRODUCIBLE_SAMPLE_WALKTHROUGH
-R3_STEP_1_STATUS: CANDIDATE_IN_REVIEW
+R3_STEP_1_REPRODUCIBLE_SAMPLE_WALKTHROUGH: COMPLETE
+R3_STEP_1_MERGE_COMMIT: 148ab547d4f9934b5f682af3a2dc956499285c37
+R3_STEP_1_VALIDATE: VALIDATE_152_PASS
+R3_STEP_1_PAGES: PAGES_64_PASS
+R3_CURRENT_TASK: HUMAN_FIRST_FRONT_DOOR
+R3_H1_STATUS: CANDIDATE_IN_REVIEW
 R3_STEP_2_GENERATED_PUBLIC_DEMO_ARTIFACT: NOT_STARTED
 ```
 
@@ -373,6 +384,15 @@ Claims must not exceed the current evidence level.
 Post-release consistency must mechanically reject regression from published-release truth back to a pre-release gate.
 
 R3 walkthrough acceptance requires committed sample inputs, exact local commands, deterministic expected counts/totals, public front-door links and preserved inactive safety locks.
+
+R3-H1 human-first acceptance requires:
+
+- a first-time visitor can identify what the repository is before encountering control-state syntax;
+- the inactive donation status is stated in plain language near the top of public entry pages;
+- the public path exposes no more than three primary first actions: see an example, try it, or use/understand the template;
+- a new user reaches the reproducible sample in no more than two navigation choices from README or Pages;
+- machine-readable release and safety tokens remain present for automated validators;
+- no behavior, version, release, tag, receiving detail, custody or activation state changes.
 
 ## 8. CONFIRMED DRIFT AND OPEN ISSUES
 
@@ -425,7 +445,7 @@ The scanner excludes only its own source and regression coverage proves validato
 
 Status: FIXED_BY_PR_23_RUNTIME_VERIFIED
 
-All remote workflow actions remain pinned to immutable SHAs. Validate and GitHub Pages runtime evidence have been observed after the pinning change, including Pages #62 on the exact release target and Pages #63 after PR #29 merge.
+All remote workflow actions remain pinned to immutable SHAs. Validate and GitHub Pages runtime evidence have been observed after the pinning change, including Pages #62 on the exact release target, Pages #63 after PR #29 merge, and Pages #64 after PR #30 merge.
 
 ### ISSUE-008 — RELEASE_PUBLICATION_GATE
 
@@ -467,6 +487,16 @@ Confirmed read-only evidence: GitHub reports `main` as `protected:false` with re
 Impact: direct pushes are technically possible and CI/PR process is not mechanically enforced by a branch rule.
 
 Required decision: maintainer may separately approve a repository-settings hardening task to require pull requests and the `Validate` status check. Do not change branch protection as a side effect of R3 utility work.
+
+### ISSUE-013 — HUMAN_READABILITY_GAP
+
+Status: READY_FOR_PATCH_R3_H1
+
+Symptom: the public front door was technically correct but exposed release/control tokens, multiple overlapping navigation entry points, and maintainer-oriented terminology before a first-time visitor could understand the product in ordinary language.
+
+Impact: a human visitor could reasonably understand individual facts but still fail to answer quickly: what is this, is it live, and what should I try first?
+
+Required fix: keep control/evidence documents authoritative while rewriting only the public navigation layer so plain-language purpose, status and next actions come first. Machine-readable tokens remain in a secondary technical section for validators.
 
 ## 9. DECISION LOG
 
@@ -532,7 +562,12 @@ Decision: PR #29, Validate #150, Pages #63 and corrected GitHub Release metadata
 Status: LOCKED
 
 ### D-016 — R3 starts with reproducible utility
-Decision: the first R3 change is a deterministic sample-ledger walkthrough with expected outputs; generated demo artifacts remain a later step after the walkthrough contract is validated.
+Decision: the first R3 change is a deterministic sample-ledger walkthrough with expected outputs; PR #30 merged and Validate #152 plus Pages #64 passed on its merge commit.
+Status: LOCKED
+
+### D-017 — Human layer outside, control layer inside
+Decision: public entry pages must explain purpose, status and next action in natural language before exposing machine-oriented state syntax. `PROJECT_STATE.md`, validators, readiness evidence and safety locks remain authoritative and are not removed or weakened.
+Consequence: R3-H1 may rewrite public navigation/docs wording without changing behavior, release identity, operating locks, custody boundaries or activation authority.
 Status: LOCKED
 
 ## 10. BUG MEMORY
@@ -587,6 +622,11 @@ Symptom: tag/release publication occurs but source-of-truth and public front doo
 Prevention: after a publication side effect, perform bounded read-back, post-release state sync, regression-test lifecycle truth, and separately verify public release metadata.
 Status: MITIGATED_BY_PR_29_AND_READBACK
 
+### B-011 — CONTROL_LANGUAGE_DOMINATES_PUBLIC_FRONT_DOOR
+Symptom: technically precise state syntax and overlapping navigation appear before a human visitor understands the purpose, current status and useful first action.
+Prevention: plain-language summary first; no more than three primary first actions; machine-readable control block later; deep control docs linked only when role/task requires them.
+Status: GUARD_PROPOSED_R3_H1
+
 ## 11. RELEASE GATE
 
 Current release decision:
@@ -618,6 +658,8 @@ Release evidence completed:
 - PR #29 synchronized post-release source truth;
 - Validate #150 and Pages #63 passed on the PR #29 merge commit;
 - GitHub Release title/body were corrected and read back successfully;
+- PR #30 reproducible walkthrough merged at `148ab547d4f9934b5f682af3a2dc956499285c37`;
+- Validate #152 and Pages #64 passed on the PR #30 merge commit;
 - donation activation, wallet publication and custody behavior remain unchanged.
 
 Remaining repository-release consistency gap:
@@ -649,12 +691,13 @@ Remaining repository-release consistency gap:
 2. Add regression fixtures for validator-name scan coverage. — COMPLETE / PR #22
 3. Pin remote GitHub Actions to immutable commit SHAs and guard the rule. — COMPLETE / PR #23
 4. Verify GitHub security settings and branch protection. — VERIFIED: MAIN PROTECTION DISABLED / HUMAN APPROVAL REQUIRED FOR CHANGE
-5. Verify Pages runtime using the pinned workflow. — COMPLETE / Pages #62 and Pages #63
+5. Verify Pages runtime using the pinned workflow. — COMPLETE / Pages #62, Pages #63 and Pages #64
 
 ### Phase R3 — User utility and adoption
 
-1. Add a reproducible sample walkthrough with expected outputs. — CURRENT PATCH
-2. Add generated sample report artifacts to the public demo. — BLOCKED UNTIL STEP 1 VALIDATED
+1. Add a reproducible sample walkthrough with expected outputs. — COMPLETE / PR #30 + Validate #152 + Pages #64
+1H. Make the public front door human-first while preserving machine-readable safety controls. — CURRENT PATCH / R3-H1
+2. Add a generated sample transparency report artifact to the public demo. — BLOCKED UNTIL R3-H1 VALIDATED
 3. Add contribution issue templates and scoped starter tasks.
 4. Collect external usage feedback without claiming adoption prematurely.
 5. Track stars, forks, contributors, issues and downstream reuse as evidence only.
@@ -663,11 +706,11 @@ Remaining repository-release consistency gap:
 
 ```text
 NEXT_ALLOWED_WORK:
-- validate and review the bounded R3 reproducible sample walkthrough candidate;
-- merge the R3 walkthrough only after CI and review are clean;
-- after the walkthrough contract is validated and merged, add a generated sample report artifact to the public demo as a separate scoped step;
+- validate and review the bounded R3-H1 human-first front-door candidate;
+- merge R3-H1 only after existing CI and Pages checks are clean;
+- after R3-H1 is validated and merged, add one generated sample transparency report artifact to the public demo as a separate scoped R3 step;
 - separately obtain maintainer approval before changing main branch protection or required status-check settings;
-- continue R3 with contribution starter tasks only after the reproducible utility path is stable.
+- continue contribution/adoption work only after the human-facing utility path remains stable.
 ```
 
 ## 14. NEXT FORBIDDEN WORK
@@ -680,10 +723,11 @@ NEXT_FORBIDDEN_WORK:
 - add custody or transfer automation;
 - claim legal, tax or regulatory approval;
 - rewrite historical dry-run or RC metadata merely to match the current release identity;
-- change VERSION or create another release as part of R3 utility work;
+- change VERSION or create another release as part of R3-H1 utility work;
 - change repository branch-protection settings without explicit maintainer approval;
-- add a generated public demo artifact before the walkthrough contract is validated;
-- expand unrelated features outside the current R3 utility scope.
+- remove machine-readable safety/release tokens required by validators merely to simplify prose;
+- add the generated public demo report before R3-H1 is validated;
+- expand unrelated features outside the current human-first navigation scope.
 ```
 
 ## 15. HANDOFF CONTRACT
