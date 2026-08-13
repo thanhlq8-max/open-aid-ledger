@@ -39,6 +39,8 @@ You can:
 
 **Do not send funds.** Donation collection is inactive and no live receiving details are published.
 
+If the public status still says `DONATIONS_ACTIVE: NO`, do not send funds.
+
 The repository can demonstrate the transparency workflow without activating a real support operation. A future activation would require a separate reviewed decision and a clearly updated public status.
 
 ## Choose your role
