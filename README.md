@@ -74,8 +74,10 @@ Useful operating documents include:
 - [Start Here](docs/START_HERE.md)
 - [Quick Access](docs/QUICK_ACCESS.md)
 - [Dry-run operations runbook](docs/DRY_RUN_OPERATIONS_RUNBOOK.md)
+- [Donation readiness review packet](docs/DONATION_READINESS_REVIEW_PACKET.md)
 - [Review packet template](docs/REVIEW_PACKET_TEMPLATE.md)
 - [Operational readiness matrix](docs/OPERATIONAL_READINESS_MATRIX.md)
+- [Share kit](docs/SHARE_KIT.md)
 - [Contributing guide](CONTRIBUTING.md)
 
 The repository uses GitHub Actions to run compile checks, ledger validation, release/status consistency checks, public-safety checks, tests, and sample report generation.
