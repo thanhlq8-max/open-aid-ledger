@@ -35,3 +35,27 @@ GO_LIVE: NO
 ```
 
 If you are unsure what to do, open the public dashboard. If you are thinking about sending funds, do not send while the status above remains inactive.
+
+## Maintainer compatibility map
+
+The section below keeps stable repository paths and share wording used by existing checks. Most first-time visitors can ignore it.
+
+### One-minute map
+
+```text
+docs/index.md
+docs/DONOR_QUICKSTART.md
+docs/DONOR_FAQ.md
+examples/dry-run/README.md
+docs/REVIEW_PACKET_TEMPLATE.md
+docs/OPERATIONAL_READINESS_MATRIX.md
+```
+
+### Share card
+
+```text
+Open Aid Ledger
+Public dashboard: https://thanhlq8-max.github.io/open-aid-ledger/
+Status: public template, not live operation
+Start here: docs/START_HERE.md
+```
