@@ -5,6 +5,7 @@ Open Aid Ledger is a transparency-first public ledger template for voluntary dig
 ## Start here
 
 - [Start Here](START_HERE.md)
+- [Reproducible Sample Walkthrough](REPRODUCIBLE_SAMPLE_WALKTHROUGH.md)
 - [Donor Quickstart](DONOR_QUICKSTART.md)
 - [Donor FAQ](DONOR_FAQ.md)
 - [Dry-run Evidence Loop](../examples/dry-run/README.md)
@@ -56,6 +57,7 @@ If the public status still says `DONATIONS_ACTIVE: NO` or `WALLETS_PUBLISHED: NO
 |---|---:|---|
 | Repository release | RELEASED | `v1.0.0` is published as the repository/template release. |
 | Access path | READY | Start with one page: `START_HERE.md`. |
+| Reproducible sample | READY | The bundled sample ledger can be validated and converted into an expected Markdown report locally. |
 | Donor guidance | READY | Donor Quickstart and FAQ are available. |
 | Shareability | READY | Share this dashboard or `START_HERE.md`, not screenshots or copied receiving data. |
 | Public status | READY | Current status is visible and explicit. |
@@ -71,6 +73,7 @@ If the public status still says `DONATIONS_ACTIVE: NO` or `WALLETS_PUBLISHED: NO
 
 | Role | Next action | Use this file | Done when |
 |---|---|---|---|
+| New user | Reproduce the sample ledger workflow. | `docs/REPRODUCIBLE_SAMPLE_WALKTHROUGH.md` | Validator passes and generated totals match the expected tables. |
 | Donor | Check current status before sending. | `docs/DONOR_QUICKSTART.md` | Status is active and official source is clear. |
 | Maintainer | Run the dry-run evidence loop with sample data. | `examples/dry-run/README.md` and `docs/DRY_RUN_OPERATIONS_RUNBOOK.md` | Operation report and review packet are both complete. |
 | Reviewer | Check evidence and unresolved blockers. | `docs/REVIEW_PACKET_TEMPLATE.md` | Review result is recorded. |
@@ -99,18 +102,20 @@ ACTIVATION_APPROVED: NO
 GO_LIVE: NO
 Official dashboard: docs/index.md
 Start here: docs/START_HERE.md
+Reproducible sample: docs/REPRODUCIBLE_SAMPLE_WALKTHROUGH.md
 Dry-run evidence loop: examples/dry-run/README.md
 ```
 
 ## Minimal path
 
 ```text
-README.md -> docs/START_HERE.md -> docs/index.md -> examples/dry-run/README.md -> docs/DRY_RUN_OPERATIONS_RUNBOOK.md
+README.md -> docs/START_HERE.md -> docs/REPRODUCIBLE_SAMPLE_WALKTHROUGH.md -> docs/index.md -> examples/dry-run/README.md -> docs/DRY_RUN_OPERATIONS_RUNBOOK.md
 ```
 
 Then use only the document needed for the task:
 
 ```text
+New user: docs/REPRODUCIBLE_SAMPLE_WALKTHROUGH.md
 Donor: docs/DONOR_QUICKSTART.md
 Maintainer: examples/dry-run/README.md
 Runbook: docs/DRY_RUN_OPERATIONS_RUNBOOK.md

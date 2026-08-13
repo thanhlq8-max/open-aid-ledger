@@ -106,6 +106,7 @@ PUBLIC_VALUE: reusable safety-first baseline for maintainers and reviewers
 
 - Static public dashboard.
 - README and quick-access documentation.
+- Reproducible sample walkthrough and expected outputs.
 - Sample campaign metadata.
 - Sample donation and disbursement ledgers.
 - Read-only local validators.
@@ -156,8 +157,9 @@ Files:
 - `docs/QUICK_ACCESS.md`
 - `docs/START_HERE.md`
 - `docs/SHARE_KIT.md`
+- `docs/REPRODUCIBLE_SAMPLE_WALKTHROUGH.md`
 
-Purpose: route users to the shortest authoritative path.
+Purpose: route users to the shortest authoritative path and provide a first reproducible utility path.
 
 ### MODULE-02 — Public dashboard
 
@@ -226,6 +228,7 @@ Files include:
 - `tests/test_workflow_action_pinning.py`
 - `tests/test_release_consistency.py`
 - `tests/test_project_state_contract.py`
+- `tests/test_reproducible_sample_walkthrough.py`
 
 Purpose: prevent unsafe public content, broken templates, mutable workflow dependencies and status drift.
 
@@ -279,6 +282,12 @@ RELEASE_TAG_CREATED: YES
 GITHUB_RELEASE_CREATED: YES
 GITHUB_RELEASE_ID: 369005821
 TAG_VALIDATE: VALIDATE_148_PASS
+POST_RELEASE_SYNC_PR: 29
+POST_RELEASE_SYNC_MERGE_COMMIT: 7eb3b88d886b696761d2c44f20be8f7245d3ee08
+POST_RELEASE_SYNC_VALIDATE: VALIDATE_150_PASS
+POST_RELEASE_SYNC_PAGES: PAGES_63_PASS
+GITHUB_RELEASE_METADATA_STATUS: SYNCHRONIZED
+GITHUB_RELEASE_METADATA_READBACK: PASS_2026-08-12
 PUBLIC_PAGES_URL: https://thanhlq8-max.github.io/open-aid-ledger/
 ```
 
@@ -305,16 +314,27 @@ RELEASE_TAG_CREATED: YES
 GITHUB_RELEASE_CREATED: YES
 TAG_VALIDATE: VALIDATE_148_PASS
 TAGGING_STATUS: COMPLETE
+POST_RELEASE_SYNC_STATUS: COMPLETE
+GITHUB_RELEASE_METADATA_STATUS: SYNCHRONIZED
 ```
 
-Known external metadata gap:
+Current R3 task:
 
 ```text
-GITHUB_RELEASE_METADATA_STATUS: STALE_PRE_RELEASE_TEXT
-GITHUB_RELEASE_METADATA_CORRECTION: HUMAN_ACTION_REQUIRED
+R3_CURRENT_TASK: REPRODUCIBLE_SAMPLE_WALKTHROUGH
+R3_STEP_1_STATUS: CANDIDATE_IN_REVIEW
+R3_STEP_2_GENERATED_PUBLIC_DEMO_ARTIFACT: NOT_STARTED
 ```
 
-The GitHub Release exists and is valid, but its current title/body were populated from pre-release wording. The repository source now provides corrected canonical release text; the public GitHub Release page still requires a manual metadata edit and read-back because the connected tool does not expose a release-update action.
+Repository governance read-back:
+
+```text
+MAIN_BRANCH_PROTECTED: NO
+REQUIRED_STATUS_CHECKS_ENFORCED_BY_BRANCH_RULE: NO
+GOVERNANCE_SETTING_CHANGE: HUMAN_APPROVAL_REQUIRED
+```
+
+The project continues to use PR review and CI by process, but GitHub branch protection is not currently enforcing that process mechanically.
 
 ## 7. VALIDATION CONTRACT
 
@@ -351,6 +371,8 @@ Evidence levels:
 Claims must not exceed the current evidence level.
 
 Post-release consistency must mechanically reject regression from published-release truth back to a pre-release gate.
+
+R3 walkthrough acceptance requires committed sample inputs, exact local commands, deterministic expected counts/totals, public front-door links and preserved inactive safety locks.
 
 ## 8. CONFIRMED DRIFT AND OPEN ISSUES
 
@@ -403,7 +425,7 @@ The scanner excludes only its own source and regression coverage proves validato
 
 Status: FIXED_BY_PR_23_RUNTIME_VERIFIED
 
-All remote workflow actions remain pinned to immutable SHAs. Validate and GitHub Pages runtime evidence have been observed after the pinning change, including Pages #62 on the exact release target.
+All remote workflow actions remain pinned to immutable SHAs. Validate and GitHub Pages runtime evidence have been observed after the pinning change, including Pages #62 on the exact release target and Pages #63 after PR #29 merge.
 
 ### ISSUE-008 — RELEASE_PUBLICATION_GATE
 
@@ -419,21 +441,32 @@ The old pre-publication pending-state guard served its purpose. The current vali
 
 ### ISSUE-010 — POST_RELEASE_STATE_DRIFT
 
-Status: FIXED_IN_CURRENT_SYNC_CANDIDATE
+Status: FIXED_BY_PR_29_AND_POST_MERGE_VALIDATION
 
 Symptom: after tag and GitHub Release publication, repository state and public front doors still described the release as pending or nonexistent.
 
-Fix: synchronize README, dashboard, post-publish status, release packet, project state, validator and regression tests to the verified published state while preserving operating locks.
+Fix: PR #29 synchronized README, dashboard, post-publish status, release packet, project state, validator and regression tests. Validate #150 and Pages #63 passed on merge commit `7eb3b88d886b696761d2c44f20be8f7245d3ee08`.
 
 ### ISSUE-011 — GITHUB_RELEASE_METADATA_DRIFT
 
-Status: OPEN_HUMAN_ACTION_REQUIRED
+Status: CLOSED_BY_MANUAL_CORRECTION_AND_READBACK
 
-Symptom: the existing GitHub Release title/body contain pre-release wording even though the release is already published.
+Confirmed read-back:
 
-Impact: the public Releases page contradicts verified repository release state.
+- release name is `Open Aid Ledger v1.0.0`;
+- body records `RELEASE_STATUS: RELEASED` and exact target `21b341c50d8e2277eda4134c66bd2ea3155a816e`;
+- release remains non-draft and non-prerelease;
+- operating locks remain inactive.
 
-Required fix: manually edit the existing GitHub Release title to `Open Aid Ledger v1.0.0`, replace its body with the corrected canonical text from `docs/RELEASE_NOTES_v1.0.0.md`, then read back the release. Do not delete or recreate the tag/release.
+### ISSUE-012 — MAIN_BRANCH_PROTECTION_DISABLED
+
+Status: OPEN_HUMAN_APPROVAL_REQUIRED
+
+Confirmed read-only evidence: GitHub reports `main` as `protected:false` with required status-check enforcement off.
+
+Impact: direct pushes are technically possible and CI/PR process is not mechanically enforced by a branch rule.
+
+Required decision: maintainer may separately approve a repository-settings hardening task to require pull requests and the `Validate` status check. Do not change branch protection as a side effect of R3 utility work.
 
 ## 9. DECISION LOG
 
@@ -494,6 +527,14 @@ Status: LOCKED
 Decision: later post-release commits may update documentation and utility, but must not rewrite the `v1.0.0` tag merely to follow `main`.
 Status: LOCKED
 
+### D-015 — Post-release consistency closeout is complete
+Decision: PR #29, Validate #150, Pages #63 and corrected GitHub Release metadata close the post-release consistency drift.
+Status: LOCKED
+
+### D-016 — R3 starts with reproducible utility
+Decision: the first R3 change is a deterministic sample-ledger walkthrough with expected outputs; generated demo artifacts remain a later step after the walkthrough contract is validated.
+Status: LOCKED
+
 ## 10. BUG MEMORY
 
 ### B-001 — STATUS_DRIFT_ACROSS_PUBLIC_FILES
@@ -543,8 +584,8 @@ Status: MITIGATED
 
 ### B-010 — POST_RELEASE_PUBLICATION_DRIFT
 Symptom: tag/release publication occurs but source-of-truth and public front doors continue to deny publication.
-Prevention: after an R3 publication side effect, perform bounded read-back, post-release state sync, regression-test lifecycle truth, and separately verify public release metadata.
-Status: GUARD_ADDED_CURRENT_SYNC
+Prevention: after a publication side effect, perform bounded read-back, post-release state sync, regression-test lifecycle truth, and separately verify public release metadata.
+Status: MITIGATED_BY_PR_29_AND_READBACK
 
 ## 11. RELEASE GATE
 
@@ -574,11 +615,14 @@ Release evidence completed:
 - tag `v1.0.0` points to the exact target;
 - GitHub Release ID `369005821` exists and is published as non-draft/non-prerelease;
 - tag-triggered Validate #148 passed;
+- PR #29 synchronized post-release source truth;
+- Validate #150 and Pages #63 passed on the PR #29 merge commit;
+- GitHub Release title/body were corrected and read back successfully;
 - donation activation, wallet publication and custody behavior remain unchanged.
 
 Remaining repository-release consistency gap:
 
-- correct stale title/body metadata on the already-existing GitHub Release and read it back.
+- NONE.
 
 ## 12. ROADMAP
 
@@ -596,23 +640,21 @@ Remaining repository-release consistency gap:
 10. Complete final public-status recheck and Pages evidence. — COMPLETE / Pages #62
 11. Tag `v1.0.0` after explicit approval. — COMPLETE
 12. Create GitHub Release from final notes. — COMPLETE
-13. Synchronize repository post-release truth. — CURRENT PATCH
-14. Correct public GitHub Release metadata and read back. — HUMAN FOLLOW-UP
+13. Synchronize repository post-release truth. — COMPLETE / PR #29
+14. Correct public GitHub Release metadata and read back. — COMPLETE / manual edit + read-back
 
 ### Phase R2 — Security hardening
 
 1. Narrow public-safety scanner exclusions. — COMPLETE / PR #22
 2. Add regression fixtures for validator-name scan coverage. — COMPLETE / PR #22
 3. Pin remote GitHub Actions to immutable commit SHAs and guard the rule. — COMPLETE / PR #23
-4. Verify GitHub security settings and branch protection. — READ_ONLY REVIEW ALLOWED / PENDING
-5. Verify Pages runtime using the pinned workflow. — COMPLETE / Pages #62
+4. Verify GitHub security settings and branch protection. — VERIFIED: MAIN PROTECTION DISABLED / HUMAN APPROVAL REQUIRED FOR CHANGE
+5. Verify Pages runtime using the pinned workflow. — COMPLETE / Pages #62 and Pages #63
 
 ### Phase R3 — User utility and adoption
 
-Start only after the post-release sync is merged and GitHub Release metadata is corrected/read back.
-
-1. Add a reproducible sample walkthrough with expected outputs.
-2. Add generated sample report artifacts to the public demo.
+1. Add a reproducible sample walkthrough with expected outputs. — CURRENT PATCH
+2. Add generated sample report artifacts to the public demo. — BLOCKED UNTIL STEP 1 VALIDATED
 3. Add contribution issue templates and scoped starter tasks.
 4. Collect external usage feedback without claiming adoption prematurely.
 5. Track stars, forks, contributors, issues and downstream reuse as evidence only.
@@ -621,12 +663,11 @@ Start only after the post-release sync is merged and GitHub Release metadata is 
 
 ```text
 NEXT_ALLOWED_WORK:
-- validate and review the bounded post-release state synchronization candidate;
-- merge it only after CI and review are clean;
-- manually correct the existing GitHub Release title/body using docs/RELEASE_NOTES_v1.0.0.md, then read back the release;
-- verify GitHub security settings and branch protection read-only if authoritative evidence is available;
-- after release metadata is consistent, begin R3 with a reproducible sample walkthrough and expected outputs;
-- add generated sample report artifacts to the public demo after the walkthrough contract is validated.
+- validate and review the bounded R3 reproducible sample walkthrough candidate;
+- merge the R3 walkthrough only after CI and review are clean;
+- after the walkthrough contract is validated and merged, add a generated sample report artifact to the public demo as a separate scoped step;
+- separately obtain maintainer approval before changing main branch protection or required status-check settings;
+- continue R3 with contribution starter tasks only after the reproducible utility path is stable.
 ```
 
 ## 14. NEXT FORBIDDEN WORK
@@ -634,14 +675,15 @@ NEXT_ALLOWED_WORK:
 ```text
 NEXT_FORBIDDEN_WORK:
 - delete, recreate or move the published v1.0.0 tag merely to follow later main commits;
-- claim GitHub Release metadata is synchronized before manual edit and read-back;
 - publish live receiving details;
 - activate donation collection;
 - add custody or transfer automation;
 - claim legal, tax or regulatory approval;
 - rewrite historical dry-run or RC metadata merely to match the current release identity;
-- change VERSION or create another release as part of the post-release sync;
-- expand unrelated features before the post-release sync and release-metadata correction are complete.
+- change VERSION or create another release as part of R3 utility work;
+- change repository branch-protection settings without explicit maintainer approval;
+- add a generated public demo artifact before the walkthrough contract is validated;
+- expand unrelated features outside the current R3 utility scope.
 ```
 
 ## 15. HANDOFF CONTRACT
