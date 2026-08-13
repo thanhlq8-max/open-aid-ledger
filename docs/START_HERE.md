@@ -68,6 +68,57 @@ GO_LIVE: NO
 
 If any public page says donations or wallets are inactive, **do not send funds**.
 
+## Maintainer control reference
+
+Most visitors do not need this section. It preserves the deeper operating contract and regression wording used by maintainers and automated checks.
+
+This is the operating cockpit reference for the repository.
+
+```text
+EASY_TO_ACCESS: YES
+EASY_TO_USE: YES
+EASY_TO_SHARE: YES
+USER_DASHBOARD: YES
+```
+
+### Donor path
+
+Use the donor documents and the public status first.
+
+```text
+IF DONATIONS_ACTIVE is NO OR WALLETS_PUBLISHED is NO:
+    DO_NOT_SEND
+```
+
+### Maintainer path
+
+The dry-run evidence loop remains the deeper operating path:
+
+```text
+examples/dry-run/README.md
+examples/dry-run/DRY_RUN_001_REVIEW_PACKET.sample.md
+docs/DRY_RUN_OPERATIONS_RUNBOOK.md
+```
+
+```text
+IF any blocker remains:
+    GO_LIVE = NO
+```
+
+### Reviewer path
+
+Review evidence, unresolved blockers, privacy, reconciliation, freeze handling, and the current go/no-go state.
+
+Current control snapshot:
+
+```text
+DRY_RUN_EVIDENCE_LOOP_READY: YES
+DASHBOARD_READY: YES
+RECEIVING_CHANNEL_PUBLICATION: BLOCKED
+DONATION_ACTIVATION: BLOCKED
+GO_LIVE: NO
+```
+
 ## Need the shortest possible route?
 
 Open [Quick Access](QUICK_ACCESS.md).
