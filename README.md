@@ -1,71 +1,99 @@
 # Open Aid Ledger
 
-Transparency-first public ledger template for voluntary digital-asset support to hardship cases and open-source public goods.
+Open Aid Ledger is a reusable open-source template for showing where support came from, how funds were used, and what evidence supports each public record.
 
-Open Aid Ledger is designed to make support easier to access, easier to use, easier to share, safer to operate, and clearer for donors.
+**This repository is a working template and demo. It is not currently collecting donations, and it does not publish a live receiving wallet.**
 
-## Quick access
+## What can I do here?
 
-Open the shortest user guide first:
+Choose the path that matches what you want to do:
 
-```text
-docs/QUICK_ACCESS.md
+- **See how it works:** open the [public dashboard](https://thanhlq8-max.github.io/open-aid-ledger/) or read the [5-minute sample walkthrough](docs/REPRODUCIBLE_SAMPLE_WALKTHROUGH.md).
+- **Try it yourself:** validate the bundled fictional ledger and generate a sample transparency report locally.
+- **Use the template:** follow [Start Here](docs/START_HERE.md) to understand the donor, maintainer, and reviewer paths.
+
+## Why this exists
+
+Public support projects often need to answer simple questions clearly:
+
+- Is the project actually accepting support right now?
+- Where did the recorded funds come from?
+- How were they used?
+- What can be shown publicly without exposing the people being helped?
+- What should happen if a record cannot be verified?
+
+This repository provides a structured starting point for answering those questions with a public status page, sample ledgers, validation tools, transparency reports, review records, and safety procedures.
+
+## How it works
+
+At a high level:
+
+1. A maintainer publishes a clear public status.
+2. Ledger records are stored in a simple, reviewable format.
+3. Validators check the records and a transparency report can be generated.
+4. Reviewers record blockers before any future live operation is considered.
+
+The repository currently demonstrates that flow with fictional sample data only.
+
+## Try the sample in about 5 minutes
+
+The easiest way to understand the project is to run the bundled example:
+
+[Open the reproducible sample walkthrough →](docs/REPRODUCIBLE_SAMPLE_WALKTHROUGH.md)
+
+You will validate a fictional ledger, generate a Markdown transparency report, and compare the result with known expected totals. No blockchain connection, wallet, private account, or real funds are required.
+
+## Who is this for?
+
+**Maintainers** can use the repository as a starting point for a transparent support workflow.
+
+**Reviewers** can inspect status, privacy controls, ledger evidence, reconciliation steps, and unresolved blockers.
+
+**Donors or observers** can check whether support is active and where authoritative public information should come from.
+
+If you only want the shortest route through the repository, use [Quick Access](docs/QUICK_ACCESS.md).
+
+## Current human-readable status
+
+Open Aid Ledger has a published `v1.0.0` repository release, but the support operation is still inactive.
+
+**Do not send funds.** No live receiving details are published.
+
+If this project is ever activated in the future, that must happen through a separate reviewed process and the public dashboard must clearly say that support is active.
+
+## What this project does not do
+
+Open Aid Ledger is not a payment processor, custody wallet, investment product, trading fund, token project, or promise of financial return.
+
+It does not sign transactions, automate transfers, expose beneficiary private information, or turn a repository release into permission to collect funds.
+
+## For maintainers and contributors
+
+Useful operating documents include:
+
+- [Start Here](docs/START_HERE.md)
+- [Quick Access](docs/QUICK_ACCESS.md)
+- [Dry-run operations runbook](docs/DRY_RUN_OPERATIONS_RUNBOOK.md)
+- [Donation readiness review packet](docs/DONATION_READINESS_REVIEW_PACKET.md)
+- [Review packet template](docs/REVIEW_PACKET_TEMPLATE.md)
+- [Operational readiness matrix](docs/OPERATIONAL_READINESS_MATRIX.md)
+- [Share kit](docs/SHARE_KIT.md)
+- [Contributing guide](CONTRIBUTING.md)
+
+The repository uses GitHub Actions to run compile checks, ledger validation, release/status consistency checks, public-safety checks, tests, and sample report generation.
+
+For local development:
+
+```powershell
+python -m compileall scripts tests
+python scripts\validate_release_consistency.py .
+python scripts\check_public_safety.py .
+python -m pytest -q
 ```
 
-Try the reproducible sample workflow:
+## Technical status
 
-```text
-docs/REPRODUCIBLE_SAMPLE_WALKTHROUGH.md
-```
-
-Share the project consistently:
-
-```text
-docs/SHARE_KIT.md
-```
-
-Public dashboard:
-
-```text
-https://thanhlq8-max.github.io/open-aid-ledger/
-```
-
-## Project goals
-
-```text
-EASY_TO_ACCESS: YES
-EASY_TO_USE: YES
-EASY_TO_SHARE: YES
-USER_DASHBOARD: YES
-PUBLIC_TRANSPARENCY: YES
-SAFETY_FIRST: YES
-```
-
-## Public dashboard
-
-Open the published dashboard:
-
-```text
-https://thanhlq8-max.github.io/open-aid-ledger/
-```
-
-Repository dashboard source:
-
-```text
-docs/index.md
-```
-
-## Start here
-
-Use one front door first:
-
-```text
-docs/START_HERE.md
-```
-
-Then follow only the links needed for your role: donor, maintainer, or reviewer.
-
-## Current status
+The block below is intentionally machine-readable so repository validators can detect status drift. Most users do not need to interpret it.
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
@@ -79,81 +107,10 @@ ACTIVATION_APPROVED: NO
 CUSTODY_AUTOMATION: NO
 TRADING_USE: FORBIDDEN
 RETURN_PROMISE: FORBIDDEN
+GO_LIVE: NO
 ```
 
-`VERSION` is the current repository release identity. `RELEASE_TARGET` is the published repository/template release tag. The `v1.0.0` tag and GitHub Release exist, but repository release publication does not activate donation collection, publish live receiving details, or approve live operation.
-
-Current rule:
-
-```text
-IF DONATIONS_ACTIVE is NO:
-    DO_NOT_SEND
-```
-
-Donation collection is inactive. Live receiving details are not published.
-
-## User dashboard
-
-Open the public dashboard source:
-
-```text
-docs/index.md
-```
-
-The dashboard shows current status, donor safety warning, operating readiness, blocked items, and the shortest path for donors, maintainers, and reviewers.
-
-## What this repo is for
-
-This repo provides a public template for:
-
-- donor-facing status and safety guidance;
-- public-safe support-case workflows;
-- ledger and transparency-report templates;
-- dry-run operations before any future activation proposal;
-- review packets and go/no-go checks;
-- emergency freeze and reconciliation procedures.
-
-## Simple operating path
-
-```text
-1. Donor checks Public Status.
-2. Maintainer runs dry-run operation.
-3. Reviewer checks evidence and blockers.
-4. Maintainer fixes blockers.
-5. CI and public-safety checks pass.
-6. Activation is considered only in a separate reviewed proposal.
-```
-
-Key files:
-
-```text
-docs/QUICK_ACCESS.md
-docs/REPRODUCIBLE_SAMPLE_WALKTHROUGH.md
-docs/SHARE_KIT.md
-docs/START_HERE.md
-docs/index.md
-docs/DONOR_QUICKSTART.md
-docs/DONOR_FAQ.md
-docs/DRY_RUN_OPERATIONS_RUNBOOK.md
-docs/REVIEW_PACKET_TEMPLATE.md
-docs/DONATION_READINESS_REVIEW_PACKET.md
-docs/OPERATIONAL_READINESS_MATRIX.md
-```
-
-## What this repo is not
-
-This repo is not:
-
-- a payment processor;
-- a charity-registration claim;
-- a custody wallet;
-- a wallet-signing system;
-- a trading fund;
-- an investment product;
-- a token issuance project;
-- a promise of financial return.
-
-## Safety guardrails
+Safety guardrails:
 
 ```text
 NO_PRIVATE_KEYS
@@ -165,21 +122,6 @@ NO_RETURN_PROMISE
 NO_BENEFICIARY_DOXXING
 ```
 
-## Validation
-
-The repository uses GitHub Actions `Validate` to run compile checks, ledger validators, readiness validators, release/status consistency validation, RC gates, public-safety scan, tests, and sample report generation.
-
-For local development, install dev requirements and run:
-
-```powershell
-python -m compileall scripts tests
-python scripts\validate_release_consistency.py .
-python scripts\check_public_safety.py .
-python -m pytest -q
-```
-
-Use the full validation command list from the workflow when preparing changes.
-
 ## License
 
-See `LICENSE`.
+See [LICENSE](LICENSE).
