@@ -1,107 +1,73 @@
 # Start Here
 
-This is the operating cockpit for Open Aid Ledger.
+Open Aid Ledger is a reusable template for making a support workflow easier to inspect: public status, ledger records, transparency reports, review evidence, and safety checks live in one repository.
 
-Current status:
+**The project is not accepting donations right now. Do not send funds.**
+
+## What do you want to do?
+
+### I want to understand the project quickly
+
+Start with the [public dashboard](index.md).
+
+It explains what the project is, what is currently active, what is blocked, and where to go next.
+
+### I want to see a working example
+
+Open the [Reproducible Sample Walkthrough](REPRODUCIBLE_SAMPLE_WALKTHROUGH.md).
+
+It uses fictional sample records. You can validate the ledger and generate a transparency report locally without connecting to a blockchain or using real funds.
+
+### I may want to donate in the future
+
+Read the [Donor Quickstart](DONOR_QUICKSTART.md) and [Donor FAQ](DONOR_FAQ.md).
+
+For now, the answer is simple: **support collection is inactive and no receiving details are published.**
+
+### I want to operate or adapt this template
+
+Start with the [Dry-run Operations Runbook](DRY_RUN_OPERATIONS_RUNBOOK.md).
+
+Use fictional or sample data first. The runbook walks through status checks, privacy review, ledger validation, report generation, reconciliation, freeze handling, and go/no-go review.
+
+### I want to review whether the workflow is ready
+
+Use the [Review Packet Template](REVIEW_PACKET_TEMPLATE.md) and [Operational Readiness Matrix](OPERATIONAL_READINESS_MATRIX.md).
+
+The purpose is to record evidence and blockers, not to assume that document existence means approval.
+
+## A simple mental model
+
+Think of the repository as four layers:
+
+1. **Public status** — tells people what is active and what is not.
+2. **Ledger and report** — shows the public-safe record of incoming and outgoing amounts.
+3. **Review evidence** — records what was checked and what remains unresolved.
+4. **Safety controls** — prevent live operation from being implied before a separate approval process.
+
+Most people only need the first two layers. Maintainers and reviewers use the deeper material when required.
+
+## Current status
+
+In plain language:
+
+- the repository/template release is published;
+- the sample workflow can be reproduced;
+- donation collection is not active;
+- no live receiving wallet is published;
+- live operation has not been approved.
+
+Machine-readable status:
 
 ```text
 DONATIONS_ACTIVE: NO
 WALLETS_PUBLISHED: NO
 ACTIVATION_APPROVED: NO
-```
-
-Do not send support while this status remains inactive.
-
-## Product goal
-
-```text
-EASY_TO_ACCESS: YES
-EASY_TO_USE: YES
-EASY_TO_SHARE: YES
-USER_DASHBOARD: YES
-PUBLIC_TRANSPARENCY: YES
-SAFETY_FIRST: YES
-```
-
-## Use this flow
-
-```text
-1. Donor checks public dashboard.
-2. Maintainer runs dry-run evidence loop.
-3. Reviewer checks evidence and blockers.
-4. Maintainer fixes blockers.
-5. CI and public-safety checks pass.
-6. Go-live is considered only in a separate reviewed proposal.
-```
-
-## Donor path
-
-Read only these first:
-
-```text
-docs/index.md
-docs/DONOR_QUICKSTART.md
-docs/DONOR_FAQ.md
-```
-
-Rule:
-
-```text
-IF DONATIONS_ACTIVE is NO OR WALLETS_PUBLISHED is NO:
-    DO_NOT_SEND
-```
-
-Use receiving information only from the official public dashboard or an approved repository source linked from it.
-
-## Maintainer path
-
-Before any future operating proposal, run the evidence loop:
-
-```text
-examples/dry-run/README.md
-docs/DRY_RUN_OPERATIONS_RUNBOOK.md
-examples/dry-run/DRY_RUN_001_OPERATION_REPORT.sample.md
-examples/dry-run/DRY_RUN_001_REVIEW_PACKET.sample.md
-docs/OPERATIONAL_READINESS_MATRIX.md
-```
-
-Rule:
-
-```text
-IF any blocker remains:
-    GO_LIVE = NO
-```
-
-## Reviewer path
-
-Check only what affects go/no-go:
-
-```text
-public dashboard clarity
-donor source-of-truth
-shareable status snapshot
-dry-run evidence loop
-receiving-channel control
-account protection
-beneficiary privacy
-ledger and report reproducibility
-freeze process
-CI result
-```
-
-## Current go/no-go
-
-```text
-DONOR_ENTRYPOINT_READY: YES
-DASHBOARD_READY: YES
-DRY_RUN_READY: YES
-DRY_RUN_EVIDENCE_LOOP_READY: YES
-REVIEW_PACKET_READY: YES
-RECEIVING_CHANNEL_PUBLICATION: BLOCKED
-DONATION_ACTIVATION: BLOCKED
 GO_LIVE: NO
 ```
 
-## Detailed docs
+If any public page says donations or wallets are inactive, **do not send funds**.
 
-Use detailed docs only when the flow above points to them.
+## Need the shortest possible route?
+
+Open [Quick Access](QUICK_ACCESS.md).
