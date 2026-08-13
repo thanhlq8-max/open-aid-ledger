@@ -1,27 +1,29 @@
-# Reproducible Sample Walkthrough
+# Try the Sample in 5 Minutes
 
-This walkthrough gives a new user one deterministic, local, read-only path from the bundled sample ledger to a validated transparency report.
+This is the fastest way to see what Open Aid Ledger actually does.
 
-It uses fictional sample records only. It does not query a blockchain, sign a transaction, publish a receiving address, activate donations, or change repository operating status.
+You will use fictional sample records that are already included in the repository. The exercise validates the ledger, generates a Markdown transparency report, and lets you compare the result with known expected totals.
 
-## Safety boundary
+**No real funds, wallet, blockchain connection, or live receiving details are involved.**
 
-```text
-PROJECT_STATUS: PUBLIC_TEMPLATE
-DONATIONS_ACTIVE: NO
-WALLETS_PUBLISHED: NO
-ACTIVATION_APPROVED: NO
-CUSTODY_AUTOMATION: NO
-GO_LIVE: NO
-```
+## What you should get at the end
 
-If any public status says donations or wallets are inactive, do not send funds.
+If everything works, you will have:
 
-## Prerequisite
+- a validated sample ledger;
+- a generated file at `artifacts/sample-transparency-report.md`;
+- 3 fictional donation records and 2 fictional disbursement records;
+- net sample balances of `0.0125 BTC`, `65 USDT` on ERC20, and `40 USDT` on TRC20.
 
-Run the commands from the repository root with Python available.
+## Before you begin
 
-The sample path uses only repository files:
+You need:
+
+- a local copy of this repository;
+- Python available from your terminal;
+- PowerShell or another shell from the repository root.
+
+The walkthrough uses these committed files:
 
 ```text
 examples/sample-ledger/donations.csv
@@ -30,9 +32,18 @@ scripts/validate_ledger.py
 scripts/generate_report.py
 ```
 
-## Step 1 — validate the bundled sample ledger
+The commands below use Windows-style paths so they can be copied directly into PowerShell:
 
-PowerShell:
+```text
+examples\sample-ledger\donations.csv
+examples\sample-ledger\disbursements.csv
+scripts\validate_ledger.py
+scripts\generate_report.py
+```
+
+## Step 1 — check the sample ledger
+
+Run:
 
 ```powershell
 python scripts\validate_ledger.py --donations examples\sample-ledger\donations.csv --disbursements examples\sample-ledger\disbursements.csv --enforce-balance
@@ -44,33 +55,33 @@ Expected result:
 ledger CSV files OK
 ```
 
-The command must exit successfully. It is read-only and does not modify the CSV files.
+This command checks the committed fictional CSV files. It does not modify them.
 
-## Step 2 — generate a sample transparency report
+## Step 2 — generate the sample report
 
-PowerShell:
+Run:
 
 ```powershell
 python scripts\generate_report.py --donations examples\sample-ledger\donations.csv --disbursements examples\sample-ledger\disbursements.csv --out artifacts\sample-transparency-report.md --title "Open Aid Ledger Sample Transparency Report"
 ```
 
-Expected result:
+Expected terminal output includes a message similar to:
 
 ```text
 Wrote ...sample-transparency-report.md
 ```
 
-Open:
+Now open:
 
 ```text
 artifacts/sample-transparency-report.md
 ```
 
-The report is generated locally from the two bundled CSV files.
+You should see a transparency report generated from the two sample CSV files.
 
-## Step 3 — compare deterministic expected output
+## Step 3 — check that the result makes sense
 
-The sample inputs contain:
+The fictional sample contains:
 
 ```text
 Donation records: 3
@@ -100,11 +111,26 @@ Expected net balances:
 | Ethereum | USDT | ERC20 | 125 | 60 | 65 |
 | Tron | USDT | TRC20 | 80 | 40 | 40 |
 
-These values are derived only from the committed fictional sample rows. They are not live balances and must not be presented as real donations or real disbursements.
+If your report matches these totals, you have reproduced the repository's basic ledger-to-report workflow.
 
-## Step 4 — optional repository checks
+These are fictional sample values. They are not live balances, real donations, or real disbursements.
 
-After the sample path succeeds, run the normal safety and regression checks:
+## What did you just prove?
+
+You proved something narrow but useful: a person can start with committed ledger records, validate them, generate a public-style report, and independently check the expected totals.
+
+You did **not** prove that the project is ready to collect donations, legally approved, safe for custody, or operating in production.
+
+## Want to go deeper?
+
+If you are evaluating the repository as a maintainer or reviewer, the next useful documents are:
+
+- [Start Here](START_HERE.md)
+- [Dry-run Operations Runbook](DRY_RUN_OPERATIONS_RUNBOOK.md)
+- [Review Packet Template](REVIEW_PACKET_TEMPLATE.md)
+- [Operational Readiness Matrix](OPERATIONAL_READINESS_MATRIX.md)
+
+Optional repository checks:
 
 ```powershell
 python scripts\validate_static_status.py .
@@ -113,21 +139,30 @@ python scripts\check_public_safety.py .
 python -m pytest -q
 ```
 
-## Success contract
+## Safety status
 
-The walkthrough passes only when all of the following are true:
+The block below is kept explicit for both people and automated checks:
+
+```text
+PROJECT_STATUS: PUBLIC_TEMPLATE
+DONATIONS_ACTIVE: NO
+WALLETS_PUBLISHED: NO
+ACTIVATION_APPROVED: NO
+CUSTODY_AUTOMATION: NO
+GO_LIVE: NO
+```
+
+If any public status says donations or wallets are inactive, do not send funds.
+
+## Reproducibility checklist
+
+The walkthrough passes when:
 
 - sample ledger validation exits successfully;
 - output includes `ledger CSV files OK`;
-- the generated report is created at the requested local output path;
+- `artifacts/sample-transparency-report.md` is created;
 - record counts are 3 donations and 2 disbursements;
-- expected incoming, outgoing and net totals match the tables above;
-- no source sample CSV is changed;
+- the incoming, outgoing, and net totals match the tables above;
+- the source sample CSV files remain unchanged;
 - no live receiving details are introduced;
-- `DONATIONS_ACTIVE`, `WALLETS_PUBLISHED`, `ACTIVATION_APPROVED` and `GO_LIVE` remain `NO`.
-
-## What this proves
-
-This walkthrough proves that a user can reproduce the repository's basic sample-ledger validation and Markdown-report workflow from committed fictional data.
-
-It does not prove legal readiness, donation activation, custody readiness, real-world adoption, or production operation.
+- `DONATIONS_ACTIVE`, `WALLETS_PUBLISHED`, `ACTIVATION_APPROVED`, and `GO_LIVE` remain `NO`.
