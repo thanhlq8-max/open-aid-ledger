@@ -1,29 +1,96 @@
-# Open Aid Ledger public dashboard
+# Open Aid Ledger
 
-Open Aid Ledger is a transparency-first public ledger template for voluntary digital-asset support to hardship cases and open-source public goods.
+Open Aid Ledger is a reusable open-source template for making a support workflow easier to inspect: what is active, what was recorded, how funds were used, and what evidence supports the public record.
 
-## Start here
+**This is a template and working demo, not a live donation campaign. It is not accepting funds right now.**
 
-- [Start Here](START_HERE.md)
-- [Reproducible Sample Walkthrough](REPRODUCIBLE_SAMPLE_WALKTHROUGH.md)
-- [Donor Quickstart](DONOR_QUICKSTART.md)
-- [Donor FAQ](DONOR_FAQ.md)
-- [Dry-run Evidence Loop](../examples/dry-run/README.md)
+## Start with one of these
 
-Use `Start Here` as the front door. Use detailed docs only when the flow points to them.
+- **See a working example:** [Try the 5-minute sample walkthrough](REPRODUCIBLE_SAMPLE_WALKTHROUGH.md)
+- **Understand your role:** [Start Here](START_HERE.md)
+- **Thinking about donating later:** [Donor Quickstart](DONOR_QUICKSTART.md) and [Donor FAQ](DONOR_FAQ.md)
 
-## User goals
+## What problem does this help solve?
 
-```text
-EASY_TO_ACCESS: YES
-EASY_TO_USE: YES
-EASY_TO_SHARE: YES
-USER_DASHBOARD: YES
-PUBLIC_TRANSPARENCY: YES
-SAFETY_FIRST: YES
-```
+A public support project should make it easy to answer basic questions without relying on private messages or scattered spreadsheets:
 
-## Current status
+- Is support collection active right now?
+- Which public records describe incoming and outgoing funds?
+- Can a report be reproduced from the ledger?
+- How is beneficiary privacy protected?
+- What happens when evidence is missing or something does not reconcile?
+
+Open Aid Ledger provides a starting structure for those questions: a public status page, sample ledgers, validators, transparency-report generation, review records, reconciliation steps, and a freeze process.
+
+## What you can see today
+
+The repository release is published and the sample workflow is ready to try. The sample data is fictional.
+
+You can:
+
+1. validate the bundled sample ledger;
+2. generate a Markdown transparency report;
+3. compare the generated totals with known expected results;
+4. inspect the dry-run and review process used before any future live operation is considered.
+
+[Try the sample workflow →](REPRODUCIBLE_SAMPLE_WALKTHROUGH.md)
+
+## Current status in plain language
+
+**Do not send funds.** Donation collection is inactive and no live receiving details are published.
+
+The repository can demonstrate the transparency workflow without activating a real support operation. A future activation would require a separate reviewed decision and a clearly updated public status.
+
+## Choose your role
+
+### New user
+
+Run the [Reproducible Sample Walkthrough](REPRODUCIBLE_SAMPLE_WALKTHROUGH.md). This is the fastest way to see the project produce a useful result.
+
+### Donor or observer
+
+Read [Donor Quickstart](DONOR_QUICKSTART.md). The current answer is simple: support is not active yet.
+
+### Maintainer
+
+Use the [Dry-run Operations Runbook](DRY_RUN_OPERATIONS_RUNBOOK.md) to test the workflow with fictional data before considering any live operation.
+
+### Reviewer
+
+Use the [Review Packet Template](REVIEW_PACKET_TEMPLATE.md) and [Operational Readiness Matrix](OPERATIONAL_READINESS_MATRIX.md) to record evidence, unresolved findings, and the current go/no-go decision.
+
+## What this project does not do
+
+Open Aid Ledger is not a payment processor, custody wallet, charity-registration claim, investment product, trading fund, token project, or promise of financial return.
+
+It does not sign transactions or automate transfers. It is designed to keep public evidence separate from private beneficiary information and to keep repository publication separate from permission to operate live.
+
+## Safety status
+
+| Area | Status | What it means for people |
+|---|---:|---|
+| Repository release | RELEASED | The `v1.0.0` template release is published. |
+| Sample workflow | READY | Fictional ledger records can be validated and converted into a sample report. |
+| Public status | READY | The current inactive state is visible. |
+| Donation activation | BLOCKED | Do not send funds. |
+| Receiving details | BLOCKED | No live receiving wallet is published. |
+| Custody automation | FORBIDDEN | No signing, transfer, withdrawal, or custody automation is part of this repo. |
+
+## For maintainers who need the deeper controls
+
+Most visitors do not need the control documents below. They exist for operating and review work:
+
+- [Dry-run Operations Runbook](DRY_RUN_OPERATIONS_RUNBOOK.md)
+- [Review Packet Template](REVIEW_PACKET_TEMPLATE.md)
+- [Operational Readiness Matrix](OPERATIONAL_READINESS_MATRIX.md)
+- [Donation policy](../DONATION_POLICY.md)
+- [Transparency policy](../TRANSPARENCY_POLICY.md)
+- [Beneficiary privacy policy](../BENEFICIARY_PRIVACY_POLICY.md)
+- [Emergency freeze procedure](EMERGENCY_FREEZE_PROCEDURE.md)
+
+## Technical status
+
+This block is machine-readable and is kept for automated consistency checks. Most users can rely on the plain-language status above.
 
 ```text
 PROJECT_STATUS: PUBLIC_TEMPLATE
@@ -37,108 +104,18 @@ ACTIVATION_APPROVED: NO
 CUSTODY_AUTOMATION: NO
 TRADING_USE: FORBIDDEN
 RETURN_PROMISE: FORBIDDEN
-```
-
-`VERSION` is the current repository release identity. `RELEASE_TARGET` is the published repository/template release tag. Release publication does not imply donation activation or live operation.
-
-Donation collection is inactive. Live receiving details are not published.
-
-## Do not send yet
-
-Do not send funds based on private messages, screenshots, comments, or copies of old receiving information.
-
-A future active release must publish status, asset, network, approved receiving channel, ledger policy, reporting policy, privacy controls, and freeze procedure from an approved repository source.
-
-If the public status still says `DONATIONS_ACTIVE: NO` or `WALLETS_PUBLISHED: NO`, do not send.
-
-## Visual dashboard
-
-| Area | Status | User meaning |
-|---|---:|---|
-| Repository release | RELEASED | `v1.0.0` is published as the repository/template release. |
-| Access path | READY | Start with one page: `START_HERE.md`. |
-| Reproducible sample | READY | The bundled sample ledger can be validated and converted into an expected Markdown report locally. |
-| Donor guidance | READY | Donor Quickstart and FAQ are available. |
-| Shareability | READY | Share this dashboard or `START_HERE.md`, not screenshots or copied receiving data. |
-| Public status | READY | Current status is visible and explicit. |
-| Public ledger template | READY | Ledger templates and validators exist. |
-| Dry-run operation | READY | Maintainers can test the flow with sample data. |
-| Evidence loop | READY | Dry-run sample artifacts are indexed in `examples/dry-run/README.md`. |
-| Review packet | READY | Reviewers can record evidence and blockers. |
-| Receiving-channel publication | BLOCKED | No live receiving detail is published yet. |
-| Donation activation | BLOCKED | `DONATIONS_ACTIVE` remains `NO`. |
-| Custody automation | FORBIDDEN | No signing, transfer automation, withdrawal APIs, or custody flow. |
-
-## One-screen operating board
-
-| Role | Next action | Use this file | Done when |
-|---|---|---|---|
-| New user | Reproduce the sample ledger workflow. | `docs/REPRODUCIBLE_SAMPLE_WALKTHROUGH.md` | Validator passes and generated totals match the expected tables. |
-| Donor | Check current status before sending. | `docs/DONOR_QUICKSTART.md` | Status is active and official source is clear. |
-| Maintainer | Run the dry-run evidence loop with sample data. | `examples/dry-run/README.md` and `docs/DRY_RUN_OPERATIONS_RUNBOOK.md` | Operation report and review packet are both complete. |
-| Reviewer | Check evidence and unresolved blockers. | `docs/REVIEW_PACKET_TEMPLATE.md` | Review result is recorded. |
-| Maintainer | Decide go/no-go from readiness matrix. | `docs/OPERATIONAL_READINESS_MATRIX.md` | `GO_LIVE` remains `NO` while blockers remain. |
-
-## Current blockers
-
-```text
-RECEIVING_CHANNEL_PUBLICATION: BLOCKED
-DONATION_ACTIVATION: BLOCKED
-CUSTODY_AUTOMATION: FORBIDDEN
 GO_LIVE: NO
 ```
 
-## Shareable status snapshot
+Repository usability goals checked by the static validator:
 
 ```text
-Open Aid Ledger status:
-VERSION: 1.0.0
-RELEASE_TARGET: v1.0.0
-RELEASE_TAG_CREATED: YES
-GITHUB_RELEASE_CREATED: YES
-DONATIONS_ACTIVE: NO
-WALLETS_PUBLISHED: NO
-ACTIVATION_APPROVED: NO
-GO_LIVE: NO
-Official dashboard: docs/index.md
-Start here: docs/START_HERE.md
-Reproducible sample: docs/REPRODUCIBLE_SAMPLE_WALKTHROUGH.md
-Dry-run evidence loop: examples/dry-run/README.md
+EASY_TO_ACCESS: YES
+EASY_TO_USE: YES
+EASY_TO_SHARE: YES
+USER_DASHBOARD: YES
+PUBLIC_TRANSPARENCY: YES
+SAFETY_FIRST: YES
 ```
 
-## Minimal path
-
-```text
-README.md -> docs/START_HERE.md -> docs/REPRODUCIBLE_SAMPLE_WALKTHROUGH.md -> docs/index.md -> examples/dry-run/README.md -> docs/DRY_RUN_OPERATIONS_RUNBOOK.md
-```
-
-Then use only the document needed for the task:
-
-```text
-New user: docs/REPRODUCIBLE_SAMPLE_WALKTHROUGH.md
-Donor: docs/DONOR_QUICKSTART.md
-Maintainer: examples/dry-run/README.md
-Runbook: docs/DRY_RUN_OPERATIONS_RUNBOOK.md
-Reviewer: docs/REVIEW_PACKET_TEMPLATE.md
-Go/no-go: docs/OPERATIONAL_READINESS_MATRIX.md
-```
-
-## Reference docs
-
-Use these only when needed:
-
-- [Donation policy](../DONATION_POLICY.md)
-- [Transparency policy](../TRANSPARENCY_POLICY.md)
-- [Beneficiary privacy policy](../BENEFICIARY_PRIVACY_POLICY.md)
-- [Receiving channel publication policy](RECEIVING_CHANNEL_PUBLICATION_POLICY.md)
-- [Receiving account protection checklist](RECEIVING_ACCOUNT_PROTECTION.md)
-- [Public summary checklist](PUBLIC_SUMMARY_CHECKLIST.md)
-- [Emergency freeze procedure](EMERGENCY_FREEZE_PROCEDURE.md)
-
-## Safety boundary
-
-This project is not a payment processor, charity-registration claim, custody wallet, wallet-signing system, trading fund, investment product, token issuance project, or promise of financial return.
-
-## Next milestone
-
-The repository/template release is complete. The next milestone is reproducible user utility and adoption work while donation activation remains a separate blocked process.
+The next public-utility milestone is to show a generated sample transparency report directly in the public demo, after this human-first navigation layer is validated.
