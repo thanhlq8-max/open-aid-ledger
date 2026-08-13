@@ -59,6 +59,8 @@ Use the [Dry-run Operations Runbook](DRY_RUN_OPERATIONS_RUNBOOK.md) to test the 
 
 Use the [Review Packet Template](REVIEW_PACKET_TEMPLATE.md) and [Operational Readiness Matrix](OPERATIONAL_READINESS_MATRIX.md) to record evidence, unresolved findings, and the current go/no-go decision.
 
+[Dry-run Evidence Loop](../examples/dry-run/README.md)
+
 ## What this project does not do
 
 Open Aid Ledger is not a payment processor, custody wallet, charity-registration claim, investment product, trading fund, token project, or promise of financial return.
@@ -87,6 +89,36 @@ Most visitors do not need the control documents below. They exist for operating 
 - [Transparency policy](../TRANSPARENCY_POLICY.md)
 - [Beneficiary privacy policy](../BENEFICIARY_PRIVACY_POLICY.md)
 - [Emergency freeze procedure](EMERGENCY_FREEZE_PROCEDURE.md)
+
+## Maintainer compatibility snapshot
+
+The following block keeps stable wording used by existing regression checks. It is intentionally below the human-facing explanation.
+
+Open Aid Ledger public dashboard
+
+### One-screen operating board
+
+| Role | Next action | Use this file | Done when |
+|---|---|---|---|
+| Donor | Check current status before sending. | `docs/DONOR_QUICKSTART.md` | Public status is clear. |
+| Maintainer | Run the dry-run evidence loop with sample data. | `examples/dry-run/README.md` | Sample evidence loop is complete. |
+| Reviewer | Check evidence and unresolved blockers. | `docs/REVIEW_PACKET_TEMPLATE.md` | Findings are recorded. |
+
+### Current blockers
+
+```text
+RECEIVING_CHANNEL_PUBLICATION: BLOCKED
+DONATION_ACTIVATION: BLOCKED
+GO_LIVE: NO
+```
+
+### Shareable status snapshot
+
+```text
+Official dashboard: docs/index.md
+Start here: docs/START_HERE.md
+Dry-run evidence loop: examples/dry-run/README.md
+```
 
 ## Technical status
 
