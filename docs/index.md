@@ -6,9 +6,27 @@ Open Aid Ledger is a reusable open-source template for making a support workflow
 
 ## Start with one of these
 
-- **See a working example:** [Try the 5-minute sample walkthrough](REPRODUCIBLE_SAMPLE_WALKTHROUGH.md)
+- **See a finished example:** [Open the generated sample transparency report](SAMPLE_TRANSPARENCY_REPORT.md)
+- **Try it yourself:** [Reproduce the report in about 5 minutes](REPRODUCIBLE_SAMPLE_WALKTHROUGH.md)
 - **Understand your role:** [Start Here](START_HERE.md)
-- **Thinking about donating later:** [Donor Quickstart](DONOR_QUICKSTART.md) and [Donor FAQ](DONOR_FAQ.md)
+
+If you are thinking about donating later, read [Donor Quickstart](DONOR_QUICKSTART.md) and [Donor FAQ](DONOR_FAQ.md). The current status is inactive.
+
+## See what the tool produces
+
+The [Sample Transparency Report](SAMPLE_TRANSPARENCY_REPORT.md) is committed as a public demo result generated from the fictional CSV records in `examples/sample-ledger/`.
+
+It contains:
+
+- 3 fictional donation records;
+- 2 fictional disbursement records;
+- incoming totals by asset;
+- outgoing totals by asset;
+- net sample balances after the recorded disbursements.
+
+A regression test compares this public file with the output of `scripts/generate_report.py`, so the demo cannot silently drift away from the tool that produces it.
+
+**The values are fictional sample data, not live balances or real donations.**
 
 ## What problem does this help solve?
 
@@ -24,14 +42,17 @@ Open Aid Ledger provides a starting structure for those questions: a public stat
 
 ## What you can see today
 
-The repository release is published and the sample workflow is ready to try. The sample data is fictional.
+The repository release is published and the sample workflow is ready to inspect or reproduce. The sample data is fictional.
 
 You can:
 
-1. validate the bundled sample ledger;
-2. generate a Markdown transparency report;
-3. compare the generated totals with known expected results;
-4. inspect the dry-run and review process used before any future live operation is considered.
+1. open the generated sample report immediately;
+2. validate the bundled sample ledger;
+3. reproduce the same Markdown transparency report;
+4. compare the generated totals with known expected results;
+5. inspect the dry-run and review process used before any future live operation is considered.
+
+[Open the sample report →](SAMPLE_TRANSPARENCY_REPORT.md)
 
 [Try the sample workflow →](REPRODUCIBLE_SAMPLE_WALKTHROUGH.md)
 
@@ -47,7 +68,7 @@ The repository can demonstrate the transparency workflow without activating a re
 
 ### New user
 
-Run the [Reproducible Sample Walkthrough](REPRODUCIBLE_SAMPLE_WALKTHROUGH.md). This is the fastest way to see the project produce a useful result.
+Open the [Sample Transparency Report](SAMPLE_TRANSPARENCY_REPORT.md) first. If the result looks useful, run the [Reproducible Sample Walkthrough](REPRODUCIBLE_SAMPLE_WALKTHROUGH.md) to reproduce it yourself.
 
 ### Donor or observer
 
@@ -74,7 +95,8 @@ It does not sign transactions or automate transfers. It is designed to keep publ
 | Area | Status | What it means for people |
 |---|---:|---|
 | Repository release | RELEASED | The `v1.0.0` template release is published. |
-| Sample workflow | READY | Fictional ledger records can be validated and converted into a sample report. |
+| Sample report | READY | A generated fictional transparency report can be viewed directly. |
+| Sample workflow | READY | Fictional ledger records can be validated and converted into the same sample report. |
 | Public status | READY | The current inactive state is visible. |
 | Donation activation | BLOCKED | Do not send funds. |
 | Receiving details | BLOCKED | No live receiving wallet is published. |
@@ -152,4 +174,4 @@ PUBLIC_TRANSPARENCY: YES
 SAFETY_FIRST: YES
 ```
 
-The next public-utility milestone is to show a generated sample transparency report directly in the public demo, after this human-first navigation layer is validated.
+The current public-utility milestone is to keep the generated sample report visible and reproducible without weakening the inactive safety state.

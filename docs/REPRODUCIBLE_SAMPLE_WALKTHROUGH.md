@@ -1,8 +1,10 @@
 # Try the Sample in 5 Minutes
 
-This is the fastest way to see what Open Aid Ledger actually does.
+This is the fastest way to reproduce what Open Aid Ledger actually does.
 
-You will use fictional sample records that are already included in the repository. The exercise validates the ledger, generates a Markdown transparency report, and lets you compare the result with known expected totals.
+Before installing anything, you can first open the committed [Sample Transparency Report](SAMPLE_TRANSPARENCY_REPORT.md) to see the result you are about to reproduce.
+
+You will use fictional sample records that are already included in the repository. The exercise validates the ledger, generates a Markdown transparency report, and lets you compare the result with the committed public example and known expected totals.
 
 **No real funds, wallet, blockchain connection, or live receiving details are involved.**
 
@@ -12,6 +14,7 @@ If everything works, you will have:
 
 - a validated sample ledger;
 - a generated file at `artifacts/sample-transparency-report.md`;
+- output matching `docs/SAMPLE_TRANSPARENCY_REPORT.md`;
 - 3 fictional donation records and 2 fictional disbursement records;
 - net sample balances of `0.0125 BTC`, `65 USDT` on ERC20, and `40 USDT` on TRC20.
 
@@ -30,6 +33,7 @@ examples/sample-ledger/donations.csv
 examples/sample-ledger/disbursements.csv
 scripts/validate_ledger.py
 scripts/generate_report.py
+docs/SAMPLE_TRANSPARENCY_REPORT.md
 ```
 
 The commands below use Windows-style paths so they can be copied directly into PowerShell:
@@ -77,7 +81,7 @@ Now open:
 artifacts/sample-transparency-report.md
 ```
 
-You should see a transparency report generated from the two sample CSV files.
+You should see the same transparency report published at [docs/SAMPLE_TRANSPARENCY_REPORT.md](SAMPLE_TRANSPARENCY_REPORT.md).
 
 ## Step 3 — check that the result makes sense
 
@@ -111,9 +115,15 @@ Expected net balances:
 | Ethereum | USDT | ERC20 | 125 | 60 | 65 |
 | Tron | USDT | TRC20 | 80 | 40 | 40 |
 
-If your report matches these totals, you have reproduced the repository's basic ledger-to-report workflow.
+If your report matches these totals and the committed [Sample Transparency Report](SAMPLE_TRANSPARENCY_REPORT.md), you have reproduced the repository's basic ledger-to-report workflow.
 
 These are fictional sample values. They are not live balances, real donations, or real disbursements.
+
+## Why the committed report can be trusted as a demo
+
+The public sample report is not maintained as a separate hand-written summary. A regression test calls the same `generate_report` function with the committed sample CSV files and requires its output to match `docs/SAMPLE_TRANSPARENCY_REPORT.md` exactly.
+
+If the generator, sample data, or report changes inconsistently, CI fails instead of silently publishing a stale demo.
 
 ## What did you just prove?
 
@@ -161,6 +171,7 @@ The walkthrough passes when:
 - sample ledger validation exits successfully;
 - output includes `ledger CSV files OK`;
 - `artifacts/sample-transparency-report.md` is created;
+- generated output matches `docs/SAMPLE_TRANSPARENCY_REPORT.md`;
 - record counts are 3 donations and 2 disbursements;
 - the incoming, outgoing, and net totals match the tables above;
 - the source sample CSV files remain unchanged;

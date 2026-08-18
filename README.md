@@ -8,9 +8,11 @@ Open Aid Ledger is a reusable open-source template for showing where support cam
 
 Choose the path that matches what you want to do:
 
-- **See how it works:** open the [public dashboard](https://thanhlq8-max.github.io/open-aid-ledger/) or read the [5-minute sample walkthrough](docs/REPRODUCIBLE_SAMPLE_WALKTHROUGH.md).
-- **Try it yourself:** validate the bundled fictional ledger and generate a sample transparency report locally.
+- **See a finished example:** open the [generated sample transparency report](docs/SAMPLE_TRANSPARENCY_REPORT.md).
+- **Try it yourself:** follow the [5-minute sample walkthrough](docs/REPRODUCIBLE_SAMPLE_WALKTHROUGH.md) to reproduce that report from the bundled fictional ledger.
 - **Use the template:** follow [Start Here](docs/START_HERE.md) to understand the donor, maintainer, and reviewer paths.
+
+The [public dashboard](https://thanhlq8-max.github.io/open-aid-ledger/) gives the same current status and public navigation in a browser-friendly view.
 
 ## Why this exists
 
@@ -35,13 +37,19 @@ At a high level:
 
 The repository currently demonstrates that flow with fictional sample data only.
 
+## See the result before installing anything
+
+The committed [Sample Transparency Report](docs/SAMPLE_TRANSPARENCY_REPORT.md) is generated from the fictional CSV files in `examples/sample-ledger/` using the repository's own `scripts/generate_report.py` logic.
+
+It shows 3 fictional donation records, 2 fictional disbursement records, and the resulting incoming, outgoing, and net totals. A regression test checks that the committed public report stays exactly aligned with what the generator produces.
+
 ## Try the sample in about 5 minutes
 
-The easiest way to understand the project is to run the bundled example:
+The easiest way to understand the project end to end is to reproduce the bundled example:
 
 [Open the reproducible sample walkthrough →](docs/REPRODUCIBLE_SAMPLE_WALKTHROUGH.md)
 
-You will validate a fictional ledger, generate a Markdown transparency report, and compare the result with known expected totals. No blockchain connection, wallet, private account, or real funds are required.
+You will validate a fictional ledger, generate a Markdown transparency report, and compare your result with the committed public sample report. No blockchain connection, wallet, private account, or real funds are required.
 
 ## Who is this for?
 
